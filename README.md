@@ -1,36 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VidyarthiiConnect
 
-## Getting Started
+VidyarthiiConnect is an AI-powered study-abroad platform designed for Nepali students (expandable globally). It replaces traditional, paper-heavy, and opaque study-abroad agency workflows with a secure, transparent, digital experience.
 
-First, run the development server:
+## Tech Stack
+- **Frontend**: Next.js (App Router), TypeScript, Tailwind CSS v4, Lucide Icons
+- **Database & ORM**: PostgreSQL (Neon Serverless), Prisma ORM
+- **Security & Auth**: Custom secure JWTs stored in HTTP-Only, Secure, SameSite cookies, edge middleware checks, in-memory IP rate-limiting, failed-login lockout protection, and passkey/WebAuthn biometric mock-ready flows.
+- **Form Validation**: Zod Schemas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Key Features
+
+1. **Unbiased AI Recommendation Engine**: Evaluates student profiles (GPA, English test scores, budget, intake timelines) to suggest Safe, Moderate, and Ambitious matches with explanations.
+2. **Secure Document Vault**: Stores document metadata in Neon PostgreSQL. Actual files are handled through a storage provider abstraction layer (local public directory for development). It includes sharing consent logs.
+3. **Application Tracker**: Real-time visual timeline monitoring for submissions, offer decisions, visa filing, and enrollments.
+4. **Visa & NOC Checklist**: Country-specific checklists (USA, UK, Canada, Australia) and Nepal MoEST No Objection Certificate (NOC) checklist guidelines.
+5. **Secure Audited messaging**: Counselor-student messaging portal with read/unread flags and counselor workspace checklists.
+6. **Billing & mock Payments**: Service package selection (Free, Premium, Visa, End-to-End) and checkout vouchers showing 13% Nepal VAT tax breakdowns.
+7. **Security Dashboard (SuperAdmin)**: Audit logs, threat flags, commission tracking ledgers, and platform-wide configurations.
+
+---
+
+## Folder Structure
+```text
+vidyarthiconnect/
+├── app/
+│   ├── api/               # API Route Handlers (auth, documents, applications, search, etc.)
+│   ├── student/           # Student Portal pages (dashboard, search, documents, applications, etc.)
+│   ├── counselor/         # Counselor portal (workspace reviews, task creation)
+│   ├── partner/           # University Partner dashboard (admissions pipeline decisions)
+│   ├── admin/             # Administrator console (CRM, assignment matrix, payments log)
+│   ├── superadmin/        # SuperAdmin system settings (audit trails, settings, threat logs)
+│   ├── login/             # Login & biometric prompt screen
+│   ├── signup/            # Student signup screen
+│   ├── privacy/           # GDPR/Data compliance page
+│   └── terms/             # Admissions disclaimer page
+├── components/            # Reusable UI dashboard elements
+├── lib/
+│   ├── auth/              # JWT session creation & verification helpers
+│   ├── db/                # Global Prisma Client singleton instance
+│   ├── security/          # Audit loggers, check rate-limits, locked out counters
+│   ├── storage/           # File upload abstraction layer provider
+│   └── validators/        # Zod validation schemas
+├── prisma/
+│   ├── schema.prisma      # Relational database models (30+ models)
+│   └── seed.ts            # Seed script with mock roles, courses, and logs
+└── middleware.ts          # Edge-safe role authorization check middleware
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Demo Credentials
+For testing and evaluation, log in with the following default accounts (Password for all accounts is **`password123`**):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Role | Email | Password | Features to Test |
+| :--- | :--- | :--- | :--- |
+| **SuperAdmin** | `superadmin@example.com` | `password123` | Audit logs, Suspicious activity, Settings, Ledger |
+| **Admin** | `admin@example.com` | `password123` | Student CRM, Counselor assignments, Payments log |
+| **Counselor** | `counselor@example.com` | `password123` | File reviews (approve/needs revision), Task allocation |
+| **Partner** | `partner@example.com` | `password123` | University of Sydney admissions pipeline (accept/decline) |
+| **Student** | `student@example.com` | `password123` | Profile builder, AI matches, Doc vault, Payments, Chat |
 
-## Learn More
+*Note: Counseling, Partner, and Admin roles will trigger a mock Multi-Factor Authentication (MFA) OTP screen. Simply input any 6-digit number (e.g. `123456`) to pass.*
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Local Development Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 1. Prerequisites
+- Node.js (v18+)
+- PostgreSQL (e.g., local database or Neon PostgreSQL account)
 
-## Deploy on Vercel
+### 2. Installation
+Clone this repository and run:
+```bash
+npm install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. Environment Variables
+Create a `.env` file in the root directory and configure the database link and security key:
+```env
+DATABASE_URL="postgresql://username:password@ep-cool-flower-123.us-east-2.neon.tech/neondb?sslmode=require"
+AUTH_SECRET="your-super-secret-jwt-signing-key-at-least-32-characters"
+FILE_STORAGE_PROVIDER="mock"
+```
+*(Refer to `.env.example` for all configurable variables)*
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. Database Setup & Seeding
+Validate the database structure, apply migrations, and seed the mock dataset:
+```bash
+# Generate Prisma Client
+npx prisma generate
+
+# Apply migrations
+npx prisma migrate dev --name init
+
+# Seed mock database
+npm run prisma:seed
+```
+
+### 5. Running the Application
+Start the Next.js development server:
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the landing page.
+
+---
+
+## Security Notes
+- **OWASP Compliance**: Protects routes against injections, XSS, and CSRF.
+- **Encrypted Session**: All credentials are hashed using `Bcrypt`. Session keys are signed using `jsonwebtoken` and saved in HTTP-Only, Secure, SameSite cookies.
+- **Biometrics ready**: The `/api/auth/webauthn` endpoint simulates credential exchange and challenges for biometric logins.
+- **Metadata Storage**: Real files are never written directly inside Neon PostgreSQL, keeping queries fast and storage optimized.
+
+---
+
+## University, Course, Scholarship & API Sync Module (Phase 2)
+
+### 1. Data Management
+- **Universities**: Supports CRUD operations for universities. Fields track city, campus, ranking, institution type, logo, data status (`DRAFT`, `PENDING_REVIEW`, `VERIFIED`, `OUTDATED`, `REJECTED`), and creator audit tags.
+- **Courses**: Tracks faculty, duration, tuition, deposit requirements, deadlines, entry scores (GPA and English IELTS/TOEFL requirements), and self-finance acceptance.
+- **Scholarships**: Dedicated models linking course/university requirements with scholarship types (`MERIT_BASED`, `NEPAL_SPECIFIC`, `GOVERNMENT_FUNDED`, etc.) and coverage types (`FULL_TUITION`, `ACCOMMODATION_SUPPORT`, etc.).
+- **Self-Finance Costs**: Captures visa fee estimates, insurance, travel, living costs, sponsor policies, and proof of funds bank balances.
+
+### 2. Estimated Cost Calculator
+- **Formula**:
+  \[\text{Total Estimated Cost} = \text{tuition} + \text{application fee} + \text{living cost} + \text{insurance} + \text{visa fee} + \text{travel estimate}\]
+  If a scholarship is applicable:
+  \[\text{Final Self-Finance Estimate} = \text{total estimated cost} - \text{scholarship amount}\]
+- calculations are displayed on the Student course details list, the Side-by-Side Comparison modal, and Admin management portals.
+
+### 3. CSV Bulk Upload
+- **How to import**: Administrators upload CSV templates containing university, course, cost, and scholarship details.
+- **Review Queue**: Parsed rows are validated using Zod and created in `ImportedDataReview` as `PENDING_REVIEW`. They do not appear on student search pages until verified by an Admin/SuperAdmin.
+- **Sample Template**: Downloadable sample CSV templates are served dynamically from `GET /api/admin/import/csv?template=true`.
+
+### 4. Partner Submission Workflow
+- University partners propose updates for program details or fees. The updates are saved in `PartnerUpdateSubmission` as `PENDING_REVIEW`. Admins review proposals in the queue to approve or reject them before they become visible to students.
+
+### 5. External API Connectors (lib/integrations/)
+- **CollegeScorecardConnector**: Implements live synchronization with the official U.S. College Scorecard API (`api.data.gov`). Requires `COLLEGE_SCORECARD_API_KEY`. If the key is missing, the application automatically flags the connection as `PENDING_CONFIGURATION` without crashing.
+- **MockGlobalUniversityConnector**: Seeds mock global data (Oxford, Tokyo Tech) to demonstrate syncing pipelines, mapping, and the review queue.
+- **OpenCollegeDataConnector**: A pre-wired placeholder for legitimate open dataset integrations.
+- **PartnerApiConnectorPlaceholder**: Prepared for recruitment partner platforms, Common App, and StudyLink APIs.
+
+### 6. Security and API Key Rules
+- **Server-Side Only**: All API connections are executed on the server side. Credentials are never sent to client browsers.
+- **No Scraping/Bypassing**: The system only connects to public, official APIs. Private portals are never scraped.
+- **SuperAdmin Managed**: Only the **SuperAdmin** role can create, edit, or view credential references.
+- **No Leaks**: Decrypted API keys are never printed in console logs or returned in JSON route payloads.
+

@@ -1,0 +1,973 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ==========================================
+// ENUMS
+// ==========================================
+
+enum UserRole {
+  STUDENT
+  COUNSELOR
+  PARTNER
+  ADMIN
+  SUPERADMIN
+}
+
+enum ApplicationStatus {
+  DRAFTING
+  DOCUMENTS_PENDING
+  COUNSELOR_REVIEW
+  SUBMITTED
+  AWAITING_DECISION
+  CONDITIONAL_OFFER
+  UNCONDITIONAL_OFFER
+  REJECTED
+  ACCEPTED
+  VISA_PREPARATION
+  VISA_SUBMITTED
+  VISA_APPROVED
+  VISA_REJECTED
+  ENROLLED
+  WITHDRAWN
+}
+
+enum DocumentReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  NEEDS_REVISION
+  EXPIRED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+  MANUALLY_VERIFIED
+  CANCELLED
+}
+
+enum CommissionStatus {
+  PENDING
+  EXPECTED
+  INVOICED
+  RECEIVED
+  CANCELLED
+}
+
+enum NotificationType {
+  INFO
+  WARNING
+  SUCCESS
+  ERROR
+  SECURITY
+}
+
+enum RiskLevel {
+  SAFE
+  MODERATE
+  AMBITIOUS
+}
+
+enum PartnerStatus {
+  PARTNER
+  NON_PARTNER
+  PENDING_PARTNER
+  FORMER_PARTNER
+  PARTNERED
+  NON_PARTNERED
+}
+
+enum DataStatus {
+  DRAFT
+  PENDING_REVIEW
+  VERIFIED
+  OUTDATED
+  REJECTED
+}
+
+enum InstitutionType {
+  PUBLIC
+  PRIVATE
+  GOVERNMENT
+  COMMUNITY
+  OTHER
+}
+
+enum DegreeLevel {
+  CERTIFICATE
+  DIPLOMA
+  BACHELOR
+  MASTER
+  PHD
+  POSTGRADUATE_DIPLOMA
+  FOUNDATION
+  OTHER
+}
+
+enum ScholarshipType {
+  MERIT_BASED
+  NEED_BASED
+  COUNTRY_SPECIFIC
+  NEPAL_SPECIFIC
+  WOMEN_STEM
+  RESEARCH
+  SPORTS
+  EARLY_APPLICATION
+  UNIVERSITY_FUNDED
+  GOVERNMENT_FUNDED
+  OTHER
+}
+
+enum CoverageType {
+  FULL_TUITION
+  PARTIAL_TUITION
+  FIXED_AMOUNT_DISCOUNT
+  LIVING_COST_SUPPORT
+  ACCOMMODATION_SUPPORT
+  ONE_TIME_GRANT
+  STIPEND
+  OTHER
+}
+
+enum ProviderType {
+  COLLEGE_SCORECARD
+  OPEN_COLLEGE_DATA
+  UNIVERSITY_DIRECT
+  RECRUITMENT_PARTNER_PLATFORM
+  CENTRAL_ADMISSION_SYSTEM
+  COMMON_APP
+  STUDY_LINK
+  PUBLIC_DATA_API
+  MANUAL
+  CSV_IMPORT
+  MOCK
+}
+
+enum AuthType {
+  API_KEY
+  OAUTH2
+  BASIC_AUTH
+  JWT
+  NONE
+}
+
+enum ConnectorStatus {
+  ACTIVE
+  INACTIVE
+  TESTING
+  ERROR
+  PENDING_CONFIGURATION
+  PENDING_CREDENTIALS
+  DISABLED
+}
+
+enum SyncType {
+  UNIVERSITIES
+  COURSES
+  SCHOLARSHIPS
+  FEES
+  ADMISSIONS_DATA
+  PROGRAMS
+  APPLICATION_STATUS
+  OFFER_LETTERS
+  ALL
+}
+
+enum SyncStatus {
+  QUEUED
+  RUNNING
+  SUCCESS
+  PARTIAL_SUCCESS
+  FAILED
+}
+
+enum ReviewStatus {
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+  NEEDS_CHANGES
+}
+
+enum ConsentType {
+  DATA_SHARING
+  PRIVACY_POLICY
+  TERMS_OF_SERVICE
+}
+
+enum DataRequestType {
+  EXPORT
+  DELETION
+}
+
+enum AuditAction {
+  LOGIN
+  LOGOUT
+  SIGNUP
+  MFA_VERIFY
+  PROFILE_UPDATE
+  DOCUMENT_UPLOAD
+  DOCUMENT_REVIEW
+  APPLICATION_CREATE
+  APPLICATION_UPDATE
+  PAYMENT_CHECKOUT
+  PAYMENT_VERIFY
+  USER_MANAGE
+  SETTING_UPDATE
+  DATA_REQUEST
+  UNIVERSITY_MANAGE
+  COURSE_MANAGE
+  SCHOLARSHIP_MANAGE
+  COST_MANAGE
+  CSV_IMPORT
+  DATA_SOURCE_MANAGE
+  API_CREDENTIAL_MANAGE
+  SYNC_TRIGGER
+  SYNC_COMPLETE
+  SYNC_FAILED
+  IMPORTED_DATA_REVIEW
+  PARTNER_UPDATE_SUBMIT
+  PARTNER_UPDATE_REVIEW
+  DATA_MARK_OUTDATED
+  DATA_VERIFY
+}
+
+// ==========================================
+// MODELS
+// ==========================================
+
+model User {
+  id                    String                   @id @default(uuid())
+  email                 String                   @unique
+  passwordHash          String
+  role                  UserRole                 @default(STUDENT)
+  name                  String
+  phone                 String?
+  dob                   DateTime?
+  nationality           String?
+  currentAddress        String?
+  isBlocked             Boolean                  @default(false)
+  mfaEnabled            Boolean                  @default(false)
+  mfaSecret             String?
+  createdAt             DateTime                 @default(now())
+  updatedAt             DateTime                 @updatedAt
+  deletedAt             DateTime?
+  
+  // Relations
+  sessions              UserSession[]
+  studentProfile        StudentProfile?
+  counselorProfile      CounselorProfile?
+  partnerProfile        UniversityPartnerProfile?
+  documentAccessLogs    DocumentAccessLog[]
+  documentComments      DocumentComment[]
+  sentMessages          Message[]
+  notifications         Notification[]
+  auditLogs             AuditLog[]
+  suspiciousActivities  SuspiciousActivityLog[]
+  dataRequests          DataRequest[]
+
+  @@index([email])
+  @@index([role])
+}
+
+model UserSession {
+  id        String    @id @default(uuid())
+  userId    String
+  token     String    @unique
+  device    String?
+  ip        String?
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+  revokedAt DateTime?
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model StudentProfile {
+  id                  String             @id @default(uuid())
+  userId              String             @unique
+  academicLevel       String?
+  gpa                 Float?
+  englishTestType     String?
+  englishTestScore    Float?
+  intendedDegree      String?
+  preferredCountry    String?
+  budgetRange         String?
+  fundingSource       String?
+  gapHistory          String?
+  workExperience      String?
+  passportStatus      String?
+  visaRefusalHistory  String?
+  preferredIntake     String?
+  guardianConsent     Boolean            @default(false)
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  deletedAt           DateTime?
+
+  // Relations
+  user                User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applications        Application[]
+  documents           Document[]
+  payments            Payment[]
+  consentRecords      ConsentRecord[]
+  aiRecommendations   AIRecommendation[]
+  shortlisted         ShortlistedUniversity[]
+}
+
+model CounselorProfile {
+  id                  String        @id @default(uuid())
+  userId              String        @unique
+  specialty           String?
+  activeStudentsCount Int           @default(0)
+  workloadLimit       Int           @default(20)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  deletedAt           DateTime?
+
+  // Relations
+  user                User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applications        Application[]
+  conversations       Conversation[]
+}
+
+model UniversityPartnerProfile {
+  id           String     @id @default(uuid())
+  userId       String     @unique
+  universityId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  deletedAt    DateTime?
+
+  // Relations
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  university   University @relation(fields: [universityId], references: [id], onDelete: Cascade)
+}
+
+model Country {
+  id           String       @id @default(uuid())
+  name         String       @unique
+  code         String       @unique
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  universities University[]
+}
+
+model University {
+  id             String                     @id @default(uuid())
+  name           String                     @unique
+  countryId      String
+  rankingWorld   Int?
+  rankingCountry Int?
+  tuitionMin     Float?
+  tuitionMax     Float?
+  partnerStatus  PartnerStatus              @default(NON_PARTNER)
+  logoUrl        String?
+  verifiedStatus Boolean                    @default(false)
+  createdAt      DateTime                   @default(now())
+  updatedAt      DateTime                   @updatedAt
+  deletedAt      DateTime?
+
+  // Added Fields
+  city                 String?
+  campus               String?
+  websiteUrl           String?
+  coverImageUrl        String?
+  description          String?
+  ranking              Int?
+  institutionType      InstitutionType            @default(PUBLIC)
+  contactEmail         String?
+  applicationPortalUrl String?
+  sourceUrl            String?
+  sourceNote           String?
+  lastVerifiedAt       DateTime?
+  verifiedBy           String?
+  createdBy            String?
+  updatedBy            String?
+  dataStatus           DataStatus                 @default(DRAFT)
+  lastSyncedAt         DateTime?
+  externalDataSourceId String?
+
+  // Relations
+  country            Country                    @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  campuses           Campus[]
+  courses            Course[]
+  applications       Application[]
+  consentRecords     ConsentRecord[]
+  shortlistedBy      ShortlistedUniversity[]
+  partners           UniversityPartnerProfile[]
+  externalDataSource ExternalDataSource?        @relation(fields: [externalDataSourceId], references: [id], onDelete: SetNull)
+  importedReviews    ImportedDataReview[]
+  partnerUpdates     PartnerUpdateSubmission[]
+  courseCosts        CourseCost[]
+  scholarships       Scholarship[]
+}
+
+model Campus {
+  id           String     @id @default(uuid())
+  name         String
+  universityId String
+  location     String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  deletedAt    DateTime?
+
+  // Relations
+  university   University @relation(fields: [universityId], references: [id], onDelete: Cascade)
+}
+
+model Course {
+  id                   String             @id @default(uuid())
+  title                String
+  universityId         String
+  degreeLevel          String
+  duration             String
+  tuitionFee           Float
+  applicationFee       Float
+  intakeDates          String
+  scholarshipAvailable Boolean            @default(false)
+  description          String?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  deletedAt            DateTime?
+
+  // Added Fields
+  faculty              String?
+  currency             String             @default("USD")
+  depositAmount        Float?
+  applicationDeadline  DateTime?
+  englishRequirement   String?
+  academicRequirement  String?
+  minimumGpa           Float?
+  courseDescription    String?
+  careerOutcomes       String?
+  postStudyWorkInfo    String?
+  selfFinanceAccepted  Boolean            @default(true)
+  sourceUrl            String?
+  sourceNote           String?
+  lastVerifiedAt       DateTime?
+  verifiedBy           String?
+  createdBy            String?
+  updatedBy            String?
+  dataStatus           DataStatus         @default(DRAFT)
+  lastSyncedAt         DateTime?
+  externalDataSourceId String?
+
+  // Relations
+  university           University         @relation(fields: [universityId], references: [id], onDelete: Cascade)
+  applications         Application[]
+  recommendations      AIRecommendation[]
+  scholarships         Scholarship[]
+  courseCost           CourseCost?
+  externalDataSource   ExternalDataSource? @relation(fields: [externalDataSourceId], references: [id], onDelete: SetNull)
+}
+
+model Scholarship {
+  id                           String           @id @default(uuid())
+  name                         String
+  description                  String?
+  amount                       Float
+  universityId                 String
+  courseId                     String?
+  country                      String?
+  scholarshipType              ScholarshipType  @default(MERIT_BASED)
+  currency                     String           @default("USD")
+  coverageType                 CoverageType     @default(PARTIAL_TUITION)
+  eligibilityCriteria          String?
+  requiredGpa                  Float?
+  requiredEnglishScore         Float?
+  deadline                     DateTime?
+  numberOfSeats                Int?
+  isAutomatic                  Boolean          @default(false)
+  requiredDocuments            String?
+  termsAndConditions           String?
+  sourceUrl                    String?
+  sourceNote                   String?
+  lastVerifiedAt               DateTime?
+  verifiedBy                   String?
+  createdBy                    String?
+  updatedBy                    String?
+  dataStatus                   DataStatus       @default(DRAFT)
+  lastSyncedAt                 DateTime?
+  externalDataSourceId         String?
+  createdAt                    DateTime         @default(now())
+  updatedAt                    DateTime         @updatedAt
+  deletedAt                    DateTime?
+
+  // Relations
+  university         University          @relation(fields: [universityId], references: [id], onDelete: Cascade)
+  course             Course?             @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  externalDataSource ExternalDataSource? @relation(fields: [externalDataSourceId], references: [id], onDelete: SetNull)
+}
+
+model CourseCost {
+  id                          String             @id @default(uuid())
+  courseId                    String             @unique
+  universityId                String
+  tuitionFeePerYear           Float
+  totalTuitionFee             Float
+  applicationFee              Float
+  depositAmount               Float
+  visaFeeEstimate             Float              @default(0)
+  insuranceEstimate           Float              @default(0)
+  livingCostEstimate          Float              @default(0)
+  accommodationEstimate       Float              @default(0)
+  travelCostEstimate          Float              @default(0)
+  proofOfFundsRequirement     String?
+  bankBalanceRequirement      Float?
+  sponsorAllowed              Boolean            @default(true)
+  educationLoanAccepted       Boolean            @default(true)
+  installmentPaymentAvailable Boolean            @default(false)
+  partTimeWorkAllowed         Boolean            @default(true)
+  refundPolicy                String?
+  currency                    String             @default("USD")
+  sourceUrl                   String?
+  sourceNote                  String?
+  lastVerifiedAt              DateTime?
+  verifiedBy                  String?
+  createdBy                   String?
+  updatedBy                   String?
+  dataStatus                  DataStatus         @default(DRAFT)
+  lastSyncedAt                DateTime?
+  externalDataSourceId        String?
+  createdAt                   DateTime           @default(now())
+  updatedAt                   DateTime           @updatedAt
+
+  // Relations
+  course             Course              @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  university         University          @relation(fields: [universityId], references: [id], onDelete: Cascade)
+}
+
+model ExternalDataSource {
+  id              String          @id @default(uuid())
+  name            String
+  providerType    ProviderType
+  baseUrl         String?
+  authType        AuthType
+  connectorStatus ConnectorStatus @default(INACTIVE)
+  description     String?
+  createdBy       String?
+  updatedBy       String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  // Relations
+  credentials     ExternalApiCredential[]
+  syncJobs        DataSyncJob[]
+  fieldMappings   ExternalFieldMapping[]
+  importedReviews ImportedDataReview[]
+  universities    University[]
+  courses         Course[]
+  scholarships    Scholarship[]
+}
+
+model ExternalApiCredential {
+  id                    String   @id @default(uuid())
+  dataSourceId          String
+  credentialName        String
+  encryptedApiKey       String?
+  encryptedClientId     String?
+  encryptedClientSecret String?
+  encryptedAccessToken  String?
+  encryptedRefreshToken String?
+  scopes                String?
+  expiresAt             DateTime?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  // Relations
+  dataSource ExternalDataSource @relation(fields: [dataSourceId], references: [id], onDelete: Cascade)
+}
+
+model DataSyncJob {
+  id             String      @id @default(uuid())
+  dataSourceId   String
+  syncType       SyncType
+  status         SyncStatus  @default(QUEUED)
+  startedAt      DateTime    @default(now())
+  completedAt    DateTime?
+  recordsFetched Int         @default(0)
+  recordsCreated Int         @default(0)
+  recordsUpdated Int         @default(0)
+  recordsFailed  Int         @default(0)
+  errorMessage   String?
+  triggeredBy    String?
+
+  // Relations
+  dataSource      ExternalDataSource   @relation(fields: [dataSourceId], references: [id], onDelete: Cascade)
+  importedReviews ImportedDataReview[]
+}
+
+model ExternalFieldMapping {
+  id                String   @id @default(uuid())
+  dataSourceId      String
+  externalFieldName String
+  internalModel     String
+  internalFieldName String
+  transformRule     String?
+  required          Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  dataSource ExternalDataSource @relation(fields: [dataSourceId], references: [id], onDelete: Cascade)
+}
+
+model ImportedDataReview {
+  id                String       @id @default(uuid())
+  dataSourceId      String
+  syncJobId         String?
+  targetModel       String       // e.g. "University", "Course", "Scholarship", "CourseCost"
+  targetRecordId    String?      // If it maps to an existing record
+  rawPayload        String       // JSON string
+  normalizedPayload String       // JSON string
+  reviewStatus      ReviewStatus @default(PENDING_REVIEW)
+  reviewedBy        String?
+  reviewedAt        DateTime?
+  createdAt         DateTime     @default(now())
+
+  // Relations
+  dataSource   ExternalDataSource @relation(fields: [dataSourceId], references: [id], onDelete: Cascade)
+  syncJob      DataSyncJob?       @relation(fields: [syncJobId], references: [id], onDelete: SetNull)
+  universityId String?
+  university   University?        @relation(fields: [universityId], references: [id], onDelete: SetNull)
+}
+
+model PartnerUpdateSubmission {
+  id             String       @id @default(uuid())
+  partnerId      String       // User ID of partner
+  universityId   String
+  targetModel    String       // "Course", "Scholarship", "CourseCost", "University"
+  targetRecordId String?      // If updating an existing record
+  updatePayload  String       // JSON string of fields to update
+  reviewStatus   ReviewStatus @default(PENDING_REVIEW)
+  reviewedBy     String?
+  reviewedAt     DateTime?
+  reviewNotes    String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  // Relations
+  university   University @relation(fields: [universityId], references: [id], onDelete: Cascade)
+}
+
+model Application {
+  id                String               @id @default(uuid())
+  studentId         String
+  universityId      String
+  courseId          String
+  intake            String
+  counselorId       String?
+  status            ApplicationStatus    @default(DRAFTING)
+  submittedDate     DateTime?
+  offerLetterStatus String?
+  visaStatus        String?
+  notes             String?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  deletedAt         DateTime?
+
+  // Relations
+  student           StudentProfile       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  university        University           @relation(fields: [universityId], references: [id], onDelete: Cascade)
+  course            Course               @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  counselor         CounselorProfile?    @relation(fields: [counselorId], references: [id], onDelete: SetNull)
+  timelines         ApplicationTimeline[]
+  commission        Commission?
+  visaChecklist     VisaChecklist?
+  nocChecklist      NOCChecklist?
+
+  @@index([studentId])
+  @@index([counselorId])
+  @@index([status])
+}
+
+model ApplicationTimeline {
+  id            String            @id @default(uuid())
+  applicationId String
+  status        ApplicationStatus
+  note          String?
+  createdAt     DateTime          @default(now())
+  application   Application       @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+model Document {
+  id               String                   @id @default(uuid())
+  ownerId          String
+  fileName         String
+  originalName     String
+  fileType         String
+  fileSize         Int
+  mimeType         String
+  storageProvider  String                   @default("mock")
+  storageKey       String
+  storageUrl       String?
+  reviewStatus     DocumentReviewStatus     @default(PENDING)
+  approvalStatus   Boolean                  @default(false)
+  expiresAt        DateTime?
+  uploadedBy       String
+  reviewedBy       String?
+  createdAt        DateTime                 @default(now())
+  updatedAt        DateTime                 @updatedAt
+  deletedAt        DateTime?
+
+  // Relations
+  student          StudentProfile           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  accessLogs       DocumentAccessLog[]
+  sharePermissions DocumentSharePermission[]
+  comments         DocumentComment[]
+
+  @@index([ownerId])
+  @@index([reviewStatus])
+}
+
+model DocumentAccessLog {
+  id         String   @id @default(uuid())
+  documentId String
+  userId     String
+  action     String
+  timestamp  DateTime @default(now())
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model DocumentSharePermission {
+  id           String   @id @default(uuid())
+  documentId   String
+  universityId String?
+  counselorId  String?
+  isGranted    Boolean  @default(true)
+  grantedAt    DateTime @default(now())
+  document     Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+}
+
+model DocumentComment {
+  id         String   @id @default(uuid())
+  documentId String
+  userId     String
+  comment    String
+  createdAt  DateTime @default(now())
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  senderId       String
+  conversationId String
+  content        String
+  readStatus     Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  
+  // Relations
+  sender         User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+}
+
+model Conversation {
+  id            String           @id @default(uuid())
+  studentId     String
+  counselorId   String
+  lastMessageAt DateTime         @default(now())
+  createdAt     DateTime         @default(now())
+
+  // Relations
+  counselor     CounselorProfile @relation(fields: [counselorId], references: [id], onDelete: Cascade)
+  messages      Message[]
+}
+
+model Task {
+  id          String    @id @default(uuid())
+  counselorId String
+  studentId   String
+  title       String
+  description String?
+  dueDate     DateTime?
+  isCompleted Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+}
+
+model Notification {
+  id         String           @id @default(uuid())
+  userId     String
+  content    String
+  type       NotificationType @default(INFO)
+  readStatus Boolean          @default(false)
+  createdAt  DateTime         @default(now())
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Payment {
+  id            String         @id @default(uuid())
+  studentId     String
+  amount        Float
+  status        PaymentStatus  @default(PENDING)
+  packageId     String
+  method        String
+  transactionId String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  deletedAt     DateTime?
+
+  // Relations
+  student       StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  package       ServicePackage @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  invoice       Invoice?
+
+  @@index([studentId])
+}
+
+model Invoice {
+  id            String   @id @default(uuid())
+  paymentId     String   @unique
+  invoiceNumber String   @unique
+  amount        Float
+  taxAmount     Float
+  issuedAt      DateTime @default(now())
+  dueDate       DateTime
+  payment       Payment  @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+}
+
+model ServicePackage {
+  id          String    @id @default(uuid())
+  name        String
+  price       Float
+  description String?
+  features    String
+  createdAt   DateTime  @default(now())
+  payments    Payment[]
+}
+
+model Commission {
+  id                   String           @id @default(uuid())
+  applicationId        String           @unique
+  tuitionAmount        Float
+  commissionPercentage Float
+  expectedAmount       Float
+  receivedAmount       Float            @default(0)
+  status               CommissionStatus @default(PENDING)
+  paymentDate          DateTime?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+  deletedAt            DateTime?
+
+  // Relations
+  application          Application      @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id        String      @id @default(uuid())
+  userId    String
+  action    AuditAction
+  ip        String?
+  details   String?
+  createdAt DateTime    @default(now())
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model SuspiciousActivityLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  type      String
+  details   String?
+  severity  String
+  ip        String?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model ConsentRecord {
+  id           String      @id @default(uuid())
+  studentId    String
+  universityId String?
+  type         ConsentType
+  granted      Boolean     @default(true)
+  grantedAt    DateTime    @default(now())
+
+  // Relations
+  student      StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  university   University?    @relation(fields: [universityId], references: [id], onDelete: SetNull)
+}
+
+model DataRequest {
+  id          String          @id @default(uuid())
+  userId      String
+  type        DataRequestType
+  status      String          @default("PENDING")
+  requestedAt DateTime        @default(now())
+  completedAt DateTime?
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AIRecommendation {
+  id                  String         @id @default(uuid())
+  studentId           String
+  courseId            String
+  score               Int
+  reason              String
+  riskLevel           RiskLevel
+  missingRequirements String?
+  suggestedNextSteps  String?
+  createdAt           DateTime       @default(now())
+
+  // Relations
+  student             StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  course              Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+}
+
+model ShortlistedUniversity {
+  id           String         @id @default(uuid())
+  studentId    String
+  universityId String
+  createdAt    DateTime       @default(now())
+
+  // Relations
+  student      StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  university   University     @relation(fields: [universityId], references: [id], onDelete: Cascade)
+}
+
+model VisaChecklist {
+  id                  String      @id @default(uuid())
+  applicationId       String      @unique
+  passport            Boolean     @default(false)
+  offerLetter         Boolean     @default(false)
+  academicDocs        Boolean     @default(false)
+  englishScore        Boolean     @default(false)
+  financialDocs       Boolean     @default(false)
+  sopGte              Boolean     @default(false)
+  medicalInsurance    Boolean     @default(false)
+  visaForm            Boolean     @default(false)
+  visaFeePaid         Boolean     @default(false)
+  biometricsScheduled Boolean     @default(false)
+  interviewPrepared   Boolean     @default(false)
+  updatedAt           DateTime    @updatedAt
+  application         Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+model NOCChecklist {
+  id                 String      @id @default(uuid())
+  applicationId      String      @unique
+  citizenship        Boolean     @default(false)
+  offerLetter        Boolean     @default(false)
+  academicTranscripts Boolean     @default(false)
+  paymentReceipt     Boolean     @default(false)
+  nocStatus          String      @default("PENDING") // PENDING, SUBMITTED, APPROVED, REJECTED
+  nocNumber          String?
+  timeline           String?
+  notes              String?
+  updatedAt          DateTime    @updatedAt
+  application        Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
