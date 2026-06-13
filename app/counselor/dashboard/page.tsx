@@ -333,7 +333,7 @@ export default function CounselorWorkspace() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => fetchAiSummary({ studentId: app.student.id }, `Student Profile AI Summary: ${app.student.user.name}`)}
-                          className="bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xxs font-semibold px-2.5 py-1 rounded-lg transition mr-2 flex items-center gap-1"
+                          className="bg-slate-50 hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-slate-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-200 text-xxs font-semibold px-2.5 py-1.5 rounded-lg transition mr-2 flex items-center gap-1 cursor-pointer"
                         >
                           <Sparkles className="h-3.5 w-3.5 text-indigo-650" /> AI Summary
                         </button>
@@ -341,18 +341,18 @@ export default function CounselorWorkspace() {
                           value={app.status}
                           disabled={actionLoadingId === app.id}
                           onChange={(e) => handleStatusUpdate(app.id, e.target.value)}
-                          className="bg-slate-50 border border-slate-200 rounded-lg py-1 px-2.5 text-xxs focus:outline-none focus:border-indigo-600 font-bold"
+                          className="bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-900 dark:text-zinc-100 rounded-lg py-1 px-2.5 text-xxs focus:outline-none focus:border-indigo-600 font-bold cursor-pointer"
                         >
-                          <option value="DRAFTING">Drafting</option>
-                          <option value="COUNSELOR_REVIEW">Counselor Review</option>
-                          <option value="SUBMITTED">Submitted</option>
-                          <option value="ACCEPTED">Accepted</option>
-                          <option value="REJECTED">Rejected</option>
-                          <option value="VISA_PREPARATION">Visa Preparation</option>
-                          <option value="VISA_SUBMITTED">Visa Submitted</option>
-                          <option value="VISA_APPROVED">Visa Approved</option>
-                          <option value="VISA_REJECTED">Visa Rejected</option>
-                          <option value="ENROLLED">Enrolled</option>
+                          <option value="DRAFTING" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Drafting</option>
+                          <option value="COUNSELOR_REVIEW" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Counselor Review</option>
+                          <option value="SUBMITTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Submitted</option>
+                          <option value="ACCEPTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Accepted</option>
+                          <option value="REJECTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Rejected</option>
+                          <option value="VISA_PREPARATION" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Visa Preparation</option>
+                          <option value="VISA_SUBMITTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Visa Submitted</option>
+                          <option value="VISA_APPROVED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Visa Approved</option>
+                          <option value="VISA_REJECTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Visa Rejected</option>
+                          <option value="ENROLLED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Enrolled</option>
                         </select>
                         {actionLoadingId === app.id && <Loader2 className="h-4 w-4 animate-spin text-slate-400" />}
                       </div>
@@ -366,8 +366,7 @@ export default function CounselorWorkspace() {
 
         {/* Right Column: Task Creator + Task List */}
         <div className="space-y-8">
-          
-          {/* Create checklist task */}
+               {/* Create checklist task */}
           <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <Plus className="h-5 w-5 text-indigo-650" /> Assign Checklist Task
@@ -381,16 +380,16 @@ export default function CounselorWorkspace() {
 
             <form onSubmit={handleTaskSubmit} className="space-y-4">
               <div>
-                <label className="font-semibold text-xs text-slate-500 mb-1.5 block">Assign To Student</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-zinc-350 mb-1.5 block">Assign To Student</label>
                 <select
                   name="studentId"
                   value={taskForm.studentId}
                   onChange={(e) => setTaskForm({ ...taskForm, studentId: e.target.value })}
                   required
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-zinc-805 border border-slate-200 dark:border-zinc-705 rounded-xl py-2 px-3 text-xs focus:outline-none text-slate-900 dark:text-zinc-100 cursor-pointer"
                 >
                   {data?.applications.map((app: any) => (
-                    <option key={app.id} value={app.studentId}>
+                    <option key={app.id} value={app.studentId} className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">
                       {app.student.user.name}
                     </option>
                   ))}
@@ -398,41 +397,41 @@ export default function CounselorWorkspace() {
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-500 mb-1.5 block">Task Title</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-zinc-350 mb-1.5 block">Task Title</label>
                 <input
                   type="text"
                   placeholder="e.g. Re-upload transcripts"
                   value={taskForm.title}
                   onChange={(e) => setTaskForm({ ...taskForm, title: e.target.value })}
                   required
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-indigo-600"
+                  className="w-full bg-slate-50 dark:bg-zinc-805 border border-slate-200 dark:border-zinc-705 rounded-xl py-2.5 px-3 text-xs focus:outline-none focus:border-indigo-600 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-500 mb-1.5 block">Description</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-zinc-350 mb-1.5 block">Description</label>
                 <textarea
                   placeholder="Details of what to submit..."
                   value={taskForm.description}
                   onChange={(e) => setTaskForm({ ...taskForm, description: e.target.value })}
                   rows={2}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-1.5 px-3 text-xs focus:outline-none focus:border-indigo-600"
+                  className="w-full bg-slate-50 dark:bg-zinc-805 border border-slate-200 dark:border-zinc-705 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-indigo-600 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-500 mb-1.5 block">Due Date</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-zinc-350 mb-1.5 block">Due Date</label>
                 <input
                   type="date"
                   value={taskForm.dueDate}
                   onChange={(e) => setTaskForm({ ...taskForm, dueDate: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs focus:outline-none text-slate-500"
+                  className="w-full bg-slate-50 dark:bg-zinc-805 border border-slate-200 dark:border-zinc-705 rounded-xl py-2 px-3 text-xs focus:outline-none text-slate-800 dark:text-zinc-200"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-xl text-xs transition"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl text-xs transition cursor-pointer shadow-xs"
               >
                 Assign Task
               </button>
@@ -477,47 +476,47 @@ export default function CounselorWorkspace() {
             <h2 className="text-lg font-bold flex items-center gap-2">
               <FileText className="h-5 w-5 text-indigo-650" /> File Review Verdict
             </h2>
-            <p className="text-xs text-slate-550">
-              Verifying document type <strong>{reviewDoc.fileType}</strong> for student <strong>{reviewDoc.student.user.name}</strong>.
+            <p className="text-xs text-slate-700 dark:text-zinc-300">
+              Verifying document type <strong className="text-slate-900 dark:text-white">{reviewDoc.fileType}</strong> for student <strong className="text-slate-900 dark:text-white">{reviewDoc.student.user.name}</strong>.
             </p>
 
             <div>
-              <label className="font-semibold text-xs text-slate-500 mb-1.5 block">Verdict Status</label>
+              <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Verdict Status</label>
               <select
                 value={reviewStatus}
                 onChange={(e) => setReviewStatus(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 text-xs focus:outline-none"
+                className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-xs focus:outline-none text-slate-900 dark:text-zinc-100 cursor-pointer"
               >
-                <option value="APPROVED">APPROVED (Verified Good)</option>
-                <option value="REJECTED">REJECTED (Incorrect/Fraud)</option>
-                <option value="NEEDS_REVISION">NEEDS REVISION (Blurry/Expiry)</option>
+                <option value="APPROVED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">APPROVED (Verified Good)</option>
+                <option value="REJECTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">REJECTED (Incorrect/Fraud)</option>
+                <option value="NEEDS_REVISION" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">NEEDS REVISION (Blurry/Expiry)</option>
               </select>
             </div>
 
             <div>
-              <label className="font-semibold text-xs text-slate-500 mb-1.5 block">Review Comment / Instructions</label>
+              <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Review Comment / Instructions</label>
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows={3}
                 placeholder="Specify instructions or reasons..."
                 required={reviewStatus !== "APPROVED"}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-indigo-600"
+                className="w-full bg-slate-50 dark:bg-zinc-805 border border-slate-200 dark:border-zinc-705 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-indigo-650 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
               />
             </div>
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-zinc-800/80">
               <button
                 type="button"
                 onClick={() => setReviewDoc(null)}
-                className="bg-slate-100 hover:bg-slate-200 text-slate-750 font-semibold px-4 py-2 rounded-xl text-xs border border-slate-200"
+                className="bg-slate-105 hover:bg-slate-200 dark:bg-zinc-850 dark:hover:bg-zinc-805 text-slate-750 dark:text-zinc-200 font-semibold px-4 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-750 transition cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={actionLoadingId === reviewDoc.id}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2 rounded-xl text-xs transition"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition cursor-pointer shadow-xs"
               >
                 {actionLoadingId === reviewDoc.id ? "Submitting..." : "Submit Verdict"}
               </button>

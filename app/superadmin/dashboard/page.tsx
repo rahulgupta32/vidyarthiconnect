@@ -409,34 +409,34 @@ export default function SuperAdminDashboard() {
         {/* TAB 4: SYSTEM & AI SETTINGS */}
         {activeTab === "settings" && (
           <div className="space-y-6 max-w-md">
-            <h2 className="text-lg font-bold flex items-center gap-2 border-b border-slate-100 pb-3">
+            <h2 className="text-lg font-bold flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-3 text-slate-805 dark:text-zinc-100">
               <Settings className="h-5 w-5 text-indigo-650" /> System Settings
             </h2>
 
             {saveSuccess && (
-              <div className="bg-emerald-55 border border-emerald-250 text-emerald-600 text-xxs font-bold p-3 rounded-xl text-center">
+              <div className="bg-emerald-50 border border-emerald-200 text-emerald-600 text-xxs font-bold p-3 rounded-xl text-center">
                 System parameters updated successfully! (Mock Settings Saved)
               </div>
             )}
 
             <form onSubmit={handleSaveSettings} className="space-y-4 text-xs">
               <div>
-                <label className="font-semibold text-slate-500 mb-1.5 block">Standard Commission Rate (%)</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-200 mb-1.5 block">Standard Commission Rate (%)</label>
                 <input
                   type="number"
                   value={settings.commissionRate}
                   onChange={(e) => setSettings({ ...settings, commissionRate: e.target.value })}
                   required
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 focus:outline-none"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-500 mb-1.5 block">AI Recommendation Matching Rigor</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-200 mb-1.5 block">AI Recommendation Matching Rigor</label>
                 <select
                   value={settings.aiSensitivity}
                   onChange={(e) => setSettings({ ...settings, aiSensitivity: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 focus:outline-none"
+                  className="w-full bg-white dark:bg-slate-955 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
                 >
                   <option value="permissive">Permissive (Lenient Matches)</option>
                   <option value="balanced">Balanced (Standard Matching Profile)</option>
@@ -445,17 +445,17 @@ export default function SuperAdminDashboard() {
               </div>
 
               <div>
-                <label className="font-semibold text-slate-500 mb-1.5 block">GDPR User-Data Retention limit (Days)</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-200 mb-1.5 block">GDPR User-Data Retention limit (Days)</label>
                 <input
                   type="number"
                   value={settings.privacyRetentionDays}
                   onChange={(e) => setSettings({ ...settings, privacyRetentionDays: e.target.value })}
                   required
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 focus:outline-none"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
                 />
               </div>
 
-              <div className="bg-indigo-50/50 dark:bg-indigo-950/20 p-3.5 rounded-xl leading-normal text-slate-500 flex gap-2">
+              <div className="bg-indigo-50/50 dark:bg-indigo-950/20 p-3.5 rounded-xl leading-normal text-slate-500 dark:text-zinc-400 flex gap-2">
                 <Sparkles className="h-5 w-5 text-amber-500 flex-shrink-0" />
                 <span>
                   Updating AI models triggers re-evaluation for recommendations on next student logins.
@@ -464,7 +464,7 @@ export default function SuperAdminDashboard() {
 
               <button
                 type="submit"
-                className="bg-indigo-650 hover:bg-indigo-755 text-white font-bold py-2 px-6 rounded-xl transition shadow-xs"
+                className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-6 rounded-xl transition shadow-xs cursor-pointer focus:outline-none focus:ring-4 focus:ring-indigo-500/40"
               >
                 Save Settings
               </button>

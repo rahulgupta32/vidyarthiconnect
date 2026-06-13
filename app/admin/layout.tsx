@@ -3,7 +3,8 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth/session";
 import { 
   LayoutDashboard, 
-  LogOut 
+  LogOut,
+  Users
 } from "lucide-react";
 
 export default async function AdminLayout({
@@ -19,6 +20,7 @@ export default async function AdminLayout({
 
   const navItems = [
     { name: "Admin CRM Panel", path: "/admin/dashboard", icon: LayoutDashboard },
+    { name: "User Management", path: "/admin/dashboard/users", icon: Users },
   ];
 
   return (

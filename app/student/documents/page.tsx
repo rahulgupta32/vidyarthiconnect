@@ -152,33 +152,33 @@ export default function DocumentVault() {
             <form onSubmit={handleUploadSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="font-semibold text-xs text-slate-500 mb-1.5 block">Document Type</label>
+                  <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Document Type</label>
                   <select
                     value={fileType}
                     onChange={(e) => setFileType(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 text-sm focus:outline-none"
+                    className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none text-slate-900 dark:text-zinc-100"
                   >
-                    <option value="Passport">Passport Copy</option>
-                    <option value="Citizenship">Citizenship Document</option>
-                    <option value="Academic transcripts">Academic Transcripts</option>
-                    <option value="IELTS score card">IELTS / PTE / TOEFL Scores</option>
-                    <option value="CV / Resume">CV / Resume</option>
-                    <option value="Statement of Purpose">Statement of Purpose (SOP)</option>
-                    <option value="Recommendation Letter">Letter of Recommendation (LOR)</option>
-                    <option value="Bank statement">Financial / Bank Documents</option>
-                    <option value="Nepal NOC">No Objection Certificate (NOC)</option>
+                    <option value="Passport" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Passport Copy</option>
+                    <option value="Citizenship" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Citizenship Document</option>
+                    <option value="Academic transcripts" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Academic Transcripts</option>
+                    <option value="IELTS score card" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">IELTS / PTE / TOEFL Scores</option>
+                    <option value="CV / Resume" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">CV / Resume</option>
+                    <option value="Statement of Purpose" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Statement of Purpose (SOP)</option>
+                    <option value="Recommendation Letter" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Letter of Recommendation (LOR)</option>
+                    <option value="Bank statement" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Financial / Bank Documents</option>
+                    <option value="Nepal NOC" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">No Objection Certificate (NOC)</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="font-semibold text-xs text-slate-500 mb-1.5 block">Select File (PDF, JPG, PNG - Max 5MB)</label>
+                  <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Select File (PDF, JPG, PNG - Max 5MB)</label>
                   <input
                     type="file"
                     id="file-input-element"
                     onChange={handleFileChange}
                     accept=".pdf,.jpg,.jpeg,.png"
                     required
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-1.5 px-3 text-xs focus:outline-none text-slate-500"
+                    className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-1.5 px-3 text-xs focus:outline-none text-slate-800 dark:text-zinc-200"
                   />
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function DocumentVault() {
               <button
                 type="submit"
                 disabled={uploading}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-bold py-2 rounded-xl transition text-sm flex items-center justify-center gap-1.5 shadow-xs"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-bold py-2.5 rounded-xl transition text-sm flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
               >
                 {uploading ? "Uploading file..." : "Upload Securely"} <Upload className="h-4 w-4" />
               </button>
@@ -270,10 +270,10 @@ export default function DocumentVault() {
                   id="data-share-check"
                   checked={consents.dataSharing}
                   onChange={(e) => setConsents({ ...consents, dataSharing: e.target.checked })}
-                  className="rounded accent-indigo-600 mt-1 h-4 w-4 flex-shrink-0"
+                  className="rounded accent-indigo-600 mt-1 h-4 w-4 flex-shrink-0 cursor-pointer"
                 />
-                <label htmlFor="data-share-check" className="text-xs text-slate-500 leading-normal select-none cursor-pointer">
-                  <strong>General Counselor Review:</strong> Allow assigned counselor to review files to verify GPA calculations.
+                <label htmlFor="data-share-check" className="text-xs text-slate-700 dark:text-zinc-350 leading-normal select-none cursor-pointer">
+                  <strong className="text-slate-900 dark:text-white">General Counselor Review:</strong> Allow assigned counselor to review files to verify GPA calculations.
                 </label>
               </div>
 
@@ -283,16 +283,16 @@ export default function DocumentVault() {
                   id="uni-share-check"
                   checked={consents.universitySharing}
                   onChange={(e) => setConsents({ ...consents, universitySharing: e.target.checked })}
-                  className="rounded accent-indigo-600 mt-1 h-4 w-4 flex-shrink-0"
+                  className="rounded accent-indigo-600 mt-1 h-4 w-4 flex-shrink-0 cursor-pointer"
                 />
-                <label htmlFor="uni-share-check" className="text-xs text-slate-500 leading-normal select-none cursor-pointer">
-                  <strong>Partner University Sharing:</strong> Consent to share verified document metadata and files with admissions departments when submitting applications.
+                <label htmlFor="uni-share-check" className="text-xs text-slate-700 dark:text-zinc-350 leading-normal select-none cursor-pointer">
+                  <strong className="text-slate-900 dark:text-white">Partner University Sharing:</strong> Consent to share verified document metadata and files with admissions departments when submitting applications.
                 </label>
               </div>
 
               <button
                 onClick={handleSaveConsent}
-                className="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold py-2 rounded-xl border border-slate-200 text-xs transition mt-2"
+                className="w-full bg-slate-50 hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-800 dark:text-zinc-200 font-bold py-2.5 rounded-xl border border-slate-200 dark:border-zinc-700 text-xs transition mt-2 cursor-pointer"
               >
                 Update Consent Permissions
               </button>
@@ -304,7 +304,7 @@ export default function DocumentVault() {
             <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
               <Lock className="h-5 w-5 text-indigo-600" /> Vault Security Details
             </h2>
-            <ul className="space-y-2.5 text-xs text-slate-500 leading-relaxed">
+            <ul className="space-y-2.5 text-xs text-slate-650 dark:text-zinc-350 leading-relaxed">
               <li className="flex gap-2">
                 <CheckCircle className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" />
                 No file binaries or base64 files are stored directly in Neon database records.

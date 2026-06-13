@@ -133,7 +133,7 @@ export default function StudentChat() {
           onChange={(e) => setInputText(e.target.value)}
           placeholder="Type your message here..."
           required
-          className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-indigo-600 focus:bg-white"
+          className="flex-1 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 border border-slate-350 dark:border-slate-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-indigo-550 focus:ring-2 focus:ring-indigo-500/20"
         />
         <button
           type="submit"

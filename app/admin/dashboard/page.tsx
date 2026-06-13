@@ -158,18 +158,18 @@ export default function AdminDashboard() {
                     <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200">
                       {student.user.name}
                     </h3>
-                    <p className="text-xxs text-slate-500">
-                      Email: <strong>{student.user.email}</strong> • GPA: <strong>{student.gpa || "N/A"}</strong> • Preferred: <strong>{student.preferredCountry || "N/A"}</strong>
+                    <p className="text-xxs text-slate-600 dark:text-zinc-400">
+                      Email: <strong className="text-slate-900 dark:text-white">{student.user.email}</strong> • GPA: <strong className="text-slate-900 dark:text-white">{student.gpa || "N/A"}</strong> • Preferred: <strong className="text-slate-900 dark:text-white">{student.preferredCountry || "N/A"}</strong>
                     </p>
                   </div>
 
                   <button
                     onClick={() => handleToggleBlock(student.user.id, student.user.isBlocked)}
                     disabled={actionId === student.user.id}
-                    className={`text-xxs font-bold px-3 py-1.5 rounded-lg border transition flex items-center gap-1 ${
+                    className={`text-xxs font-bold px-3 py-1.5 rounded-lg border transition flex items-center gap-1 cursor-pointer ${
                       student.user.isBlocked 
-                        ? "bg-rose-50 text-rose-700 border-rose-250 hover:bg-rose-100" 
-                        : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
+                        ? "bg-rose-50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-450 border-rose-250 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/40" 
+                        : "bg-slate-50 dark:bg-zinc-800 text-slate-700 dark:text-zinc-200 border-slate-200 dark:border-zinc-700 hover:bg-slate-100 dark:hover:bg-zinc-700"
                     }`}
                   >
                     {actionId === student.user.id ? (
@@ -202,10 +202,10 @@ export default function AdminDashboard() {
                     <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200">
                       {app.student.user.name}
                     </h3>
-                    <p className="text-xxs text-slate-550 leading-normal">
-                      University: <strong>{app.university.name}</strong> • Course: <strong>{app.course.title}</strong>
+                    <p className="text-xxs text-slate-605 dark:text-zinc-400 leading-normal">
+                      University: <strong className="text-slate-900 dark:text-white">{app.university.name}</strong> • Course: <strong className="text-slate-900 dark:text-white">{app.course.title}</strong>
                     </p>
-                    <span className="text-xxxxs font-bold text-slate-400 block mt-1 uppercase">
+                    <span className="text-xxxxs font-bold text-slate-500 dark:text-zinc-450 block mt-1 uppercase">
                       Current Counselor: {app.counselor ? app.counselor.user.name : "None Assigned"}
                     </span>
                   </div>
@@ -215,11 +215,11 @@ export default function AdminDashboard() {
                       value={app.counselorId || ""}
                       disabled={actionId === app.id}
                       onChange={(e) => handleAssignCounselor(app.id, e.target.value)}
-                      className="bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xxs focus:outline-none"
+                      className="bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-900 dark:text-zinc-100 rounded-lg py-1 px-2.5 text-xxs focus:outline-none cursor-pointer"
                     >
-                      <option value="">Select Counselor</option>
+                      <option value="" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Select Counselor</option>
                       {data?.counselors.map((c: any) => (
-                        <option key={c.id} value={c.id}>
+                        <option key={c.id} value={c.id} className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">
                           {c.user.name}
                         </option>
                       ))}

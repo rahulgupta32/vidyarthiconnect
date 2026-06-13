@@ -163,7 +163,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (token && (pathname === "/login" || pathname === "/signup")) {
+  if (token && (pathname === "/login" || pathname === "/signup" || pathname.startsWith("/signup/"))) {
     const isSignatureValid = await verifyJwtSignature(token);
     const payload = decodeJwtPayload(token);
     if (isSignatureValid && payload && Date.now() < payload.exp * 1000) {
@@ -199,7 +199,7 @@ export const config = {
     "/admin/:path*",
     "/superadmin/:path*",
     "/login",
-    "/signup",
+    "/signup/:path*",
     "/api/student/:path*",
     "/api/counselor/:path*",
     "/api/partner/:path*",

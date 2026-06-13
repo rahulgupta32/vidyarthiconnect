@@ -110,3 +110,37 @@ When deploying the AI Assistant capabilities, navigate to **Project Settings > E
 - `OPENAI_MONTHLY_TOKEN_LIMIT_GLOBAL`: Sets the system-wide global monthly token limit (e.g. `"1000000"`). Leave empty (`""`) to skip the check.
 
 *Note: All OpenAI calls are handled in server-side Next.js App Router API routes. None of these variables should be prefixed with `NEXT_PUBLIC_` to keep them secure and hidden from client-side bundle inspects.*
+
+---
+
+## Production Security & Account Flow
+
+### 1. Invitation-Based Accounts
+- **Student Accounts**: Can register publicly at the `/signup` route.
+- **SuperAdmin Account**: Initialized strictly via the secure bootstrap CLI script.
+- **Admin Accounts**: Created/invited only by the SuperAdmin.
+- **Counselor Accounts**: Created/invited by Admins or SuperAdmins.
+- **University Partner Accounts**: Created/invited by Admins or SuperAdmins.
+
+*Note: Public signups never create privileged accounts. Even if a malicious request attempts to send a `role` parameter to `/api/auth/signup`, it is strictly ignored or rejected.*
+
+### 2. SuperAdmin Initialization
+To create the first SuperAdmin against the production database, configure the environment variables and run the bootstrap script from your local workstation:
+
+PowerShell:
+```powershell
+cd D:\deeplearnig\vidyarthiconnect
+
+$env:DATABASE_URL="YOUR_PRODUCTION_NEON_DATABASE_URL"
+$env:SUPERADMIN_EMAIL="YOUR_EMAIL"
+$env:SUPERADMIN_NAME="YOUR_NAME"
+$env:SUPERADMIN_PASSWORD="YOUR_STRONG_PASSWORD"
+$env:FORCE_CREATE_SUPERADMIN="false"
+
+npm run create-superadmin
+```
+
+> [!IMPORTANT]
+> **Password Rotation**: After first login, change the password if the password was ever shared in chat, docs, screenshots, or logs.
+> **Production Migrations**: In production, do not run `prisma db seed` or `prisma migrate dev`. Always run `prisma migrate deploy` to safely apply migrations to your live Neon database.
+

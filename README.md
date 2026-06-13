@@ -146,9 +146,37 @@ Open [http://localhost:3000](http://localhost:3000) to view the landing page.
 - **OpenCollegeDataConnector**: A pre-wired placeholder for legitimate open dataset integrations.
 - **PartnerApiConnectorPlaceholder**: Prepared for recruitment partner platforms, Common App, and StudyLink APIs.
 
-### 6. Security and API Key Rules
-- **Server-Side Only**: All API connections are executed on the server side. Credentials are never sent to client browsers.
-- **No Scraping/Bypassing**: The system only connects to public, official APIs. Private portals are never scraped.
-- **SuperAdmin Managed**: Only the **SuperAdmin** role can create, edit, or view credential references.
 - **No Leaks**: Decrypted API keys are never printed in console logs or returned in JSON route payloads.
+
+---
+
+## Production Deployment Environment Variables
+
+When deploying VidyarthiiConnect to Vercel, configure the following environment variables under **Project Settings > Environment Variables**:
+
+### 1. Database & Authentication
+- `DATABASE_URL`: The Neon PostgreSQL production database connection string. (Do not run seed scripts in production).
+- `AUTH_SECRET`: A secure random 32-character encryption secret for JWT session signing.
+- `NEXTAUTH_SECRET`: Duplicate value of `AUTH_SECRET` for NextAuth compatibility.
+- `AUTH_URL`: Your absolute production Vercel URL (e.g. `https://vidyarthiconnect.vercel.app`).
+- `NEXTAUTH_URL`: Duplicate value of `AUTH_URL`.
+
+### 2. File Storage
+- `FILE_STORAGE_PROVIDER`: Set to `"mock"` for local/temporary demo storage, or `"s3"` / `"r2"` / `"supabase"` for secure cloud object storage.
+
+### 3. OpenAI AI Assistant
+- `OPENAI_API_KEY`: Your live OpenAI developer key (keep empty if disabled).
+- `OPENAI_MODEL`: `"gpt-4.1-mini"` (highly recommended default for speed and cost efficiency).
+- `OPENAI_ASSISTANT_ENABLED`: Set to `"false"` to disable live OpenAI calls and use mock fallback responses for testing. Set to `"true"` in production.
+- `OPENAI_DAILY_TOKEN_LIMIT_PER_USER`: Daily usage quota limit per student.
+- `OPENAI_MONTHLY_TOKEN_LIMIT_GLOBAL`: Monthly global usage safety ceiling limit.
+
+### 4. Integration APIs
+- `COLLEGE_SCORECARD_API_KEY`: U.S. Higher Education data.gov API credential.
+- `EXTERNAL_API_ENCRYPTION_KEY`: A secure key used to encrypt connection credentials stored in Neon database.
+
+> [!WARNING]
+> - Never commit `.env` file to your GitHub repository.
+> - Do not run seed scripts (`npm run prisma:seed`) or push raw mock data in production.
+
 

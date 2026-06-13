@@ -247,7 +247,7 @@ export default function UniversitySearch() {
               placeholder="Search course or university..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-9 text-sm focus:outline-none focus:border-indigo-600"
+              className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 border border-slate-350 dark:border-slate-700 rounded-xl py-2.5 px-9 text-sm focus:outline-none focus:border-indigo-550 focus:ring-2 focus:ring-indigo-500/20"
             />
           </div>
 
@@ -255,7 +255,7 @@ export default function UniversitySearch() {
             <select
               value={selectedCountry}
               onChange={(e) => setSelectedCountry(e.target.value)}
-              className="bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs focus:outline-none"
+              className="bg-white dark:bg-slate-955 text-slate-900 dark:text-white border border-slate-350 dark:border-slate-700 rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
             >
               <option value="all">All Countries</option>
               <option value="United States">United States</option>
@@ -265,19 +265,19 @@ export default function UniversitySearch() {
             <select
               value={selectedFee}
               onChange={(e) => setSelectedFee(e.target.value)}
-              className="bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs focus:outline-none"
+              className="bg-white dark:bg-slate-955 text-slate-900 dark:text-white border border-slate-350 dark:border-slate-700 rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
             >
               <option value="all">Any Tuition Fee</option>
               <option value="under-40k">Under $40,000/year</option>
               <option value="above-40k">Above $40,000/year</option>
             </select>
 
-            <label className="flex items-center gap-2 text-xs font-semibold select-none cursor-pointer">
+            <label className="flex items-center gap-2 text-xs font-semibold select-none cursor-pointer text-slate-700 dark:text-slate-205">
               <input
                 type="checkbox"
                 checked={onlyPartnered}
                 onChange={(e) => setOnlyPartnered(e.target.checked)}
-                className="rounded accent-indigo-600"
+                className="rounded accent-indigo-600 cursor-pointer"
               />
               Partnered Universities
             </label>

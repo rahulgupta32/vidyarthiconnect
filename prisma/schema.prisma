@@ -1119,3 +1119,33 @@ model CounselorHandoff {
   counselor      User?           @relation("CounselorHandoffs", fields: [counselorId], references: [id], onDelete: SetNull)
   conversation   AIConversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 }
+
+// ==========================================
+// INVITATION-BASED ACCOUNT SYSTEM MODELS
+// ==========================================
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  REVOKED
+}
+
+model InviteUser {
+  id           String       @id @default(uuid())
+  email        String
+  name         String
+  role         UserRole
+  invitedById  String
+  token        String       @unique
+  expiresAt    DateTime
+  acceptedAt   DateTime?
+  status       InviteStatus @default(PENDING)
+  universityId String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([token])
+  @@index([email])
+}
+

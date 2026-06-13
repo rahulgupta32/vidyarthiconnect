@@ -3,7 +3,8 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth/session";
 import { 
   LayoutDashboard, 
-  LogOut 
+  LogOut,
+  Users
 } from "lucide-react";
 
 export default async function SuperAdminLayout({
@@ -19,6 +20,7 @@ export default async function SuperAdminLayout({
 
   const navItems = [
     { name: "SuperAdmin Workspace", path: "/superadmin/dashboard", icon: LayoutDashboard },
+    { name: "User Management", path: "/superadmin/dashboard/users", icon: Users },
   ];
 
   return (

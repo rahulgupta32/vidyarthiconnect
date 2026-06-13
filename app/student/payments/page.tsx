@@ -195,37 +195,37 @@ export default function StudentPayments() {
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <CreditCard className="h-5 w-5 text-indigo-650" /> Checkout Package
             </h2>
-            <p className="text-xs text-slate-550 mb-6">
-              You are purchasing <strong>{selectedPackage.name}</strong> for <strong>NPR {selectedPackage.price.toLocaleString()}</strong>.
+            <p className="text-xs text-slate-700 dark:text-zinc-300 mb-6">
+              You are purchasing <strong className="text-slate-900 dark:text-white">{selectedPackage.name}</strong> for <strong className="text-slate-900 dark:text-white">NPR {selectedPackage.price.toLocaleString()}</strong>.
             </p>
 
             <form onSubmit={handleCheckoutSubmit} className="space-y-4">
               <div>
-                <label className="font-semibold text-xs text-slate-500 mb-1.5 block">Payment Gateway (Mocked)</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Payment Gateway (Mocked)</label>
                 <select
                   value={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 text-xs focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-xs focus:outline-none text-slate-900 dark:text-zinc-100 cursor-pointer"
                 >
-                  <option value="eSewa">eSewa Mobile Wallet</option>
-                  <option value="Khalti">Khalti Wallet</option>
-                  <option value="Stripe">Stripe Credit Card</option>
-                  <option value="Manual">Manual Bank Deposit</option>
+                  <option value="eSewa" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">eSewa Mobile Wallet</option>
+                  <option value="Khalti" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Khalti Wallet</option>
+                  <option value="Stripe" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Stripe Credit Card</option>
+                  <option value="Manual" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Manual Bank Deposit</option>
                 </select>
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-500 mb-1.5 block">Transaction ID / Reference Number</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Transaction ID / Reference Number</label>
                 <input
                   type="text"
                   value={transactionId}
                   onChange={(e) => setTransactionId(e.target.value)}
                   placeholder="e.g. TXN-881023 (leave empty to autogenerate)"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 text-xs focus:outline-none focus:border-indigo-600"
+                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-xs focus:outline-none focus:border-indigo-650 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
                 />
               </div>
 
-              <div className="bg-slate-50 dark:bg-zinc-800/40 p-3.5 rounded-xl text-xxs text-slate-400 leading-normal flex gap-2">
+              <div className="bg-slate-50 dark:bg-zinc-800/40 p-3.5 rounded-xl text-xxs text-slate-650 dark:text-zinc-400 leading-normal flex gap-2">
                 <ShieldCheck className="h-5 w-5 text-indigo-600 flex-shrink-0" />
                 <span>
                   Payments are secure and logged. Your counselor will be notified as soon as transaction validation completes.
@@ -236,14 +236,14 @@ export default function StudentPayments() {
                 <button
                   type="button"
                   onClick={() => setSelectedPackage(null)}
-                  className="bg-slate-100 hover:bg-slate-200 text-slate-750 font-semibold px-4 py-2 rounded-xl text-xs border border-slate-200"
+                  className="bg-slate-100 hover:bg-slate-200 dark:bg-zinc-850 dark:hover:bg-zinc-805 text-slate-700 dark:text-zinc-200 font-semibold px-4 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-750 transition cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-bold px-6 py-2 rounded-xl text-xs transition"
+                  className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition cursor-pointer shadow-xs"
                 >
                   {submitting ? "Verifying Transaction..." : "Confirm Payment"}
                 </button>

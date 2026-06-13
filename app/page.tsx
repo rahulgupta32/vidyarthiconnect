@@ -85,15 +85,18 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Link href="/signup" className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3.5 rounded-full shadow-lg shadow-indigo-200 dark:shadow-none transition">
-              Create Free Student Profile
+              Create Student Account
             </Link>
             <Link href="/login" className="w-full sm:w-auto bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-800 text-slate-700 dark:text-zinc-200 hover:bg-slate-50 dark:hover:bg-zinc-800 font-bold px-8 py-3.5 rounded-full transition flex items-center justify-center gap-2">
-              Book counseling
+              Sign In
             </Link>
           </div>
+          <p className="text-xs text-slate-500 dark:text-zinc-405 mt-4 max-w-md mx-auto">
+            For students only. Counselors, university partners, admins, and superadmins must be invited by VidyarthiiConnect.
+          </p>
           
           {/* Security Banner Badge */}
-          <div className="mt-12 flex justify-center items-center gap-2 text-xs text-slate-500 dark:text-zinc-400">
+          <div className="mt-8 flex justify-center items-center gap-2 text-xs text-slate-500 dark:text-zinc-400">
             <ShieldCheck className="h-4 w-4 text-emerald-500" /> OWASP Security Certified Architecture • Passkey Ready • GDPR/Data Consent Compliant
           </div>
         </div>
@@ -358,12 +361,20 @@ export default function Home() {
       <section className="py-20 bg-indigo-600 text-white text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-extrabold mb-6">Ready to apply to your dream university?</h2>
-          <p className="text-indigo-100 mb-8 max-w-xl mx-auto">
+          <p className="text-indigo-100 mb-6 max-w-xl mx-auto">
             Create your secure student account and start receiving matches within minutes.
           </p>
-          <Link href="/signup" className="inline-block bg-white !text-indigo-700 font-bold px-8 py-4 rounded-full shadow-lg hover:bg-slate-100 transition ring-2 ring-white/40 focus:outline-none focus:ring-4 focus:ring-white/50">
-            Sign Up Now
-          </Link>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-4">
+            <Link href="/signup" className="inline-block bg-white !text-indigo-700 font-bold px-8 py-4 rounded-full shadow-lg hover:bg-slate-100 transition ring-2 ring-white/40 focus:outline-none focus:ring-4 focus:ring-white/50">
+              Create Student Account
+            </Link>
+            <Link href="/login" className="inline-block bg-indigo-705 hover:bg-indigo-805 text-white border border-indigo-400 font-bold px-8 py-4 rounded-full shadow-lg transition focus:outline-none focus:ring-4 focus:ring-white/40">
+              Sign In
+            </Link>
+          </div>
+          <p className="text-xs text-indigo-200 mt-2">
+            For students only. Counselors, university partners, admins, and superadmins must be invited by VidyarthiiConnect.
+          </p>
         </div>
       </section>
 
