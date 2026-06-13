@@ -44,7 +44,7 @@ export default async function PartnerLayout({
       </header>
 
       {/* Body wrapper */}
-      <div className="grid min-h-[calc(100vh-4rem)] grid-cols-1 md:grid-cols-[16rem_1fr]">
+      <div className="min-h-[calc(100vh-4rem)] md:grid" style={{ gridTemplateColumns: "256px minmax(0, 1fr)" }}>
         {/* Sidebar */}
         <aside className="border-b border-slate-800 bg-slate-900/80 px-4 py-6 md:border-b-0 md:border-r">
           <SidebarNav role="partner" />
