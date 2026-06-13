@@ -51,7 +51,7 @@ export default function SuperAdminDashboard() {
   };
 
   if (loading) {
-    return <div className="text-center py-20 text-slate-500">Loading superadmin workspace...</div>;
+    return <div className="text-center py-8 text-slate-400">Loading superadmin workspace...</div>;
   }
 
   // Calc total expected commission

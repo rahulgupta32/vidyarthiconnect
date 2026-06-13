@@ -156,11 +156,11 @@ export default function UniversitySearch() {
   });
 
   if (loading) {
-    return <div className="text-center py-20 text-slate-500">Loading university finder database...</div>;
+    return <div className="text-center py-8 text-slate-400">Loading university finder database...</div>;
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold mb-2">University & Program Finder</h1>
         <p className="text-sm text-slate-500 dark:text-zinc-400">
@@ -325,7 +325,7 @@ export default function UniversitySearch() {
                             </span>
                           )}
                           {course.dataStatus === "VERIFIED" ? (
-                            <span className="bg-emerald-500/10 text-emerald-455 border border-emerald-500/20 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider flex items-center gap-1">
+                            <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider flex items-center gap-1">
                               <CheckCircle2 className="h-3 w-3 text-emerald-400" /> Verified Data
                             </span>
                           ) : course.dataStatus === "OUTDATED" ? (
@@ -353,7 +353,7 @@ export default function UniversitySearch() {
 
                       <div className="bg-slate-950/40 border border-slate-800/50 p-3 rounded-xl mb-4 space-y-1.5 text-xxs">
                         <div className="flex justify-between">
-                          <span className="text-slate-405">Estimated Total Cost:</span>
+                          <span className="text-slate-400">Estimated Total Cost:</span>
                           <span className="font-bold text-white">{currency} {totalEstimatedCost.toLocaleString()}</span>
                         </div>
                         {scholarshipAmount > 0 && (
@@ -427,7 +427,7 @@ export default function UniversitySearch() {
           <div className="flex gap-2">
             <button
               onClick={() => setCompareList([])}
-              className="text-slate-405 hover:text-slate-200 text-xxs font-bold px-2.5 py-1.5"
+              className="text-slate-400 hover:text-slate-200 text-xxs font-bold px-2.5 py-1.5"
             >
               Clear
             </button>

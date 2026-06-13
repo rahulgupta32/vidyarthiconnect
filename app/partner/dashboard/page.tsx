@@ -59,7 +59,7 @@ export default function PartnerDashboard() {
   };
 
   if (loading) {
-    return <div className="text-center py-20 text-slate-500">Loading university partner workspace...</div>;
+    return <div className="text-center py-8 text-slate-400">Loading university partner workspace...</div>;
   }
 
   const apps = data?.applications || [];
@@ -69,7 +69,7 @@ export default function PartnerDashboard() {
   const conversionRate = totalApps > 0 ? Math.round((acceptedApps / totalApps) * 100) : 0;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* University banner details */}
       <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm flex items-center gap-4">
         <div className="bg-emerald-50 dark:bg-emerald-950/20 p-4 rounded-xl text-emerald-700">

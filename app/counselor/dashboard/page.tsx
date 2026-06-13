@@ -162,11 +162,11 @@ export default function CounselorWorkspace() {
   };
 
   if (loading) {
-    return <div className="text-center py-20 text-slate-500">Loading counselor workspace details...</div>;
+    return <div className="text-center py-8 text-slate-400">Loading counselor workspace details...</div>;
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold mb-2">Counselor Workspace</h1>
         <p className="text-sm text-slate-400">
@@ -542,7 +542,7 @@ export default function CounselorWorkspace() {
 
             <div className="flex-1 overflow-y-auto pr-2">
               {summaryModal.loading ? (
-                <div className="flex flex-col items-center justify-center py-20 space-y-3">
+                <div className="flex flex-col items-center justify-center py-8 space-y-3">
                   <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
                   <span className="text-xs text-slate-500 font-medium">Analyzing student records and drafting response...</span>
                 </div>

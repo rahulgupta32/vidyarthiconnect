@@ -16,8 +16,8 @@ export default async function PartnerLayout({
   }
 
   return (
-    <div className="dark min-h-screen bg-slate-950 text-white">
-      <header className="sticky top-0 z-40 bg-slate-900/95 border-b border-slate-800 h-16 px-6 flex items-center justify-between shadow-sm backdrop-blur">
+    <div className="dark min-h-screen bg-slate-950 bg-gradient-to-tr from-slate-950 via-slate-900 to-indigo-950/20 text-white">
+      <header className="sticky top-0 z-40 h-16 border-b border-slate-800 bg-slate-900/95 px-6 flex items-center justify-between shadow-sm backdrop-blur">
         <div className="flex items-center gap-2">
           <Link href="/" className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-sky-500 bg-clip-text text-transparent">
             Vidyarthii<span className="text-sky-500 font-extrabold">Connect</span>
@@ -44,14 +44,14 @@ export default async function PartnerLayout({
       </header>
 
       {/* Body wrapper */}
-      <div className="flex flex-col md:flex-row min-h-[calc(100vh-4rem)]">
+      <div className="flex min-h-[calc(100vh-4rem)] flex-col items-start md:flex-row">
         {/* Sidebar */}
-        <aside className="w-full md:w-64 bg-slate-900/80 border-b md:border-r md:border-b-0 border-slate-800 py-6 px-4 flex-shrink-0">
+        <aside className="w-full shrink-0 border-b border-slate-800 bg-slate-900/80 px-4 py-6 md:w-64 md:border-b-0 md:border-r">
           <SidebarNav role="partner" />
         </aside>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-y-auto">
+        <main className="w-full flex-1 overflow-y-auto">
           <div className="mx-auto w-full max-w-7xl px-6 py-8 lg:px-10">
             {children}
           </div>

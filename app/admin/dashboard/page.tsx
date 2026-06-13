@@ -83,7 +83,7 @@ export default function AdminDashboard() {
   };
 
   if (loading) {
-    return <div className="text-center py-20 text-slate-500">Loading admin CRM panel...</div>;
+    return <div className="text-center py-8 text-slate-400">Loading admin CRM panel...</div>;
   }
 
   // Calc metrics
@@ -93,7 +93,7 @@ export default function AdminDashboard() {
   const totalRevenue = data?.payments.reduce((acc: number, curr: any) => acc + curr.amount, 0) || 0;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold mb-2">Admin CRM Panel</h1>
         <p className="text-sm text-slate-400">

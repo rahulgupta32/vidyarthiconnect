@@ -152,8 +152,8 @@ export default function SuperAdminUsersPage() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 text-slate-500">
-        <Loader2 className="h-8 w-8 animate-spin text-indigo-600 mb-2" />
+      <div className="flex flex-col items-start py-8 text-slate-400 gap-2">
+        <Loader2 className="h-6 w-6 animate-spin text-indigo-500" />
         <span>Loading User Directory...</span>
       </div>
     );
