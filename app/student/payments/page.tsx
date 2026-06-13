@@ -123,7 +123,7 @@ export default function StudentPayments() {
             <p className="text-xs text-slate-400">Your digital receipt voucher</p>
           </div>
 
-          <div className="border-t border-slate-100 dark:border-zinc-850 pt-4 divide-y divide-slate-150 text-xs">
+          <div className="border-t border-slate-100 dark:border-zinc-800 pt-4 divide-y divide-slate-200 text-xs">
             <div className="flex justify-between py-2.5">
               <span className="text-slate-400 font-semibold">Service Package</span>
               <span className="font-bold">{successReceipt.package}</span>
@@ -138,7 +138,7 @@ export default function StudentPayments() {
             </div>
             <div className="flex justify-between py-2.5">
               <span className="text-slate-400 font-semibold">Transaction ID</span>
-              <span className="font-mono text-slate-600 dark:text-zinc-350">{successReceipt.txnId}</span>
+              <span className="font-mono text-slate-600 dark:text-zinc-300">{successReceipt.txnId}</span>
             </div>
             <div className="flex justify-between py-2.5">
               <span className="text-slate-400 font-semibold">Base Price</span>
@@ -169,7 +169,7 @@ export default function StudentPayments() {
               <div className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400 mb-3">NPR {pkg.price.toLocaleString()}</div>
               <p className="text-xxs text-slate-400 leading-normal mb-5">{pkg.desc}</p>
               
-              <ul className="space-y-2.5 text-xxs text-slate-600 dark:text-zinc-400 mb-6 border-t border-slate-50 dark:border-zinc-850 pt-4">
+              <ul className="space-y-2.5 text-xxs text-slate-600 dark:text-zinc-400 mb-6 border-t border-slate-50 dark:border-zinc-800 pt-4">
                 {pkg.features.map((feat, fIdx) => (
                   <li key={fIdx} className="flex items-center gap-1.5">
                     <CheckCircle className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" /> {feat}
@@ -191,9 +191,9 @@ export default function StudentPayments() {
       {/* Checkout Modal Form */}
       {selectedPackage && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-zinc-900 border border-slate-250 dark:border-zinc-850 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <CreditCard className="h-5 w-5 text-indigo-650" /> Checkout Package
+              <CreditCard className="h-5 w-5 text-indigo-600" /> Checkout Package
             </h2>
             <p className="text-xs text-slate-700 dark:text-zinc-300 mb-6">
               You are purchasing <strong className="text-slate-900 dark:text-white">{selectedPackage.name}</strong> for <strong className="text-slate-900 dark:text-white">NPR {selectedPackage.price.toLocaleString()}</strong>.
@@ -221,11 +221,11 @@ export default function StudentPayments() {
                   value={transactionId}
                   onChange={(e) => setTransactionId(e.target.value)}
                   placeholder="e.g. TXN-881023 (leave empty to autogenerate)"
-                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-xs focus:outline-none focus:border-indigo-650 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
+                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-xs focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
                 />
               </div>
 
-              <div className="bg-slate-50 dark:bg-zinc-800/40 p-3.5 rounded-xl text-xxs text-slate-650 dark:text-zinc-400 leading-normal flex gap-2">
+              <div className="bg-slate-50 dark:bg-zinc-800/40 p-3.5 rounded-xl text-xxs text-slate-600 dark:text-zinc-400 leading-normal flex gap-2">
                 <ShieldCheck className="h-5 w-5 text-indigo-600 flex-shrink-0" />
                 <span>
                   Payments are secure and logged. Your counselor will be notified as soon as transaction validation completes.
@@ -236,7 +236,7 @@ export default function StudentPayments() {
                 <button
                   type="button"
                   onClick={() => setSelectedPackage(null)}
-                  className="bg-slate-100 hover:bg-slate-200 dark:bg-zinc-850 dark:hover:bg-zinc-805 text-slate-700 dark:text-zinc-200 font-semibold px-4 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-750 transition cursor-pointer"
+                  className="bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-200 font-semibold px-4 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-700 transition cursor-pointer"
                 >
                   Cancel
                 </button>

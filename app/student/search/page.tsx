@@ -195,10 +195,10 @@ export default function UniversitySearch() {
                   <div className="flex justify-between items-center mb-2">
                     <span className={`text-xxs font-extrabold px-2 py-0.5 rounded-full ${
                       rec.riskLevel === "SAFE" 
-                        ? "bg-emerald-55 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400" 
+                        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400" 
                         : rec.riskLevel === "MODERATE"
                         ? "bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:text-amber-400"
-                        : "bg-rose-55 text-rose-700 dark:bg-rose-950/30 dark:text-rose-400"
+                        : "bg-rose-50 text-rose-700 dark:bg-rose-950/30 dark:text-rose-400"
                     }`}>
                       {rec.riskLevel} MATCH
                     </span>
@@ -207,7 +207,7 @@ export default function UniversitySearch() {
                   <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200 mb-1">{rec.course.title}</h3>
                   <p className="text-xxs text-slate-400 mb-3">{rec.course.university.name} ({rec.course.university.country.name})</p>
                   
-                  <div className="bg-slate-50 dark:bg-zinc-800/40 p-2.5 rounded-lg text-xxs leading-relaxed mb-4 text-slate-650 dark:text-zinc-355">
+                  <div className="bg-slate-50 dark:bg-zinc-800/40 p-2.5 rounded-lg text-xxs leading-relaxed mb-4 text-slate-600 dark:text-zinc-300">
                     <strong>Why recommended:</strong> {rec.reason}
                   </div>
                   {rec.missingRequirements !== "None" && (
@@ -228,7 +228,7 @@ export default function UniversitySearch() {
             ))}
           </div>
 
-          <div className="flex gap-2 items-start text-slate-400 text-xxs border-t border-slate-100 dark:border-zinc-850 pt-4 leading-relaxed">
+          <div className="flex gap-2 items-start text-slate-400 text-xxs border-t border-slate-100 dark:border-zinc-800 pt-4 leading-relaxed">
             <Info className="h-4 w-4 text-slate-400 flex-shrink-0 mt-0.5" />
             <p>
               <strong>Disclaimer:</strong> {recommendations[0]?.disclaimer}
@@ -247,7 +247,7 @@ export default function UniversitySearch() {
               placeholder="Search course or university..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 border border-slate-350 dark:border-slate-700 rounded-xl py-2.5 px-9 text-sm focus:outline-none focus:border-indigo-550 focus:ring-2 focus:ring-indigo-500/20"
+              className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-9 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40"
             />
           </div>
 
@@ -255,7 +255,7 @@ export default function UniversitySearch() {
             <select
               value={selectedCountry}
               onChange={(e) => setSelectedCountry(e.target.value)}
-              className="bg-white dark:bg-slate-955 text-slate-900 dark:text-white border border-slate-350 dark:border-slate-700 rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+              className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40"
             >
               <option value="all">All Countries</option>
               <option value="United States">United States</option>
@@ -265,19 +265,19 @@ export default function UniversitySearch() {
             <select
               value={selectedFee}
               onChange={(e) => setSelectedFee(e.target.value)}
-              className="bg-white dark:bg-slate-955 text-slate-900 dark:text-white border border-slate-350 dark:border-slate-700 rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+              className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40"
             >
               <option value="all">Any Tuition Fee</option>
               <option value="under-40k">Under $40,000/year</option>
               <option value="above-40k">Above $40,000/year</option>
             </select>
 
-            <label className="flex items-center gap-2 text-xs font-semibold select-none cursor-pointer text-slate-700 dark:text-slate-205">
+            <label className="flex items-center gap-2 text-xs font-semibold select-none cursor-pointer text-slate-700 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={onlyPartnered}
                 onChange={(e) => setOnlyPartnered(e.target.checked)}
-                className="rounded accent-indigo-600 cursor-pointer"
+                className="h-4 w-4 rounded border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-950 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
               />
               Partnered Universities
             </label>
@@ -311,7 +311,7 @@ export default function UniversitySearch() {
                 } = getCourseCostDetails(course);
 
                 return (
-                  <div key={course.id} className="border border-slate-150 dark:border-zinc-800 p-5 rounded-2xl flex flex-col justify-between hover:shadow-md transition">
+                  <div key={course.id} className="border border-slate-200 dark:border-zinc-800 p-5 rounded-2xl flex flex-col justify-between hover:shadow-md transition bg-white dark:bg-zinc-900/80 shadow-xs">
                     <div>
                       <div className="flex justify-between items-start gap-2 mb-3">
                         <div>
@@ -340,7 +340,7 @@ export default function UniversitySearch() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4 text-xxs text-slate-650 dark:text-zinc-350 bg-slate-50 dark:bg-zinc-800/40 p-3 rounded-xl mb-4">
+                      <div className="grid grid-cols-2 gap-4 text-xxs text-slate-600 dark:text-zinc-300 bg-slate-50 dark:bg-zinc-800/40 p-3 rounded-xl mb-4">
                         <div>📍 Country: <strong>{course.university.country.name}</strong></div>
                         <div>⏱️ Duration: <strong>{course.duration}</strong></div>
                         <div>💰 Tuition Fee: <strong>{currency} {tuition.toLocaleString()}/yr</strong></div>
@@ -377,7 +377,7 @@ export default function UniversitySearch() {
                         </div>
                       )}
 
-                      <div className="text-xxs text-slate-450 space-y-1 border-t border-slate-100 dark:border-zinc-800 pt-2.5 mb-4">
+                      <div className="text-xxs text-slate-400 space-y-1 border-t border-slate-100 dark:border-zinc-800 pt-2.5 mb-4">
                         <div>Last verified: {course.lastVerifiedAt ? new Date(course.lastVerifiedAt).toLocaleDateString() : "Pending"}</div>
                         {course.lastSyncedAt && <div>Last synced: {new Date(course.lastSyncedAt).toLocaleDateString()}</div>}
                         <div>Source: {course.sourceUrl ? <a href={course.sourceUrl} target="_blank" className="underline text-indigo-500 hover:text-indigo-600">Public Link</a> : course.sourceNote || "Manual Entry"}</div>
@@ -389,7 +389,7 @@ export default function UniversitySearch() {
                         onClick={() => handleToggleCompare(course)}
                         className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xxs font-semibold border transition ${
                           isCompared 
-                            ? "bg-indigo-65 text-indigo-600 border-indigo-600 dark:bg-indigo-950/20" 
+                            ? "bg-indigo-50 text-indigo-600 border-indigo-600 dark:bg-indigo-950/20" 
                             : "bg-white border-slate-200 text-slate-600 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-200 hover:bg-slate-50"
                         }`}
                       >
@@ -417,7 +417,7 @@ export default function UniversitySearch() {
       {compareList.length > 0 && (
         <div className="sticky bottom-6 z-40 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-4 max-w-xl mx-auto shadow-2xl flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="bg-indigo-55 text-indigo-700 text-xxs font-extrabold px-2 py-1 rounded-md">
+            <span className="bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 text-xxs font-extrabold px-2 py-1 rounded-md">
               {compareList.length}/2 Selected
             </span>
             <div className="text-xxs leading-none text-slate-500">
@@ -445,7 +445,7 @@ export default function UniversitySearch() {
       {/* Comparison Modal Overlay */}
       {showComparison && compareList.length === 2 && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-zinc-900 border border-slate-250 dark:border-zinc-850 rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative">
+          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative">
             <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
               <GitCompare className="h-5 w-5 text-indigo-600" /> Side-by-Side Comparison
             </h2>
@@ -456,7 +456,7 @@ export default function UniversitySearch() {
               <div>{compareList[1].title}</div>
             </div>
 
-            <div className="divide-y divide-slate-150 text-xs">
+            <div className="divide-y divide-slate-200 dark:divide-zinc-800 text-xs">
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">University</div>
                 <div className="font-bold text-slate-800 dark:text-zinc-200">{compareList[0].university.name}</div>
@@ -469,8 +469,8 @@ export default function UniversitySearch() {
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Tuition Fee</div>
-                <div className="font-bold text-slate-700 dark:text-zinc-355">{details0?.currency} {details0?.tuition.toLocaleString()}/yr</div>
-                <div className="font-bold text-slate-700 dark:text-zinc-355">{details1?.currency} {details1?.tuition.toLocaleString()}/yr</div>
+                <div className="font-bold text-slate-700 dark:text-zinc-300">{details0?.currency} {details0?.tuition.toLocaleString()}/yr</div>
+                <div className="font-bold text-slate-700 dark:text-zinc-300">{details1?.currency} {details1?.tuition.toLocaleString()}/yr</div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Estimated Total Cost</div>
@@ -529,7 +529,7 @@ export default function UniversitySearch() {
             <div className="flex justify-end gap-3 mt-8 pt-4 border-t border-slate-100">
               <button
                 onClick={() => setShowComparison(false)}
-                className="bg-slate-100 hover:bg-slate-200 text-slate-750 font-semibold px-5 py-2 rounded-xl text-xs border border-slate-250"
+                className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2 rounded-xl text-xs border border-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-200 dark:border-zinc-700"
               >
                 Close Comparison
               </button>

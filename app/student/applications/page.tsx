@@ -97,12 +97,12 @@ export default function ApplicationTracker() {
 
       {applications.length === 0 ? (
         <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-12 text-center shadow-sm max-w-lg mx-auto">
-          <Send className="h-12 w-12 text-slate-350 mx-auto mb-4" />
+          <Send className="h-12 w-12 text-slate-300 mx-auto mb-4" />
           <h2 className="text-lg font-bold mb-2">No Active Applications</h2>
-          <p className="text-sm text-slate-550 mb-6">
+          <p className="text-sm text-slate-500 mb-6">
             Explore partnered colleges and submit your initial program draft from the university finder directory.
           </p>
-          <a href="/student/search" className="bg-indigo-650 hover:bg-indigo-750 text-white font-bold py-2.5 px-6 rounded-full text-xs transition">
+          <a href="/student/search" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-full text-xs transition">
             Explore Universities
           </a>
         </div>
@@ -112,7 +112,7 @@ export default function ApplicationTracker() {
             <div key={app.id} className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm space-y-6">
               
               {/* Application Details */}
-              <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-slate-100 dark:border-zinc-850 pb-4">
+              <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-slate-100 dark:border-zinc-800 pb-4">
                 <div>
                   <h3 className="font-extrabold text-lg text-slate-800 dark:text-zinc-200">{app.course.title}</h3>
                   <p className="text-sm text-slate-500 font-medium">{app.university.name}</p>
@@ -166,10 +166,10 @@ export default function ApplicationTracker() {
               </div>
 
               {/* Required Documents / Visa Checklist placeholder */}
-              <div className="grid md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-zinc-850">
+              <div className="grid md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-zinc-800">
                 <div className="bg-slate-50 dark:bg-zinc-800/40 p-4 rounded-xl">
                   <h4 className="text-xs font-extrabold uppercase text-slate-400 mb-3 flex items-center gap-1.5">
-                    <ShieldCheck className="h-4 w-4 text-indigo-650" /> Visa Checklist Status
+                    <ShieldCheck className="h-4 w-4 text-indigo-600" /> Visa Checklist Status
                   </h4>
                   {app.visaChecklist ? (
                     <div className="grid grid-cols-2 gap-2 text-xxs text-slate-600 dark:text-zinc-400">
@@ -199,10 +199,10 @@ export default function ApplicationTracker() {
 
                 <div className="bg-slate-50 dark:bg-zinc-800/40 p-4 rounded-xl">
                   <h4 className="text-xs font-extrabold uppercase text-slate-400 mb-3 flex items-center gap-1.5">
-                    <BookOpen className="h-4 w-4 text-indigo-650" /> Nepal NOC checklist
+                    <BookOpen className="h-4 w-4 text-indigo-600" /> Nepal NOC checklist
                   </h4>
                   {app.nocChecklist ? (
-                    <div className="space-y-2 text-xxs text-slate-655 dark:text-zinc-400">
+                    <div className="space-y-2 text-xxs text-slate-600 dark:text-zinc-400">
                       <div className="grid grid-cols-2 gap-2">
                         <div className="flex items-center gap-1">
                           {app.nocChecklist.citizenship ? "✅" : "❌"} citizenship Scan

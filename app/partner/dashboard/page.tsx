@@ -71,7 +71,7 @@ export default function PartnerDashboard() {
   return (
     <div className="space-y-8">
       {/* University banner details */}
-      <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-850 p-6 rounded-2xl shadow-sm flex items-center gap-4">
+      <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm flex items-center gap-4">
         <div className="bg-emerald-50 dark:bg-emerald-950/20 p-4 rounded-xl text-emerald-700">
           <Building className="h-10 w-10" />
         </div>
@@ -93,7 +93,7 @@ export default function PartnerDashboard() {
         <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase">Total Applicants</span>
-            <Users className="h-5 w-5 text-indigo-650" />
+            <Users className="h-5 w-5 text-indigo-600" />
           </div>
           <div className="text-2xl font-extrabold">{totalApps}</div>
           <div className="text-xxs text-slate-400 mt-1">Filed via VidyarthiiConnect</div>
@@ -120,9 +120,9 @@ export default function PartnerDashboard() {
         <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase">Conversion Rate</span>
-            <TrendingUp className="h-5 w-5 text-indigo-650" />
+            <TrendingUp className="h-5 w-5 text-indigo-600" />
           </div>
-          <div className="text-2xl font-extrabold text-indigo-650">{conversionRate}%</div>
+          <div className="text-2xl font-extrabold text-indigo-600">{conversionRate}%</div>
           <div className="text-xxs text-slate-400 mt-1">Acceptance percentage</div>
         </div>
       </div>
@@ -130,11 +130,11 @@ export default function PartnerDashboard() {
       {/* Applicant pipeline list */}
       <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
         <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
-          <Award className="h-5 w-5 text-indigo-655" /> Applicant Pipeline
+          <Award className="h-5 w-5 text-indigo-600" /> Applicant Pipeline
         </h2>
 
         {apps.length === 0 ? (
-          <p className="text-sm text-slate-400 text-center py-10 border border-dashed border-slate-200 dark:border-zinc-850 rounded-xl">
+          <p className="text-sm text-slate-400 text-center py-10 border border-dashed border-slate-200 dark:border-zinc-800 rounded-xl">
             No applicants have submitted requests to your institution yet.
           </p>
         ) : (
@@ -167,7 +167,7 @@ export default function PartnerDashboard() {
                       <button
                         onClick={() => handleDecision(app.id, "ACCEPTED")}
                         disabled={actionId === app.id}
-                        className="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xxs font-semibold px-2.5 py-1 rounded-md border border-emerald-250 transition flex items-center gap-1"
+                        className="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xxs font-semibold px-2.5 py-1 rounded-md border border-emerald-200 transition flex items-center gap-1"
                       >
                         {actionId === app.id && <Loader2 className="h-3 w-3 animate-spin" />}
                         Accept
@@ -175,7 +175,7 @@ export default function PartnerDashboard() {
                       <button
                         onClick={() => handleDecision(app.id, "REJECTED")}
                         disabled={actionId === app.id}
-                        className="bg-rose-50 text-rose-700 hover:bg-rose-100 text-xxs font-semibold px-2.5 py-1 rounded-md border border-rose-250 transition flex items-center gap-1"
+                        className="bg-rose-50 text-rose-700 hover:bg-rose-100 text-xxs font-semibold px-2.5 py-1 rounded-md border border-rose-200 transition flex items-center gap-1"
                       >
                         {actionId === app.id && <Loader2 className="h-3 w-3 animate-spin" />}
                         Decline

@@ -1,11 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth/session";
-import { 
-  LayoutDashboard, 
-  LogOut,
-  Users
-} from "lucide-react";
+import { LogOut } from "lucide-react";
+import { SidebarNav } from "@/components/ui/SidebarNav";
 
 export default async function AdminLayout({
   children,
@@ -18,20 +15,15 @@ export default async function AdminLayout({
     redirect("/login");
   }
 
-  const navItems = [
-    { name: "Admin CRM Panel", path: "/admin/dashboard", icon: LayoutDashboard },
-    { name: "User Management", path: "/admin/dashboard/users", icon: Users },
-  ];
-
   return (
-    <div className="bg-slate-50 dark:bg-zinc-950 min-h-screen flex flex-col">
+    <div className="bg-slate-50 dark:bg-slate-950 min-h-screen flex flex-col text-slate-900 dark:text-white">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-white dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800 h-16 px-6 flex items-center justify-between shadow-sm">
+      <header className="sticky top-0 z-40 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 h-16 px-6 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-2">
           <Link href="/" className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-sky-500 bg-clip-text text-transparent">
             Vidyarthii<span className="text-sky-500 font-extrabold">Connect</span>
           </Link>
-          <span className="bg-indigo-50 text-indigo-750 text-xs px-2 py-0.5 rounded-full font-semibold">
+          <span className="bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 text-xs px-2 py-0.5 rounded-full font-semibold">
             Admin Panel
           </span>
         </div>
@@ -55,23 +47,12 @@ export default async function AdminLayout({
       {/* Body wrapper */}
       <div className="flex-1 flex flex-col md:flex-row">
         {/* Sidebar */}
-        <aside className="w-full md:w-64 bg-white dark:bg-zinc-900 border-r border-slate-200 dark:border-zinc-800 py-6 px-4 flex-shrink-0">
-          <nav className="space-y-1">
-            {navItems.map((item, idx) => (
-              <Link
-                key={idx}
-                href={item.path}
-                className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-850 hover:text-indigo-600 transition"
-              >
-                <item.icon className="h-4 w-4" />
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+        <aside className="w-full md:w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 py-6 px-4 flex-shrink-0">
+          <SidebarNav role="admin" />
         </aside>
 
         {/* Content Area */}
-        <main className="flex-1 p-6 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full">
+        <main className="flex-1 px-6 py-8 lg:px-10 overflow-y-auto max-w-7xl mx-auto w-full">
           {children}
         </main>
       </div>

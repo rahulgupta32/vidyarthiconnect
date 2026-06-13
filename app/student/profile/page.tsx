@@ -124,13 +124,13 @@ export default function ProfileBuilder() {
       </div>
 
       {successMsg && (
-        <div className="bg-emerald-50 border border-emerald-200 text-emerald-705 dark:bg-emerald-950/20 dark:border-emerald-800/50 dark:text-emerald-400 text-sm rounded-xl p-4 text-center font-semibold">
+        <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 dark:bg-emerald-950/20 dark:border-emerald-800/50 dark:text-emerald-400 text-sm rounded-xl p-4 text-center font-semibold">
           {successMsg}
         </div>
       )}
 
       {errorMsg && (
-        <div className="bg-rose-50 border border-rose-200 text-rose-700 dark:bg-rose-955/20 dark:border-rose-800/50 dark:text-rose-400 text-sm rounded-xl p-4 text-center font-semibold">
+        <div className="bg-rose-50 border border-rose-200 text-rose-700 dark:bg-rose-950/20 dark:border-rose-800/50 dark:text-rose-400 text-sm rounded-xl p-4 text-center font-semibold">
           {errorMsg}
         </div>
       )}
@@ -148,15 +148,15 @@ export default function ProfileBuilder() {
             <div key={s.num} className="flex items-center gap-2">
               <div className={`h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold transition ${
                 isCompleted 
-                  ? "bg-indigo-650 text-white" 
+                  ? "bg-indigo-600 text-white" 
                   : isActive 
-                  ? "bg-indigo-50 border-2 border-indigo-650 text-indigo-650 dark:bg-indigo-955/30" 
+                  ? "bg-indigo-50 border-2 border-indigo-600 text-indigo-600 dark:bg-indigo-950/30" 
                   : "bg-slate-50 border border-slate-200 text-slate-400 dark:bg-zinc-800 dark:border-zinc-700"
               }`}>
                 {isCompleted ? <Check className="h-4 w-4" /> : s.num}
               </div>
               <span className={`text-xs font-semibold hidden sm:inline ${
-                isActive ? "text-indigo-650 font-bold" : "text-slate-400"
+                isActive ? "text-indigo-600 font-bold" : "text-slate-400"
               }`}>
                 {s.label}
               </span>
@@ -172,18 +172,18 @@ export default function ProfileBuilder() {
         {/* STEP 1: ACADEMICS */}
         {step === 1 && (
           <div className="space-y-6">
-            <h2 className="text-lg font-bold text-slate-805 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-3">
-              <GraduationCap className="h-5 w-5 text-indigo-650" /> Academic & Test Scores
+            <h2 className="text-lg font-bold text-slate-800 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-3">
+              <GraduationCap className="h-5 w-5 text-indigo-600" /> Academic & Test Scores
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Current Academic Level</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Current Academic Level</label>
                 <select
                   name="academicLevel"
                   value={formData.academicLevel}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-905 dark:text-white border border-slate-350 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="">Select Level</option>
                   <option value="+2 High School">+2 High School / A-Levels</option>
@@ -193,7 +193,7 @@ export default function ProfileBuilder() {
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Academic GPA / Percentage</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Academic GPA / Percentage</label>
                 <input
                   type="number"
                   step="0.01"
@@ -202,7 +202,7 @@ export default function ProfileBuilder() {
                   onChange={handleChange}
                   max={4.0}
                   min={0.0}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-905 dark:text-white placeholder:text-slate-500 border border-slate-350 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                   placeholder="e.g. 3.65 (GPA out of 4.0)"
                 />
               </div>
@@ -210,12 +210,12 @@ export default function ProfileBuilder() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">English Language Exam</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">English Language Exam</label>
                 <select
                   name="englishTestType"
                   value={formData.englishTestType}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-905 dark:text-white border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="IELTS">IELTS</option>
                   <option value="PTE">PTE Academic</option>
@@ -226,14 +226,14 @@ export default function ProfileBuilder() {
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Test Score (Overall)</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Test Score (Overall)</label>
                 <input
                   type="number"
                   step="0.1"
                   name="englishTestScore"
                   value={formData.englishTestScore}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-955 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                   placeholder="e.g. 7.5 (for IELTS) or 68 (for PTE)"
                 />
               </div>
@@ -254,18 +254,18 @@ export default function ProfileBuilder() {
         {/* STEP 2: INTENTIONS */}
         {step === 2 && (
           <div className="space-y-6">
-            <h2 className="text-lg font-bold text-slate-805 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-3">
-              <MapPin className="h-5 w-5 text-indigo-650" /> Study Intentions & Budget
+            <h2 className="text-lg font-bold text-slate-800 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-3">
+              <MapPin className="h-5 w-5 text-indigo-600" /> Study Intentions & Budget
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Intended Degree Level</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Intended Degree Level</label>
                 <select
                   name="intendedDegree"
                   value={formData.intendedDegree}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-905 dark:text-white border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="">Select Intended Degree</option>
                   <option value="Bachelor">Bachelor Degree</option>
@@ -276,12 +276,12 @@ export default function ProfileBuilder() {
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Preferred Country</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Preferred Country</label>
                 <select
                   name="preferredCountry"
                   value={formData.preferredCountry}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-905 dark:text-white border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="">Select Country</option>
                   <option value="USA">United States (USA)</option>
@@ -294,12 +294,12 @@ export default function ProfileBuilder() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Annual Budget Range (USD)</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Annual Budget Range (USD)</label>
                 <select
                   name="budgetRange"
                   value={formData.budgetRange}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-905 dark:text-white border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="">Select Budget Range</option>
                   <option value="Below $15,000">Below $15,000</option>
@@ -310,26 +310,26 @@ export default function ProfileBuilder() {
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Funding Source</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Funding Source</label>
                 <input
                   type="text"
                   name="fundingSource"
                   value={formData.fundingSource}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-955 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                   placeholder="e.g. Bank Loan & Family Savings"
                 />
               </div>
             </div>
 
             <div>
-              <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Preferred Intake Term</label>
+              <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Preferred Intake Term</label>
               <input
                 type="text"
                 name="preferredIntake"
                 value={formData.preferredIntake}
                 onChange={handleChange}
-                className="w-full bg-white dark:bg-slate-955 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="e.g. Fall 2026 (Sept) or Semester 1 2027 (Feb)"
               />
             </div>
@@ -356,18 +356,18 @@ export default function ProfileBuilder() {
         {/* STEP 3: HISTORY & CONSENT */}
         {step === 3 && (
           <div className="space-y-6">
-            <h2 className="text-lg font-bold text-slate-805 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-3">
-              <FileCheck className="h-5 w-5 text-indigo-650" /> Gap, Visa History & Consents
+            <h2 className="text-lg font-bold text-slate-800 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-3">
+              <FileCheck className="h-5 w-5 text-indigo-600 dark:text-indigo-400" /> Gap, Visa History & Consents
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Passport Status</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Passport Status</label>
                 <select
                   name="passportStatus"
                   value={formData.passportStatus}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-905 dark:text-white border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="Valid">Valid Passport</option>
                   <option value="Applied">Applied / Awaiting</option>
@@ -377,38 +377,38 @@ export default function ProfileBuilder() {
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Visa Refusal History</label>
+                <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Visa Refusal History</label>
                 <input
                   type="text"
                   name="visaRefusalHistory"
                   value={formData.visaRefusalHistory}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-955 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                   placeholder="e.g. None or Refused once in USA (2024)"
                 />
               </div>
             </div>
 
             <div>
-              <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Work Experience (if any)</label>
+              <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Work Experience (if any)</label>
               <textarea
                 name="workExperience"
                 value={formData.workExperience}
                 onChange={handleChange}
                 rows={2}
-                className="w-full bg-white dark:bg-slate-955 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="Brief description of your jobs or internships"
               />
             </div>
 
             <div>
-              <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Study Gap History</label>
+              <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Study Gap History</label>
               <input
                 type="text"
                 name="gapHistory"
                 value={formData.gapHistory}
                 onChange={handleChange}
-                className="w-full bg-white dark:bg-slate-955 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-355 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="Specify if there is any study gap and its reasons"
               />
             </div>
@@ -419,9 +419,9 @@ export default function ProfileBuilder() {
                 name="guardianConsent"
                 checked={formData.guardianConsent}
                 onChange={handleChange}
-                className="rounded accent-indigo-650 h-4 w-4 cursor-pointer"
+                className="rounded accent-indigo-600 h-4 w-4 cursor-pointer"
               />
-              <span className="text-xs text-slate-605 dark:text-slate-400">
+              <span className="text-xs text-slate-600 dark:text-slate-400">
                 I authorize VidyarthiiConnect to review and process my academic data. (If under 18, I confirm parent/guardian approval).
               </span>
             </div>

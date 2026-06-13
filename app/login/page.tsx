@@ -151,8 +151,8 @@ function LoginContent() {
           Vidyarthii<span className="text-sky-500 font-extrabold">Connect</span>
         </Link>
         <h2 className="text-2xl font-extrabold mt-4 text-slate-800 dark:text-zinc-100">Welcome Back</h2>
-        <p className="text-sm text-slate-650 dark:text-zinc-450 mt-1">Sign in to resume your application path</p>
-        <div className="bg-slate-50 dark:bg-zinc-850/60 border border-slate-200 dark:border-zinc-800 p-3 rounded-xl text-xs text-slate-650 dark:text-slate-350 mt-4 text-left leading-relaxed">
+        <p className="text-sm text-slate-600 dark:text-zinc-400 mt-1">Sign in to resume your application path</p>
+        <div className="bg-slate-50 dark:bg-zinc-800/60 border border-slate-200 dark:border-zinc-800 p-3 rounded-xl text-xs text-slate-600 dark:text-zinc-300 mt-4 text-left leading-relaxed">
           Students can create an account directly. Counselors, university partners, admins, and superadmins must sign in using accounts created or invited by VidyarthiiConnect.
         </div>
       </div>
@@ -160,8 +160,8 @@ function LoginContent() {
       {error && (
         <div className={`border text-sm font-semibold rounded-lg p-3 text-center mb-4 ${
           error.includes("successful")
-            ? "bg-emerald-50 dark:bg-emerald-955/20 border-emerald-250 dark:border-emerald-800/50 text-emerald-700 dark:text-emerald-400"
-            : "bg-rose-50 dark:bg-rose-955/20 border-rose-250 dark:border-rose-800/50 text-rose-700 dark:text-rose-450"
+            ? "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800/50 text-emerald-700 dark:text-emerald-400"
+            : "bg-rose-50 dark:bg-rose-900/20 border-rose-200 dark:border-rose-800/50 text-rose-700 dark:text-rose-400"
         }`}>
           {error}
         </div>
@@ -170,39 +170,39 @@ function LoginContent() {
       {!mfaRequired ? (
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block">Email Address</label>
+            <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block">Email Address</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3.5 h-4 w-4 text-slate-450 dark:text-slate-400" />
+              <Mail className="absolute left-3 top-3.5 h-4 w-4 text-slate-400 dark:text-slate-400" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="student@example.com"
               />
             </div>
           </div>
 
           <div>
-            <label className="font-semibold text-xs text-slate-705 dark:text-slate-205 mb-1.5 block flex justify-between">
+            <label className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-1.5 block flex justify-between">
               Password
-              <span className="text-indigo-650 hover:underline cursor-pointer text-xs font-semibold">Forgot?</span>
+              <span className="text-indigo-600 hover:underline cursor-pointer text-xs font-semibold">Forgot?</span>
             </label>
             <div className="relative">
-              <Lock className="absolute left-3 top-3.5 h-4 w-4 text-slate-450 dark:text-slate-400" />
+              <Lock className="absolute left-3 top-3.5 h-4 w-4 text-slate-400 dark:text-slate-400" />
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full bg-white dark:bg-slate-955 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="••••••••"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3.5 text-slate-450 hover:text-slate-650 dark:hover:text-white cursor-pointer"
+                className="absolute right-3 top-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer"
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -221,7 +221,7 @@ function LoginContent() {
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t border-slate-200 dark:border-zinc-800" />
             </div>
-            <span className="relative bg-white dark:bg-zinc-900 px-4 text-xs text-slate-450 dark:text-slate-400 uppercase font-bold">
+            <span className="relative bg-white dark:bg-zinc-900 px-4 text-xs text-slate-400 dark:text-slate-400 uppercase font-bold">
               Or Biometric
             </span>
           </div>
@@ -230,7 +230,7 @@ function LoginContent() {
             type="button"
             onClick={handleBiometricLogin}
             disabled={loading}
-            className="w-full bg-slate-50 hover:bg-slate-100 dark:bg-zinc-850 dark:hover:bg-zinc-800 text-slate-700 dark:text-slate-200 font-bold py-2.5 rounded-xl border border-slate-200 dark:border-zinc-800 transition flex items-center justify-center gap-2 text-sm cursor-pointer"
+            className="w-full bg-slate-50 hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-800 text-slate-700 dark:text-slate-200 font-bold py-2.5 rounded-xl border border-slate-200 dark:border-zinc-800 transition flex items-center justify-center gap-2 text-sm cursor-pointer"
           >
             <Fingerprint className="h-5 w-5 text-indigo-600 dark:text-indigo-400" /> Sign In with Passkey
           </button>
@@ -254,7 +254,7 @@ function LoginContent() {
               value={mfaCode}
               onChange={(e) => setMfaCode(e.target.value.replace(/\D/g, ""))}
               required
-              className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-550 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-center text-lg font-bold tracking-widest focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+              className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-center text-lg font-bold tracking-widest focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
               placeholder="123456"
             />
           </div>
@@ -279,7 +279,7 @@ function LoginContent() {
 
       <div className="text-center mt-6 text-xs text-slate-600 dark:text-slate-400">
         Don't have an account?{" "}
-        <Link href="/signup" className="text-indigo-650 font-bold hover:underline">
+        <Link href="/signup" className="text-indigo-600 font-bold hover:underline">
           Sign Up
         </Link>
       </div>
@@ -289,7 +289,7 @@ function LoginContent() {
 
 export default function Login() {
   return (
-    <div className="bg-slate-50 dark:bg-zinc-955 flex justify-center items-center min-h-screen py-12 px-4">
+    <div className="bg-slate-50 dark:bg-zinc-950 flex justify-center items-center min-h-screen py-12 px-4">
       <Suspense fallback={<div className="text-slate-500">Loading login credentials form...</div>}>
         <LoginContent />
       </Suspense>

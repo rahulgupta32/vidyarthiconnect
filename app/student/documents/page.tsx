@@ -227,7 +227,7 @@ export default function DocumentVault() {
                           <a
                             href={doc.storageUrl}
                             target="_blank"
-                            className="bg-slate-50 border border-slate-200 text-slate-650 hover:bg-slate-100 p-1.5 rounded-lg transition"
+                            className="bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100 p-1.5 rounded-lg transition"
                             title="View Document"
                           >
                             <Eye className="h-3.5 w-3.5" />
@@ -272,7 +272,7 @@ export default function DocumentVault() {
                   onChange={(e) => setConsents({ ...consents, dataSharing: e.target.checked })}
                   className="rounded accent-indigo-600 mt-1 h-4 w-4 flex-shrink-0 cursor-pointer"
                 />
-                <label htmlFor="data-share-check" className="text-xs text-slate-700 dark:text-zinc-350 leading-normal select-none cursor-pointer">
+                <label htmlFor="data-share-check" className="text-xs text-slate-700 dark:text-zinc-300 leading-normal select-none cursor-pointer">
                   <strong className="text-slate-900 dark:text-white">General Counselor Review:</strong> Allow assigned counselor to review files to verify GPA calculations.
                 </label>
               </div>
@@ -285,7 +285,7 @@ export default function DocumentVault() {
                   onChange={(e) => setConsents({ ...consents, universitySharing: e.target.checked })}
                   className="rounded accent-indigo-600 mt-1 h-4 w-4 flex-shrink-0 cursor-pointer"
                 />
-                <label htmlFor="uni-share-check" className="text-xs text-slate-700 dark:text-zinc-350 leading-normal select-none cursor-pointer">
+                <label htmlFor="uni-share-check" className="text-xs text-slate-700 dark:text-zinc-300 leading-normal select-none cursor-pointer">
                   <strong className="text-slate-900 dark:text-white">Partner University Sharing:</strong> Consent to share verified document metadata and files with admissions departments when submitting applications.
                 </label>
               </div>
@@ -304,7 +304,7 @@ export default function DocumentVault() {
             <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
               <Lock className="h-5 w-5 text-indigo-600" /> Vault Security Details
             </h2>
-            <ul className="space-y-2.5 text-xs text-slate-650 dark:text-zinc-350 leading-relaxed">
+            <ul className="space-y-2.5 text-xs text-slate-600 dark:text-zinc-300 leading-relaxed">
               <li className="flex gap-2">
                 <CheckCircle className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" />
                 No file binaries or base64 files are stored directly in Neon database records.

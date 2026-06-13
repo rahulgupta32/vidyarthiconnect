@@ -146,7 +146,7 @@ export default function FloatingChatWidget() {
                     className={`max-w-[85%] rounded-xl px-3 py-2 text-xxs leading-relaxed whitespace-pre-wrap ${
                       m.role === "USER"
                         ? "bg-indigo-600 text-white rounded-br-none"
-                        : "bg-white dark:bg-zinc-800 text-slate-800 dark:text-zinc-200 rounded-bl-none border border-slate-200 dark:border-zinc-750"
+                        : "bg-white dark:bg-zinc-800 text-slate-800 dark:text-zinc-200 rounded-bl-none border border-slate-200 dark:border-zinc-700"
                     }`}
                   >
                     {m.content}
@@ -157,8 +157,8 @@ export default function FloatingChatWidget() {
 
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-white dark:bg-zinc-800 text-slate-400 rounded-xl rounded-bl-none px-3 py-2 text-xxs flex items-center gap-1.5 border border-slate-200 dark:border-zinc-750">
-                  <Loader2 className="h-3 w-3 animate-spin text-indigo-650" /> formulating answer...
+                <div className="bg-white dark:bg-zinc-800 text-slate-400 rounded-xl rounded-bl-none px-3 py-2 text-xxs flex items-center gap-1.5 border border-slate-200 dark:border-zinc-700">
+                  <Loader2 className="h-3 w-3 animate-spin text-indigo-600" /> formulating answer...
                 </div>
               </div>
             )}
@@ -172,7 +172,7 @@ export default function FloatingChatWidget() {
           </div>
 
           {/* AI Disclaimer */}
-          <div className="px-4 py-2 bg-amber-500/5 border-t border-slate-100 dark:border-zinc-850/80 text-[10px] leading-relaxed text-amber-700 dark:text-amber-400 flex gap-1.5 items-start">
+          <div className="px-4 py-2 bg-amber-500/5 border-t border-slate-100 dark:border-zinc-800/80 text-[10px] leading-relaxed text-amber-700 dark:text-amber-400 flex gap-1.5 items-start">
             <ShieldAlert className="h-3.5 w-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
             <span>
               AI guidance is for informational support only. Final decisions are made by authorities. VidyarthiiConnect does not guarantee admission, scholarship, visa/NOC approval, or financial approval.

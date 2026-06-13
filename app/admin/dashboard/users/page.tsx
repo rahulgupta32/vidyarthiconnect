@@ -165,7 +165,7 @@ export default function AdminUsersPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-extrabold mb-2 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-          <Users className="h-6 w-6 text-indigo-650" /> Staff Directory & Invitations
+          <Users className="h-6 w-6 text-indigo-600" /> Staff Directory & Invitations
         </h1>
         <p className="text-sm text-slate-500 dark:text-zinc-400">
           Invite Counselor Guides or University Partners, copy secure registration links, and manage active system staff.
@@ -177,7 +177,7 @@ export default function AdminUsersPage() {
         <div className="space-y-6">
           <Card className="border border-slate-200 dark:border-zinc-800">
             <h2 className="text-base font-bold mb-4 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-              <UserPlus className="h-5 w-5 text-indigo-650" /> Send Staff Invitation
+              <UserPlus className="h-5 w-5 text-indigo-600" /> Send Staff Invitation
             </h2>
 
             {formError && (
@@ -282,7 +282,7 @@ export default function AdminUsersPage() {
           {/* Active Users directory */}
           <Card className="border border-slate-200 dark:border-zinc-800">
             <h2 className="text-base font-bold mb-4 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-              <UserCheck className="h-5 w-5 text-indigo-650" /> Active Staff Directory
+              <UserCheck className="h-5 w-5 text-indigo-600" /> Active Staff Directory
             </h2>
 
             <div className="overflow-x-auto">
@@ -296,10 +296,10 @@ export default function AdminUsersPage() {
                     <th className="pb-3 pr-4">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-zinc-850">
+                <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
                   {users.map((u) => (
                     <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/10">
-                      <td className="py-3 pr-4 font-semibold text-slate-850 dark:text-zinc-100">
+                      <td className="py-3 pr-4 font-semibold text-slate-800 dark:text-zinc-100">
                         {u.name}
                         <div className="text-[10px] text-slate-400 font-normal">{u.email}</div>
                       </td>
@@ -361,7 +361,7 @@ export default function AdminUsersPage() {
           {/* Pending Invitations list */}
           <Card className="border border-slate-200 dark:border-zinc-800">
             <h2 className="text-base font-bold mb-4 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-              <Mail className="h-5 w-5 text-indigo-650" /> Staff Invitations Ledger
+              <Mail className="h-5 w-5 text-indigo-600" /> Staff Invitations Ledger
             </h2>
 
             <div className="overflow-x-auto">
@@ -375,7 +375,7 @@ export default function AdminUsersPage() {
                     <th className="pb-3 pr-4">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-zinc-850">
+                <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
                   {invites.length === 0 ? (
                     <tr>
                       <td colSpan={5} className="py-4 text-center text-slate-400 dark:text-zinc-500">No invitations issued yet.</td>
@@ -396,9 +396,9 @@ export default function AdminUsersPage() {
                         <td className="py-3 pr-4">
                           <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider ${
                             inv.status === "PENDING"
-                              ? "bg-amber-50 text-amber-700 dark:bg-amber-955/20 border border-amber-200"
+                              ? "bg-amber-50 text-amber-700 dark:bg-amber-900/20 border border-amber-200"
                               : inv.status === "ACCEPTED"
-                              ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-955/20 border border-emerald-200"
+                              ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-905/20 border border-emerald-200"
                               : "bg-slate-50 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-zinc-700"
                           }`}>
                             {inv.status}

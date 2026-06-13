@@ -175,7 +175,7 @@ export default function SuperAdminUsersPage() {
         <div className="space-y-6">
           <Card className="border border-slate-200 dark:border-zinc-800">
             <h2 className="text-base font-bold mb-4 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-              <UserPlus className="h-5 w-5 text-indigo-650" /> Send Staff Invitation
+              <UserPlus className="h-5 w-5 text-indigo-600" /> Send Staff Invitation
             </h2>
 
             {formError && (
@@ -185,7 +185,7 @@ export default function SuperAdminUsersPage() {
             )}
 
             {formSuccess && (
-              <div className="bg-emerald-50 dark:bg-emerald-955/20 border border-emerald-200 dark:border-emerald-800/50 text-emerald-600 dark:text-emerald-400 text-xs font-semibold p-3 rounded-xl mb-4">
+              <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/50 text-emerald-600 dark:text-emerald-400 text-xs font-semibold p-3 rounded-xl mb-4">
                 {formSuccess}
               </div>
             )}
@@ -281,7 +281,7 @@ export default function SuperAdminUsersPage() {
           {/* Active Users directory */}
           <Card className="border border-slate-200 dark:border-zinc-800">
             <h2 className="text-base font-bold mb-4 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-              <UserCheck className="h-5 w-5 text-indigo-650" /> Active System Users
+              <UserCheck className="h-5 w-5 text-indigo-600" /> Active System Users
             </h2>
 
             <div className="overflow-x-auto">
@@ -295,23 +295,23 @@ export default function SuperAdminUsersPage() {
                     <th className="pb-3 pr-4">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-zinc-850">
+                <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
                   {users.map((u) => (
                     <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/10">
-                      <td className="py-3 pr-4 font-semibold text-slate-850 dark:text-zinc-100">
+                      <td className="py-3 pr-4 font-semibold text-slate-800 dark:text-zinc-100">
                         {u.name}
                         <div className="text-[10px] text-slate-400 font-normal">{u.email}</div>
                       </td>
                       <td className="py-3 pr-4">
                         <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider ${
                           u.role === "SUPERADMIN"
-                            ? "bg-rose-50 text-rose-700 dark:bg-rose-955/20 border border-rose-200"
+                            ? "bg-rose-50 text-rose-700 dark:bg-rose-950/20 border border-rose-200"
                             : u.role === "ADMIN"
-                            ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-955/20 border border-indigo-200"
+                            ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/20 border border-indigo-200"
                             : u.role === "COUNSELOR"
-                            ? "bg-sky-50 text-sky-700 dark:bg-sky-955/20 border border-sky-200"
+                            ? "bg-sky-50 text-sky-700 dark:bg-sky-950/20 border border-sky-200"
                             : u.role === "PARTNER"
-                            ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-955/20 border border-emerald-200"
+                            ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 border border-emerald-200"
                             : "bg-slate-50 text-slate-700"
                         }`}>
                           {u.role}
@@ -334,7 +334,7 @@ export default function SuperAdminUsersPage() {
                             disabled={actionId === u.id}
                             className={`font-semibold p-1.5 rounded-lg border transition flex items-center gap-1 cursor-pointer ${
                               u.isBlocked 
-                                ? "bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100 dark:bg-rose-955/10" 
+                                ? "bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100 dark:bg-rose-900/10" 
                                 : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 dark:bg-zinc-800 dark:border-zinc-700 dark:text-slate-200"
                             }`}
                           >
@@ -362,7 +362,7 @@ export default function SuperAdminUsersPage() {
           {/* Pending Invitations list */}
           <Card className="border border-slate-200 dark:border-zinc-800">
             <h2 className="text-base font-bold mb-4 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-              <Mail className="h-5 w-5 text-indigo-650" /> Staff Invitations Ledger
+              <Mail className="h-5 w-5 text-indigo-600" /> Staff Invitations Ledger
             </h2>
 
             <div className="overflow-x-auto">
@@ -376,30 +376,30 @@ export default function SuperAdminUsersPage() {
                     <th className="pb-3 pr-4">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-zinc-850">
+                <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
                   {invites.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="py-4 text-center text-slate-450">No invitations issued yet.</td>
+                      <td colSpan={5} className="py-4 text-center text-slate-400">No invitations issued yet.</td>
                     </tr>
                   ) : (
                     invites.map((inv) => (
                       <tr key={inv.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/10">
-                        <td className="py-3 pr-4 font-semibold text-slate-850 dark:text-zinc-100">
+                        <td className="py-3 pr-4 font-semibold text-slate-800 dark:text-zinc-100">
                           {inv.name}
                           <div className="text-[10px] text-slate-400 font-normal">{inv.email}</div>
                         </td>
                         <td className="py-3 pr-4">
                           <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase">{inv.role}</span>
                         </td>
-                        <td className="py-3 pr-4 text-slate-450 dark:text-zinc-400 font-mono">
+                        <td className="py-3 pr-4 text-slate-400 dark:text-zinc-400 font-mono">
                           {new Date(inv.expiresAt).toLocaleString()}
                         </td>
                         <td className="py-3 pr-4">
                           <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider ${
                             inv.status === "PENDING"
-                              ? "bg-amber-50 text-amber-700 dark:bg-amber-955/20 border border-amber-200"
+                              ? "bg-amber-50 text-amber-700 dark:bg-amber-905/20 border border-amber-200"
                               : inv.status === "ACCEPTED"
-                              ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-955/20 border border-emerald-200"
+                              ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 border border-emerald-200"
                               : "bg-slate-50 text-slate-700 border border-slate-200"
                           }`}>
                             {inv.status}

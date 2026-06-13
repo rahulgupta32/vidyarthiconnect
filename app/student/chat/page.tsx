@@ -76,9 +76,9 @@ export default function StudentChat() {
     <div className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl shadow-sm flex flex-col h-[calc(100vh-12rem)] overflow-hidden">
       
       {/* Top Header */}
-      <div className="bg-slate-50 dark:bg-zinc-850 px-6 py-4 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between flex-shrink-0">
+      <div className="bg-slate-50 dark:bg-zinc-800 px-6 py-4 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between flex-shrink-0">
         <div className="flex items-center gap-3">
-          <div className="bg-indigo-100 dark:bg-indigo-950 p-2.5 rounded-full text-indigo-650 dark:text-indigo-400">
+          <div className="bg-indigo-100 dark:bg-indigo-950 p-2.5 rounded-full text-indigo-600 dark:text-indigo-400">
             <User className="h-5 w-5" />
           </div>
           <div>
@@ -88,7 +88,7 @@ export default function StudentChat() {
             </p>
           </div>
         </div>
-        <div className="text-xxs text-slate-455 font-semibold flex items-center gap-1 bg-white border border-slate-200 rounded-lg px-2.5 py-1">
+        <div className="text-xxs text-slate-400 font-semibold flex items-center gap-1 bg-white border border-slate-200 rounded-lg px-2.5 py-1">
           <ShieldCheck className="h-3.5 w-3.5 text-indigo-600" /> Monitored Audited Channel
         </div>
       </div>
@@ -108,7 +108,7 @@ export default function StudentChat() {
                 <div className={`max-w-[70%] rounded-2xl p-4 shadow-xxs text-xs leading-relaxed ${
                   isMe 
                     ? "bg-indigo-600 text-white rounded-br-none" 
-                    : "bg-white border border-slate-200 text-slate-800 rounded-bl-none dark:bg-zinc-805 dark:border-zinc-750 dark:text-zinc-200"
+                    : "bg-white border border-slate-200 text-slate-800 rounded-bl-none dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-200"
                 }`}>
                   <div className="text-xxs font-extrabold mb-1 opacity-70">
                     {msg.sender.name}
@@ -133,7 +133,7 @@ export default function StudentChat() {
           onChange={(e) => setInputText(e.target.value)}
           placeholder="Type your message here..."
           required
-          className="flex-1 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 border border-slate-350 dark:border-slate-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-indigo-550 focus:ring-2 focus:ring-indigo-500/20"
+          className="flex-1 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20"
         />
         <button
           type="submit"

@@ -137,23 +137,23 @@ function InviteSignupContent() {
           Vidyarthii<span className="text-sky-500 font-extrabold">Connect</span>
         </Link>
         <h2 className="text-2xl font-extrabold mt-4 text-slate-800 dark:text-zinc-100">Accept Invitation</h2>
-        <p className="text-sm text-slate-600 dark:text-zinc-350 mt-2">
+        <p className="text-sm text-slate-600 dark:text-zinc-300 mt-2">
           Set up credentials for your new <strong className="text-indigo-600 dark:text-indigo-400">{inviteDetails?.role}</strong> account
         </p>
-        <div className="bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/40 rounded-xl p-3 text-xs text-slate-705 dark:text-zinc-300 mt-4 text-left">
+        <div className="bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/40 rounded-xl p-3 text-xs text-slate-700 dark:text-zinc-300 mt-4 text-left">
           <strong>Invitee Name:</strong> {inviteDetails?.name} <br />
           <strong>Registered Email:</strong> {inviteDetails?.email}
         </div>
       </div>
 
       {submitError && (
-        <div className="bg-rose-50 dark:bg-rose-955/20 border border-rose-200 dark:border-rose-800/50 text-rose-600 dark:text-rose-400 text-sm rounded-xl p-3 text-center mb-4 font-semibold">
+        <div className="bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/50 text-rose-600 dark:text-rose-400 text-sm rounded-xl p-3 text-center mb-4 font-semibold">
           {submitError}
         </div>
       )}
 
       {success && (
-        <div className="bg-emerald-50 dark:bg-emerald-955/20 border border-emerald-200 dark:border-emerald-800/50 text-emerald-600 dark:text-emerald-400 text-sm rounded-xl p-3 text-center mb-4 font-semibold animate-pulse">
+        <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/50 text-emerald-600 dark:text-emerald-400 text-sm rounded-xl p-3 text-center mb-4 font-semibold animate-pulse">
           Account created successfully! Redirecting you to login...
         </div>
       )}
@@ -170,7 +170,7 @@ function InviteSignupContent() {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full bg-white dark:bg-zinc-800 text-slate-905 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-550 focus:ring-2 focus:ring-indigo-550/30"
+                className="w-full bg-white dark:bg-zinc-800 text-slate-900 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="••••••••"
               />
             </div>
@@ -186,7 +186,7 @@ function InviteSignupContent() {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="w-full bg-white dark:bg-zinc-800 text-slate-905 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-550 focus:ring-2 focus:ring-indigo-550/30"
+                className="w-full bg-white dark:bg-zinc-800 text-slate-900 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="••••••••"
               />
             </div>
@@ -204,7 +204,7 @@ function InviteSignupContent() {
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full bg-white dark:bg-zinc-800 text-slate-905 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-550 focus:ring-2 focus:ring-indigo-550/30"
+                className="w-full bg-white dark:bg-zinc-800 text-slate-900 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="+977-9841123456"
               />
             </div>
@@ -220,7 +220,7 @@ function InviteSignupContent() {
                 value={formData.dob}
                 onChange={handleChange}
                 required
-                className="w-full bg-white dark:bg-zinc-800 text-slate-905 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-550 focus:ring-2 focus:ring-indigo-550/30"
+                className="w-full bg-white dark:bg-zinc-800 text-slate-900 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/30"
               />
             </div>
           </div>
@@ -237,7 +237,7 @@ function InviteSignupContent() {
                 value={formData.nationality}
                 onChange={handleChange}
                 required
-                className="w-full bg-white dark:bg-zinc-800 text-slate-905 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-550 focus:ring-2 focus:ring-indigo-550/30"
+                className="w-full bg-white dark:bg-zinc-800 text-slate-900 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="Nepali"
               />
             </div>
@@ -253,7 +253,7 @@ function InviteSignupContent() {
                 value={formData.currentAddress}
                 onChange={handleChange}
                 required
-                className="w-full bg-white dark:bg-zinc-800 text-slate-905 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-550 focus:ring-2 focus:ring-indigo-550/30"
+                className="w-full bg-white dark:bg-zinc-800 text-slate-900 dark:text-zinc-100 placeholder:text-slate-500 border border-slate-300 dark:border-zinc-700 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="Kathmandu, Nepal"
               />
             </div>

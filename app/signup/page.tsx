@@ -61,7 +61,7 @@ export default function Signup() {
             Vidyarthii<span className="text-sky-500 font-extrabold">Connect</span>
           </Link>
           <h2 className="text-2xl font-extrabold mt-4 text-slate-800 dark:text-zinc-100">Create your student account</h2>
-          <p className="text-sm text-slate-650 dark:text-zinc-400 mt-2">
+          <p className="text-sm text-slate-600 dark:text-zinc-400 mt-2">
             Start your study-abroad journey with secure profile building, verified university discovery, document checklists, and AI-powered guidance.
           </p>
           <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-xl p-3 text-xs text-amber-800 dark:text-amber-300 mt-4 text-left leading-normal">
@@ -70,13 +70,13 @@ export default function Signup() {
         </div>
 
         {error && (
-          <div className="bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-800/50 text-rose-700 dark:text-rose-450 text-sm font-semibold rounded-lg p-3 text-center mb-4">
+          <div className="bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-800/50 text-rose-700 dark:text-rose-400 text-sm font-semibold rounded-lg p-3 text-center mb-4">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="bg-emerald-50 dark:bg-emerald-955/20 border border-emerald-200 dark:border-emerald-800/50 text-emerald-700 dark:text-emerald-400 text-sm font-semibold rounded-lg p-3 text-center mb-4">
+          <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/50 text-emerald-700 dark:text-emerald-400 text-sm font-semibold rounded-lg p-3 text-center mb-4">
             Registration successful! Redirecting to login...
           </div>
         )}
@@ -85,7 +85,7 @@ export default function Signup() {
           <div>
             <label className="font-semibold text-xs text-slate-700 dark:text-slate-200 mb-1.5 block">Full Name</label>
             <div className="relative">
-              <User className="absolute left-3 top-3 h-4 w-4 text-slate-450 dark:text-slate-400" />
+              <User className="absolute left-3 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
               <input
                 type="text"
                 name="name"
@@ -102,7 +102,7 @@ export default function Signup() {
             <div>
               <label className="font-semibold text-xs text-slate-700 dark:text-slate-200 mb-1.5 block">Email Address</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-450 dark:text-slate-400" />
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
                 <input
                   type="email"
                   name="email"
@@ -118,7 +118,7 @@ export default function Signup() {
             <div>
               <label className="font-semibold text-xs text-slate-700 dark:text-slate-200 mb-1.5 block">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-455 dark:text-slate-400" />
+                <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
                 <input
                   type="password"
                   name="password"
@@ -136,7 +136,7 @@ export default function Signup() {
             <div>
               <label className="font-semibold text-xs text-slate-700 dark:text-slate-200 mb-1.5 block">Phone Number</label>
               <div className="relative">
-                <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-455 dark:text-slate-400" />
+                <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
                 <input
                   type="tel"
                   name="phone"
@@ -151,7 +151,7 @@ export default function Signup() {
             <div>
               <label className="font-semibold text-xs text-slate-700 dark:text-slate-200 mb-1.5 block">Date of Birth</label>
               <div className="relative">
-                <Calendar className="absolute left-3 top-3 h-4 w-4 text-slate-455 dark:text-slate-400" />
+                <Calendar className="absolute left-3 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
                 <input
                   type="date"
                   name="dob"
@@ -167,7 +167,7 @@ export default function Signup() {
             <div>
               <label className="font-semibold text-xs text-slate-700 dark:text-slate-200 mb-1.5 block">Nationality</label>
               <div className="relative">
-                <Globe className="absolute left-3 top-3 h-4 w-4 text-slate-455 dark:text-slate-400" />
+                <Globe className="absolute left-3 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
                 <input
                   type="text"
                   name="nationality"
@@ -182,7 +182,7 @@ export default function Signup() {
             <div>
               <label className="font-semibold text-xs text-slate-700 dark:text-slate-200 mb-1.5 block">Current Address</label>
               <div className="relative">
-                <MapPin className="absolute left-3 top-3 h-4 w-4 text-slate-455 dark:text-slate-400" />
+                <MapPin className="absolute left-3 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
                 <input
                   type="text"
                   name="currentAddress"
@@ -199,11 +199,11 @@ export default function Signup() {
             <input type="checkbox" required className="rounded accent-indigo-600 h-4 w-4 cursor-pointer" />
             <span className="text-xs text-slate-600 dark:text-slate-400">
               I agree to the{" "}
-              <Link href="/terms" className="text-indigo-650 hover:underline font-semibold">
+              <Link href="/terms" className="text-indigo-600 hover:underline font-semibold">
                 Terms of Service
               </Link>{" "}
               and{" "}
-              <Link href="/privacy" className="text-indigo-650 hover:underline font-semibold">
+              <Link href="/privacy" className="text-indigo-600 hover:underline font-semibold">
                 Privacy Policy
               </Link>
             </span>
@@ -220,7 +220,7 @@ export default function Signup() {
 
         <div className="text-center mt-6 text-xs text-slate-600 dark:text-slate-400">
           Already have an account?{" "}
-          <Link href="/login" className="text-indigo-650 font-bold hover:underline">
+          <Link href="/login" className="text-indigo-600 font-bold hover:underline">
             Sign In
           </Link>
         </div>

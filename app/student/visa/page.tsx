@@ -66,12 +66,11 @@ export default function VisaNocPrep() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* Left 2 Columns: Visa Checklists */}
+                {/* Left 2 Columns: Visa Checklists */}
         <div className="lg:col-span-2 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm space-y-6">
-          <div className="flex justify-between items-center border-b border-slate-100 dark:border-zinc-850 pb-4">
+          <div className="flex justify-between items-center border-b border-slate-100 dark:border-zinc-800 pb-4">
             <h2 className="text-lg font-bold flex items-center gap-2">
-              <ShieldCheck className="h-5 w-5 text-indigo-650" /> Student Visa Checklist
+              <ShieldCheck className="h-5 w-5 text-indigo-600" /> Student Visa Checklist
             </h2>
             
             {/* Country tabs */}
@@ -100,7 +99,7 @@ export default function VisaNocPrep() {
               {countryChecklists[selectedCountry].map((item, idx) => (
                 <div key={idx} className="flex gap-2.5 items-start text-xs bg-slate-50 dark:bg-zinc-800/40 p-3 rounded-xl hover:bg-slate-100/50 transition">
                   <CheckCircle className="h-4.5 w-4.5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-650 dark:text-zinc-350 leading-relaxed">{item}</span>
+                  <span className="text-slate-600 dark:text-zinc-300 leading-relaxed">{item}</span>
                 </div>
               ))}
             </div>
@@ -113,8 +112,8 @@ export default function VisaNocPrep() {
 
         {/* Right 1 Column: Nepal NOC MoEST Guide */}
         <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm space-y-6">
-          <h2 className="text-lg font-bold flex items-center gap-2 border-b border-slate-100 pb-4">
-            <BookOpen className="h-5 w-5 text-indigo-650" /> Nepal NOC Checklist
+          <h2 className="text-lg font-bold flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-4">
+            <BookOpen className="h-5 w-5 text-indigo-600" /> Nepal NOC Checklist
           </h2>
 
           <p className="text-xs text-slate-500 leading-relaxed">
@@ -131,17 +130,17 @@ export default function VisaNocPrep() {
             ].map((doc, idx) => (
               <div key={idx} className="flex gap-2 items-center text-xs">
                 <span className="text-indigo-600 font-bold">✓</span>
-                <span className="text-slate-600 dark:text-zinc-450">{doc}</span>
+                <span className="text-slate-600 dark:text-zinc-300">{doc}</span>
               </div>
             ))}
           </div>
 
-          <div className="pt-4 border-t border-slate-100 dark:border-zinc-850">
+          <div className="pt-4 border-t border-slate-100 dark:border-zinc-800">
             <a
               href="https://noc.moest.gov.np/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full bg-slate-50 hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-200 border border-slate-200 dark:border-zinc-750 text-xs font-semibold py-2.5 rounded-xl text-center flex items-center justify-center gap-1.5 transition"
+              className="w-full bg-slate-50 hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 text-xs font-semibold py-2.5 rounded-xl text-center flex items-center justify-center gap-1.5 transition"
             >
               MoEST Nepal NOC Portal <ExternalLink className="h-3.5 w-3.5" />
             </a>

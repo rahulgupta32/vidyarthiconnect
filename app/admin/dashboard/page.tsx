@@ -106,7 +106,7 @@ export default function AdminDashboard() {
         <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase font-bold">Students Registered</span>
-            <Users className="h-5 w-5 text-indigo-650" />
+            <Users className="h-5 w-5 text-indigo-600" />
           </div>
           <div className="text-2xl font-extrabold">{totalStudents}</div>
           <div className="text-xxs text-slate-400 mt-1">Total Nepali candidates</div>
@@ -133,9 +133,9 @@ export default function AdminDashboard() {
         <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase font-bold">Total Revenue</span>
-            <DollarSign className="h-5 w-5 text-indigo-650" />
+            <DollarSign className="h-5 w-5 text-indigo-600" />
           </div>
-          <div className="text-2xl font-extrabold text-indigo-650">NPR {totalRevenue.toLocaleString()}</div>
+          <div className="text-2xl font-extrabold text-indigo-600">NPR {totalRevenue.toLocaleString()}</div>
           <div className="text-xxs text-slate-400 mt-1">Verified payments received</div>
         </div>
       </div>
@@ -148,7 +148,7 @@ export default function AdminDashboard() {
           {/* Student CRM Directory */}
           <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <Users className="h-5 w-5 text-indigo-655" /> Student CRM Directory
+              <Users className="h-5 w-5 text-indigo-600" /> Student CRM Directory
             </h2>
 
             <div className="space-y-4">
@@ -168,7 +168,7 @@ export default function AdminDashboard() {
                     disabled={actionId === student.user.id}
                     className={`text-xxs font-bold px-3 py-1.5 rounded-lg border transition flex items-center gap-1 cursor-pointer ${
                       student.user.isBlocked 
-                        ? "bg-rose-50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-450 border-rose-250 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/40" 
+                        ? "bg-rose-50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-450 border-rose-200 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/40" 
                         : "bg-slate-50 dark:bg-zinc-800 text-slate-700 dark:text-zinc-200 border-slate-200 dark:border-zinc-700 hover:bg-slate-100 dark:hover:bg-zinc-700"
                     }`}
                   >
@@ -192,7 +192,7 @@ export default function AdminDashboard() {
           {/* Counselor Assignments Panel */}
           <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <UserPlus className="h-5 w-5 text-indigo-655" /> Counselor Assignments
+              <UserPlus className="h-5 w-5 text-indigo-600" /> Counselor Assignments
             </h2>
 
             <div className="space-y-4">
@@ -238,7 +238,7 @@ export default function AdminDashboard() {
           {/* Counselors Workload Summary */}
           <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <Users className="h-5 w-5 text-indigo-650" /> Counselor Staff Workloads
+              <Users className="h-5 w-5 text-indigo-600" /> Counselor Staff Workloads
             </h2>
 
             <div className="space-y-4">
@@ -252,7 +252,7 @@ export default function AdminDashboard() {
                         {c.activeStudentsCount} / {c.workloadLimit} Limit
                       </span>
                     </div>
-                    <div className="w-full bg-slate-100 dark:bg-zinc-850 h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-slate-100 dark:bg-zinc-800 h-2 rounded-full overflow-hidden">
                       <div 
                         className={`h-2 rounded-full ${ratio > 80 ? "bg-rose-500" : ratio > 50 ? "bg-amber-500" : "bg-emerald-500"}`}
                         style={{ width: `${ratio}%` }} 
@@ -267,7 +267,7 @@ export default function AdminDashboard() {
           {/* Service Payments Log */}
           <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <DollarSign className="h-5 w-5 text-indigo-650" /> verified Payments
+              <DollarSign className="h-5 w-5 text-indigo-600" /> verified Payments
             </h2>
 
             {data?.payments.length === 0 ? (
@@ -275,7 +275,7 @@ export default function AdminDashboard() {
             ) : (
               <div className="space-y-3">
                 {data?.payments.map((p: any) => (
-                  <div key={p.id} className="border-b border-slate-50 dark:border-zinc-850 pb-3 last:border-b-0 last:pb-0 flex justify-between items-center text-xs">
+                  <div key={p.id} className="border-b border-slate-50 dark:border-zinc-800 pb-3 last:border-b-0 last:pb-0 flex justify-between items-center text-xs">
                     <div>
                       <h4 className="font-bold">{p.student.user.name}</h4>
                       <p className="text-xxxxs text-slate-450">{p.package.name} • via {p.method}</p>

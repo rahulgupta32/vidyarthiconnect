@@ -82,7 +82,7 @@ export default async function StudentDashboard() {
       <div className="bg-gradient-to-r from-indigo-600 to-sky-500 text-white rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
         <div className="relative z-10 max-w-xl">
           <h1 className="text-2xl sm:text-3xl font-extrabold mb-2">Welcome Back, {session.name}!</h1>
-          <p className="text-indigo-150 text-sm">
+          <p className="text-indigo-200 text-sm">
             Keep your academic profile updated to get more accurate AI course recommendations. Your path to global education starts here.
           </p>
         </div>
@@ -195,7 +195,7 @@ export default async function StudentDashboard() {
               <span className="font-medium text-slate-500">Completed fields</span>
               <span className="font-bold text-indigo-600">{completionPercentage}%</span>
             </div>
-            <div className="w-full bg-slate-100 dark:bg-zinc-850 h-2.5 rounded-full overflow-hidden mb-4">
+            <div className="w-full bg-slate-100 dark:bg-zinc-800 h-2.5 rounded-full overflow-hidden mb-4">
               <div className="bg-indigo-600 h-2.5 rounded-full" style={{ width: `${completionPercentage}%` }} />
             </div>
             <Link href="/student/profile" className="w-full bg-slate-50 dark:bg-zinc-800 hover:bg-slate-100 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 text-xs font-semibold py-2 rounded-xl text-center block transition">
@@ -237,12 +237,12 @@ export default async function StudentDashboard() {
             ) : (
               <div className="space-y-3.5">
                 {notifications.map((notif) => (
-                  <div key={notif.id} className="flex gap-2.5 items-start text-xs border-b border-slate-50 dark:border-zinc-850 pb-2.5 last:border-b-0 last:pb-0">
+                  <div key={notif.id} className="flex gap-2.5 items-start text-xs border-b border-slate-50 dark:border-zinc-800 pb-2.5 last:border-b-0 last:pb-0">
                     {notif.type === "SUCCESS" && <CheckCircle className="h-4 w-4 text-emerald-500 flex-shrink-0" />}
                     {notif.type === "WARNING" && <AlertCircle className="h-4 w-4 text-amber-500 flex-shrink-0" />}
                     {notif.type === "ERROR" && <AlertCircle className="h-4 w-4 text-rose-500 flex-shrink-0" />}
                     {notif.type === "INFO" && <Clock className="h-4 w-4 text-indigo-500 flex-shrink-0" />}
-                    <p className="text-slate-650 dark:text-zinc-350">{notif.content}</p>
+                    <p className="text-slate-600 dark:text-zinc-300">{notif.content}</p>
                   </div>
                 ))}
               </div>
