@@ -114,6 +114,7 @@ export async function GET(req: NextRequest) {
 
       recommendations.push({
         id: course.id,
+        course: course,
         courseTitle: course.title,
         universityName: course.university.name,
         country: course.university.country.name,
@@ -124,6 +125,7 @@ export async function GET(req: NextRequest) {
         score: Math.min(100, Math.max(0, score)),
         riskLevel,
         reasons: reasons.slice(0, 3),
+        reason: reasons.slice(0, 3).join(" "),
         missingRequirements: missing.join(", ") || "None",
         dataStatus: course.dataStatus,
         lastVerifiedAt: course.lastVerifiedAt,

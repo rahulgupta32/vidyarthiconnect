@@ -80,3 +80,67 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
   }
 }
+
+export async function PUT(req: NextRequest) {
+  const session = await getSession();
+  const ip = req.headers.get("x-forwarded-for") || (req as any).ip || "127.0.0.1";
+  
+  if (!session || (session.role !== "ADMIN" && session.role !== "SUPERADMIN")) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const body = await req.json();
+    const { id, ...rest } = body;
+    if (!id) {
+      return NextResponse.json({ error: "Missing scholarship ID" }, { status: 400 });
+    }
+
+    const validated = ScholarshipSchema.parse(rest);
+
+    const scholarship = await db.scholarship.update({
+      where: { id },
+      data: {
+        name: validated.name,
+        description: validated.description || null,
+        amount: validated.amount,
+        universityId: validated.universityId,
+        courseId: validated.courseId || null,
+        country: validated.country || null,
+        scholarshipType: validated.scholarshipType as any,
+        currency: validated.currency,
+        coverageType: validated.coverageType as any,
+        eligibilityCriteria: validated.eligibilityCriteria || null,
+        requiredGpa: validated.requiredGpa || null,
+        requiredEnglishScore: validated.requiredEnglishScore || null,
+        deadline: validated.deadline ? new Date(validated.deadline) : null,
+        numberOfSeats: validated.numberOfSeats || null,
+        isAutomatic: validated.isAutomatic,
+        requiredDocuments: validated.requiredDocuments || null,
+        termsAndConditions: validated.termsAndConditions || null,
+        sourceUrl: validated.sourceUrl || null,
+        sourceNote: validated.sourceNote || null,
+        dataStatus: validated.dataStatus,
+        lastVerifiedAt: validated.dataStatus === "VERIFIED" ? new Date() : undefined,
+        verifiedBy: validated.dataStatus === "VERIFIED" ? session.name : undefined,
+        updatedBy: session.id,
+      },
+    });
+
+    await logAudit(
+      session.id,
+      AuditAction.SCHOLARSHIP_MANAGE,
+      ip,
+      `Updated scholarship: ${scholarship.name} (${scholarship.id})`
+    );
+
+    return NextResponse.json(scholarship);
+  } catch (error: any) {
+    console.error("PUT scholarship error:", error);
+    if (error.name === "ZodError") {
+      return NextResponse.json({ error: "Validation Error", details: error.errors }, { status: 400 });
+    }
+    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+  }
+}
+

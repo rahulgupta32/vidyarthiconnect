@@ -82,3 +82,69 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
   }
 }
+
+export async function PUT(req: NextRequest) {
+  const session = await getSession();
+  const ip = req.headers.get("x-forwarded-for") || (req as any).ip || "127.0.0.1";
+  
+  if (!session || (session.role !== "ADMIN" && session.role !== "SUPERADMIN")) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const body = await req.json();
+    const { id, ...rest } = body;
+    if (!id) {
+      return NextResponse.json({ error: "Missing cost details ID" }, { status: 400 });
+    }
+
+    const validated = CourseCostSchema.parse(rest);
+
+    const cost = await db.courseCost.update({
+      where: { id },
+      data: {
+        courseId: validated.courseId,
+        universityId: validated.universityId,
+        tuitionFeePerYear: validated.tuitionFeePerYear,
+        totalTuitionFee: validated.totalTuitionFee,
+        applicationFee: validated.applicationFee,
+        depositAmount: validated.depositAmount,
+        visaFeeEstimate: validated.visaFeeEstimate,
+        insuranceEstimate: validated.insuranceEstimate,
+        livingCostEstimate: validated.livingCostEstimate,
+        accommodationEstimate: validated.accommodationEstimate,
+        travelCostEstimate: validated.travelCostEstimate,
+        proofOfFundsRequirement: validated.proofOfFundsRequirement || null,
+        bankBalanceRequirement: validated.bankBalanceRequirement || null,
+        sponsorAllowed: validated.sponsorAllowed,
+        educationLoanAccepted: validated.educationLoanAccepted,
+        installmentPaymentAvailable: validated.installmentPaymentAvailable,
+        partTimeWorkAllowed: validated.partTimeWorkAllowed,
+        refundPolicy: validated.refundPolicy || null,
+        currency: validated.currency,
+        sourceUrl: validated.sourceUrl || null,
+        sourceNote: validated.sourceNote || null,
+        dataStatus: validated.dataStatus,
+        lastVerifiedAt: validated.dataStatus === "VERIFIED" ? new Date() : undefined,
+        verifiedBy: validated.dataStatus === "VERIFIED" ? session.name : undefined,
+        updatedBy: session.id,
+      },
+    });
+
+    await logAudit(
+      session.id,
+      AuditAction.COST_MANAGE,
+      ip,
+      `Updated course cost details for course ID ${cost.courseId} (${cost.id})`
+    );
+
+    return NextResponse.json(cost);
+  } catch (error: any) {
+    console.error("PUT course cost error:", error);
+    if (error.name === "ZodError") {
+      return NextResponse.json({ error: "Validation Error", details: error.errors }, { status: 400 });
+    }
+    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+  }
+}
+

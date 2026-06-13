@@ -15,6 +15,36 @@ import {
   Info
 } from "lucide-react";
 
+function getCourseCostDetails(course: any) {
+  const cost = course?.courseCost;
+  const tuition = cost?.tuitionFeePerYear ?? course?.tuitionFee ?? 0;
+  const appFee = cost?.applicationFee ?? course?.applicationFee ?? 0;
+  const deposit = cost?.depositAmount ?? 0;
+  const living = cost?.livingCostEstimate ?? 12000;
+  const insurance = cost?.insuranceEstimate ?? 2000;
+  const visa = cost?.visaFeeEstimate ?? 500;
+  const travel = cost?.travelCostEstimate ?? 1500;
+  
+  const total = tuition + appFee + living + insurance + visa + travel;
+  const scholarship = course?.scholarships && course.scholarships.length > 0 ? (course.scholarships[0]?.amount ?? 0) : 0;
+  const selfFinance = Math.max(0, total - scholarship);
+  const currency = cost?.currency ?? "USD";
+
+  return {
+    tuition,
+    appFee,
+    deposit,
+    living,
+    insurance,
+    visa,
+    travel,
+    total,
+    scholarship,
+    selfFinance,
+    currency
+  };
+}
+
 export default function UniversitySearch() {
   const [courses, setCourses] = useState<any[]>([]);
   const [recommendations, setRecommendations] = useState<any[]>([]);
@@ -32,6 +62,9 @@ export default function UniversitySearch() {
   // Comparison State
   const [compareList, setCompareList] = useState<any[]>([]);
   const [showComparison, setShowComparison] = useState(false);
+
+  const details0 = compareList[0] ? getCourseCostDetails(compareList[0]) : null;
+  const details1 = compareList[1] ? getCourseCostDetails(compareList[1]) : null;
 
   // Load Search Data
   useEffect(() => {
@@ -263,19 +296,19 @@ export default function UniversitySearch() {
                 const isCompared = compareList.some((c) => c.id === course.id);
                 
                 // Cost calculations
-                const cost = course.courseCost;
-                const tuition = cost ? cost.tuitionFeePerYear : course.tuitionFee;
-                const appFee = cost ? cost.applicationFee : course.applicationFee;
-                const deposit = cost ? cost.depositAmount : 0;
-                const living = cost ? cost.livingCostEstimate : 12000;
-                const insurance = cost ? cost.insuranceEstimate : 2000;
-                const visa = cost ? cost.visaFeeEstimate : 500;
-                const travel = cost ? cost.travelCostEstimate : 1500;
-                
-                const totalEstimatedCost = tuition + appFee + living + insurance + visa + travel;
-                const scholarshipAmount = course.scholarships && course.scholarships.length > 0 ? course.scholarships[0].amount : 0;
-                const finalSelfFinance = Math.max(0, totalEstimatedCost - scholarshipAmount);
-                const currency = cost ? cost.currency : "USD";
+                const {
+                  tuition,
+                  appFee,
+                  deposit,
+                  living,
+                  insurance,
+                  visa,
+                  travel,
+                  total: totalEstimatedCost,
+                  scholarship: scholarshipAmount,
+                  selfFinance: finalSelfFinance,
+                  currency
+                } = getCourseCostDetails(course);
 
                 return (
                   <div key={course.id} className="border border-slate-150 dark:border-zinc-800 p-5 rounded-2xl flex flex-col justify-between hover:shadow-md transition">
@@ -436,34 +469,34 @@ export default function UniversitySearch() {
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Tuition Fee</div>
-                <div className="font-bold text-slate-700 dark:text-zinc-350">${compareList[0].tuitionFee.toLocaleString()}/yr</div>
-                <div className="font-bold text-slate-700 dark:text-zinc-350">${compareList[1].tuitionFee.toLocaleString()}/yr</div>
+                <div className="font-bold text-slate-700 dark:text-zinc-355">{details0?.currency} {details0?.tuition.toLocaleString()}/yr</div>
+                <div className="font-bold text-slate-700 dark:text-zinc-355">{details1?.currency} {details1?.tuition.toLocaleString()}/yr</div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Estimated Total Cost</div>
                 <div className="font-bold text-slate-800 dark:text-zinc-200">
-                  ${(compareList[0].courseCost?.tuitionFeePerYear + compareList[0].courseCost?.applicationFee + compareList[0].courseCost?.livingCostEstimate + compareList[0].courseCost?.insuranceEstimate + compareList[0].courseCost?.visaFeeEstimate + compareList[0].courseCost?.travelCostEstimate || compareList[0].tuitionFee + 16000).toLocaleString()}/yr
+                  {details0?.currency} {details0?.total.toLocaleString()}/yr
                 </div>
                 <div className="font-bold text-slate-800 dark:text-zinc-200">
-                  ${(compareList[1].courseCost?.tuitionFeePerYear + compareList[1].courseCost?.applicationFee + compareList[1].courseCost?.livingCostEstimate + compareList[1].courseCost?.insuranceEstimate + compareList[1].courseCost?.visaFeeEstimate + compareList[1].courseCost?.travelCostEstimate || compareList[1].tuitionFee + 16000).toLocaleString()}/yr
+                  {details1?.currency} {details1?.total.toLocaleString()}/yr
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Scholarship Value</div>
                 <div className="font-bold text-emerald-600">
-                  ${(compareList[0].scholarships?.[0]?.amount || 0).toLocaleString()}
+                  {details0?.currency} {details0?.scholarship.toLocaleString()}
                 </div>
                 <div className="font-bold text-emerald-600">
-                  ${(compareList[1].scholarships?.[0]?.amount || 0).toLocaleString()}
+                  {details1?.currency} {details1?.scholarship.toLocaleString()}
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Self-Finance Estimate</div>
                 <div className="font-extrabold text-indigo-600">
-                  ${Math.max(0, (compareList[0].courseCost?.tuitionFeePerYear + compareList[0].courseCost?.applicationFee + compareList[0].courseCost?.livingCostEstimate + compareList[0].courseCost?.insuranceEstimate + compareList[0].courseCost?.visaFeeEstimate + compareList[0].courseCost?.travelCostEstimate || compareList[0].tuitionFee + 16000) - (compareList[0].scholarships?.[0]?.amount || 0)).toLocaleString()}
+                  {details0?.currency} {details0?.selfFinance.toLocaleString()}
                 </div>
                 <div className="font-extrabold text-indigo-600">
-                  ${Math.max(0, (compareList[1].courseCost?.tuitionFeePerYear + compareList[1].courseCost?.applicationFee + compareList[1].courseCost?.livingCostEstimate + compareList[1].courseCost?.insuranceEstimate + compareList[1].courseCost?.visaFeeEstimate + compareList[1].courseCost?.travelCostEstimate || compareList[1].tuitionFee + 16000) - (compareList[1].scholarships?.[0]?.amount || 0)).toLocaleString()}
+                  {details1?.currency} {details1?.selfFinance.toLocaleString()}
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">

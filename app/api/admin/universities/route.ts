@@ -77,3 +77,64 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
   }
 }
+
+export async function PUT(req: NextRequest) {
+  const session = await getSession();
+  const ip = req.headers.get("x-forwarded-for") || (req as any).ip || "127.0.0.1";
+  
+  if (!session || (session.role !== "ADMIN" && session.role !== "SUPERADMIN")) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const body = await req.json();
+    const { id, ...rest } = body;
+    if (!id) {
+      return NextResponse.json({ error: "Missing university ID" }, { status: 400 });
+    }
+
+    const validated = UniversitySchema.parse(rest);
+
+    const university = await db.university.update({
+      where: { id },
+      data: {
+        name: validated.name,
+        countryId: validated.countryId,
+        city: validated.city || null,
+        campus: validated.campus || null,
+        websiteUrl: validated.websiteUrl || null,
+        logoUrl: validated.logoUrl || null,
+        coverImageUrl: validated.coverImageUrl || null,
+        description: validated.description || null,
+        ranking: validated.ranking || null,
+        institutionType: validated.institutionType,
+        partnerStatus: validated.partnerStatus as any,
+        contactEmail: validated.contactEmail || null,
+        applicationPortalUrl: validated.applicationPortalUrl || null,
+        sourceUrl: validated.sourceUrl || null,
+        sourceNote: validated.sourceNote || null,
+        dataStatus: validated.dataStatus,
+        verifiedStatus: validated.dataStatus === "VERIFIED",
+        lastVerifiedAt: validated.dataStatus === "VERIFIED" ? new Date() : undefined,
+        verifiedBy: validated.dataStatus === "VERIFIED" ? session.name : undefined,
+        updatedBy: session.id,
+      },
+    });
+
+    await logAudit(
+      session.id,
+      AuditAction.UNIVERSITY_MANAGE,
+      ip,
+      `Updated university: ${university.name} (${university.id})`
+    );
+
+    return NextResponse.json(university);
+  } catch (error: any) {
+    console.error("PUT university error:", error);
+    if (error.name === "ZodError") {
+      return NextResponse.json({ error: "Validation Error", details: error.errors }, { status: 400 });
+    }
+    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+  }
+}
+
