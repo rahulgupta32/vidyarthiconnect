@@ -116,14 +116,14 @@ export default function StudentPayments() {
 
       {/* Payment Receipt Voucher */}
       {successReceipt && (
-        <div className="bg-white dark:bg-zinc-900 border-2 border-emerald-500/25 max-w-xl mx-auto rounded-2xl p-6 sm:p-8 shadow-xl space-y-6">
+        <div className="bg-slate-900/80 border-2 border-emerald-500/25 max-w-xl mx-auto rounded-2xl p-6 sm:p-8 shadow-xl space-y-6">
           <div className="text-center space-y-2">
             <CheckCircle className="h-12 w-12 text-emerald-500 mx-auto" />
-            <h2 className="text-lg font-bold text-slate-800 dark:text-zinc-200">Payment Verified Successfully!</h2>
+            <h2 className="text-lg font-bold text-white">Payment Verified Successfully!</h2>
             <p className="text-xs text-slate-400">Your digital receipt voucher</p>
           </div>
 
-          <div className="border-t border-slate-100 dark:border-zinc-800 pt-4 divide-y divide-slate-200 text-xs">
+          <div className="border-t border-slate-800 pt-4 divide-y divide-slate-200 text-xs">
             <div className="flex justify-between py-2.5">
               <span className="text-slate-400 font-semibold">Service Package</span>
               <span className="font-bold">{successReceipt.package}</span>
@@ -149,12 +149,12 @@ export default function StudentPayments() {
               <span>NPR {successReceipt.vat.toLocaleString()}</span>
             </div>
             <div className="flex justify-between py-2.5 border-t-2 border-slate-200/50 pt-3">
-              <span className="text-slate-800 dark:text-zinc-200 font-extrabold text-sm">Grand Total Paid</span>
+              <span className="text-white font-extrabold text-sm">Grand Total Paid</span>
               <span className="font-extrabold text-sm text-emerald-600">NPR {successReceipt.total.toLocaleString()}</span>
             </div>
           </div>
 
-          <div className="bg-slate-50 dark:bg-zinc-800/40 p-3 rounded-lg text-xxs text-slate-500 leading-normal text-center">
+          <div className="bg-slate-950/40 border border-slate-800 p-3 rounded-lg text-xxs text-slate-500 leading-normal text-center">
             Invoice generated automatically. A confirmation SMS was sent to your phone.
           </div>
         </div>
@@ -163,9 +163,9 @@ export default function StudentPayments() {
       {/* Package List Grid */}
       <div className="grid md:grid-cols-3 gap-6">
         {packages.map((pkg) => (
-          <div key={pkg.id} className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col justify-between shadow-xs">
+          <div key={pkg.id} className="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between shadow-xl">
             <div>
-              <h3 className="font-bold text-base text-slate-800 dark:text-zinc-200 mb-2">{pkg.name}</h3>
+              <h3 className="font-bold text-base text-white mb-2">{pkg.name}</h3>
               <div className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400 mb-3">NPR {pkg.price.toLocaleString()}</div>
               <p className="text-xxs text-slate-400 leading-normal mb-5">{pkg.desc}</p>
               
@@ -191,7 +191,7 @@ export default function StudentPayments() {
       {/* Checkout Modal Form */}
       {selectedPackage && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <CreditCard className="h-5 w-5 text-indigo-600" /> Checkout Package
             </h2>
@@ -205,12 +205,12 @@ export default function StudentPayments() {
                 <select
                   value={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-xs focus:outline-none text-slate-900 dark:text-zinc-100 cursor-pointer"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 px-3 text-xs focus:outline-none text-white cursor-pointer"
                 >
-                  <option value="eSewa" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">eSewa Mobile Wallet</option>
-                  <option value="Khalti" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Khalti Wallet</option>
-                  <option value="Stripe" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Stripe Credit Card</option>
-                  <option value="Manual" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Manual Bank Deposit</option>
+                  <option value="eSewa" className="bg-slate-950 text-white">eSewa Mobile Wallet</option>
+                  <option value="Khalti" className="bg-slate-950 text-white">Khalti Wallet</option>
+                  <option value="Stripe" className="bg-slate-950 text-white">Stripe Credit Card</option>
+                  <option value="Manual" className="bg-slate-950 text-white">Manual Bank Deposit</option>
                 </select>
               </div>
 
@@ -221,11 +221,11 @@ export default function StudentPayments() {
                   value={transactionId}
                   onChange={(e) => setTransactionId(e.target.value)}
                   placeholder="e.g. TXN-881023 (leave empty to autogenerate)"
-                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-xs focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 px-3 text-xs focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 text-white placeholder-slate-400 dark:placeholder-zinc-500"
                 />
               </div>
 
-              <div className="bg-slate-50 dark:bg-zinc-800/40 p-3.5 rounded-xl text-xxs text-slate-600 dark:text-zinc-400 leading-normal flex gap-2">
+              <div className="bg-slate-950/40 border border-slate-800 p-3.5 rounded-xl text-xxs text-slate-600 dark:text-zinc-400 leading-normal flex gap-2">
                 <ShieldCheck className="h-5 w-5 text-indigo-600 flex-shrink-0" />
                 <span>
                   Payments are secure and logged. Your counselor will be notified as soon as transaction validation completes.
@@ -236,7 +236,7 @@ export default function StudentPayments() {
                 <button
                   type="button"
                   onClick={() => setSelectedPackage(null)}
-                  className="bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-200 font-semibold px-4 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-700 transition cursor-pointer"
+                  className="bg-slate-800 hover:bg-slate-800 text-slate-200 font-semibold px-4 py-2.5 rounded-xl text-xs border border-slate-800 transition cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -255,3 +255,5 @@ export default function StudentPayments() {
     </div>
   );
 }
+
+

@@ -115,7 +115,7 @@ export default function FloatingChatWidget() {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       {/* Chat Window overlay */}
       {isOpen && (
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 w-80 sm:w-96 h-[480px] rounded-2xl shadow-2xl flex flex-col mb-4 overflow-hidden animate-in slide-in-from-bottom-5 duration-200">
+        <div className="bg-slate-900 border border-slate-800 w-80 sm:w-96 h-[480px] rounded-2xl shadow-2xl flex flex-col mb-4 overflow-hidden animate-in slide-in-from-bottom-5 duration-200 text-white">
           {/* Header */}
           <div className="bg-gradient-to-r from-indigo-600 to-sky-500 text-white p-4 flex justify-between items-center">
             <div className="flex items-center gap-2">
@@ -131,7 +131,7 @@ export default function FloatingChatWidget() {
           </div>
 
           {/* Messages List */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50 dark:bg-zinc-950">
+          <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-950">
             {messages.length === 0 ? (
               <div className="text-center py-10 text-slate-400 text-xxs">
                 Hello! How can I help you today? Ask me about university requirements, NOC checklist, cost estimates or documents.
@@ -146,7 +146,7 @@ export default function FloatingChatWidget() {
                     className={`max-w-[85%] rounded-xl px-3 py-2 text-xxs leading-relaxed whitespace-pre-wrap ${
                       m.role === "USER"
                         ? "bg-indigo-600 text-white rounded-br-none"
-                        : "bg-white dark:bg-zinc-800 text-slate-800 dark:text-zinc-200 rounded-bl-none border border-slate-200 dark:border-zinc-700"
+                        : "bg-white dark:bg-zinc-800 text-white rounded-bl-none border border-slate-800"
                     }`}
                   >
                     {m.content}
@@ -157,7 +157,7 @@ export default function FloatingChatWidget() {
 
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-white dark:bg-zinc-800 text-slate-400 rounded-xl rounded-bl-none px-3 py-2 text-xxs flex items-center gap-1.5 border border-slate-200 dark:border-zinc-700">
+                <div className="bg-white dark:bg-zinc-800 text-slate-400 rounded-xl rounded-bl-none px-3 py-2 text-xxs flex items-center gap-1.5 border border-slate-800">
                   <Loader2 className="h-3 w-3 animate-spin text-indigo-600" /> formulating answer...
                 </div>
               </div>
@@ -172,7 +172,7 @@ export default function FloatingChatWidget() {
           </div>
 
           {/* AI Disclaimer */}
-          <div className="px-4 py-2 bg-amber-500/5 border-t border-slate-100 dark:border-zinc-800/80 text-[10px] leading-relaxed text-amber-700 dark:text-amber-400 flex gap-1.5 items-start">
+          <div className="px-4 py-2 bg-amber-500/5 border-t border-slate-800 text-[10px] leading-relaxed text-amber-700 dark:text-amber-400 flex gap-1.5 items-start">
             <ShieldAlert className="h-3.5 w-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
             <span>
               AI guidance is for informational support only. Final decisions are made by authorities. VidyarthiiConnect does not guarantee admission, scholarship, visa/NOC approval, or financial approval.
@@ -180,13 +180,13 @@ export default function FloatingChatWidget() {
           </div>
 
           {/* Input Form */}
-          <form onSubmit={handleSend} className="p-3 bg-white dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 flex gap-2">
+          <form onSubmit={handleSend} className="p-3 bg-white dark:bg-zinc-900 border-t border-slate-800 flex gap-2">
             <input
               type="text"
               placeholder="Ask anything..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              className="flex-1 bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-xl py-2 px-3.5 text-xxs focus:outline-none focus:border-indigo-600"
+              className="flex-1 bg-slate-950 border border-slate-800 rounded-xl py-2 px-3.5 text-xxs focus:outline-none focus:border-indigo-600"
             />
             <button
               type="submit"

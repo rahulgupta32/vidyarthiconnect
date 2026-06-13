@@ -71,15 +71,15 @@ export default function PartnerDashboard() {
   return (
     <div className="space-y-8">
       {/* University banner details */}
-      <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm flex items-center gap-4">
+      <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm flex items-center gap-4">
         <div className="bg-emerald-50 dark:bg-emerald-950/20 p-4 rounded-xl text-emerald-700">
           <Building className="h-10 w-10" />
         </div>
         <div>
-          <span className="bg-emerald-50 text-emerald-700 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">
+          <span className="bg-emerald-950/40 text-emerald-400 border border-emerald-500/20 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">
             Official Partner Institution
           </span>
-          <h1 className="text-2xl font-extrabold text-slate-800 dark:text-zinc-100 mt-1">
+          <h1 className="text-2xl font-extrabold text-white mt-1">
             {data?.partner.university.name}
           </h1>
           <p className="text-xxs text-slate-400">
@@ -90,7 +90,7 @@ export default function PartnerDashboard() {
 
       {/* Metrics widgets */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase">Total Applicants</span>
             <Users className="h-5 w-5 text-indigo-600" />
@@ -99,7 +99,7 @@ export default function PartnerDashboard() {
           <div className="text-xxs text-slate-400 mt-1">Filed via VidyarthiiConnect</div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase">Awaiting Offer</span>
             <Clock className="h-5 w-5 text-amber-500" />
@@ -108,7 +108,7 @@ export default function PartnerDashboard() {
           <div className="text-xxs text-slate-400 mt-1">Requires admissions decision</div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase">Offers Issued</span>
             <CheckCircle className="h-5 w-5 text-emerald-500" />
@@ -117,7 +117,7 @@ export default function PartnerDashboard() {
           <div className="text-xxs text-slate-400 mt-1">Unconditional/Conditional offers</div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase">Conversion Rate</span>
             <TrendingUp className="h-5 w-5 text-indigo-600" />
@@ -128,21 +128,21 @@ export default function PartnerDashboard() {
       </div>
 
       {/* Applicant pipeline list */}
-      <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+      <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm">
         <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
           <Award className="h-5 w-5 text-indigo-600" /> Applicant Pipeline
         </h2>
 
         {apps.length === 0 ? (
-          <p className="text-sm text-slate-400 text-center py-10 border border-dashed border-slate-200 dark:border-zinc-800 rounded-xl">
+          <p className="text-sm text-slate-400 text-center py-10 border border-dashed border-slate-800 rounded-xl">
             No applicants have submitted requests to your institution yet.
           </p>
         ) : (
           <div className="space-y-6">
             {apps.map((app: any) => (
-              <div key={app.id} className="border border-slate-100 dark:border-zinc-800 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div key={app.id} className="border border-slate-800 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                  <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200">{app.student.user.name}</h3>
+                  <h3 className="font-bold text-sm text-white">{app.student.user.name}</h3>
                   <p className="text-xxs text-slate-500">
                     Course Preference: <strong>{app.course.title}</strong> • Academic Level: <strong>{app.student.academicLevel}</strong> • GPA: <strong>{app.student.gpa}</strong> • English: <strong>{app.student.englishTestScore} ({app.student.englishTestType})</strong>
                   </p>
@@ -154,9 +154,9 @@ export default function PartnerDashboard() {
                 <div className="flex gap-2 items-center w-full sm:w-auto">
                   <span className={`text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase border ${
                     app.status === "ACCEPTED" || app.status === "ENROLLED"
-                      ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                      ? "bg-emerald-950/40 text-emerald-400 border border-emerald-500/20 border-emerald-200"
                       : app.status === "REJECTED"
-                      ? "bg-rose-50 text-rose-700 border-rose-200"
+                      ? "bg-rose-950/40 text-rose-400 border border-rose-500/20 border-rose-200"
                       : "bg-slate-50 text-slate-700 border-slate-200"
                   }`}>
                     {app.status.replace(/_/g, " ")}
@@ -167,7 +167,7 @@ export default function PartnerDashboard() {
                       <button
                         onClick={() => handleDecision(app.id, "ACCEPTED")}
                         disabled={actionId === app.id}
-                        className="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xxs font-semibold px-2.5 py-1 rounded-md border border-emerald-200 transition flex items-center gap-1"
+                        className="bg-emerald-950/40 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-900/30 text-xxs font-semibold px-2.5 py-1 rounded-md border border-emerald-200 transition flex items-center gap-1"
                       >
                         {actionId === app.id && <Loader2 className="h-3 w-3 animate-spin" />}
                         Accept
@@ -175,7 +175,7 @@ export default function PartnerDashboard() {
                       <button
                         onClick={() => handleDecision(app.id, "REJECTED")}
                         disabled={actionId === app.id}
-                        className="bg-rose-50 text-rose-700 hover:bg-rose-100 text-xxs font-semibold px-2.5 py-1 rounded-md border border-rose-200 transition flex items-center gap-1"
+                        className="bg-rose-950/40 text-rose-400 border border-rose-500/20 hover:bg-rose-100 text-xxs font-semibold px-2.5 py-1 rounded-md border border-rose-200 transition flex items-center gap-1"
                       >
                         {actionId === app.id && <Loader2 className="h-3 w-3 animate-spin" />}
                         Decline

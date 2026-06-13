@@ -145,7 +145,7 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
 export const Card: React.FC<CardProps> = ({ className = "", children, ...props }) => {
   return (
     <div
-      className={`bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm ${className}`}
+      className={`bg-white border border-slate-200 dark:bg-slate-900/80 dark:border-slate-800 p-6 rounded-2xl shadow-sm dark:shadow-xl ${className}`}
       {...props}
     >
       {children}
@@ -174,7 +174,7 @@ export const Modal: React.FC<ModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
       <div className="fixed inset-0" onClick={onClose}></div>
       <div
-        className={`bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-lg w-full relative z-10 ${maxWidthClass}`}
+        className={`bg-white border border-slate-200 dark:bg-slate-900/85 dark:border-slate-800 p-6 rounded-2xl shadow-lg dark:shadow-2xl w-full relative z-10 ${maxWidthClass}`}
       >
         {title && (
           <div className="flex justify-between items-center mb-4 border-b border-slate-100 dark:border-zinc-800 pb-2">

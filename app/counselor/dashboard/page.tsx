@@ -169,14 +169,14 @@ export default function CounselorWorkspace() {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-bold mb-2">Counselor Workspace</h1>
-        <p className="text-sm text-slate-500 dark:text-zinc-400">
+        <p className="text-sm text-slate-400">
           Verify uploaded academic folders, check applications, update milestones, and create checklists for students.
         </p>
       </div>
 
       {/* Workload Limit overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase">Assigned Students</span>
             <Users className="h-5 w-5 text-indigo-600" />
@@ -185,7 +185,7 @@ export default function CounselorWorkspace() {
           <div className="text-xxs text-slate-400 mt-1">Workload limit: {data?.counselor.workloadLimit} students</div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase">Pending Review</span>
             <FileText className="h-5 w-5 text-amber-500" />
@@ -194,7 +194,7 @@ export default function CounselorWorkspace() {
           <div className="text-xxs text-slate-400 mt-1">Requires immediate file verification</div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase">Active Tasks</span>
             <Clock className="h-5 w-5 text-indigo-600" />
@@ -210,7 +210,7 @@ export default function CounselorWorkspace() {
         <div className="lg:col-span-2 space-y-8">
           
           {/* AI Handoffs & Escalation Alerts */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2 text-rose-600">
               <AlertCircle className="h-5 w-5 text-rose-600 animate-pulse" /> AI Handoffs & Escalation Alerts
             </h2>
@@ -222,13 +222,13 @@ export default function CounselorWorkspace() {
             ) : (
               <div className="space-y-4">
                 {data.handoffs.map((handoff: any) => (
-                  <div key={handoff.id} className="border border-slate-100 dark:border-zinc-800/80 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-slate-50 dark:hover:bg-zinc-800/30 transition">
+                  <div key={handoff.id} className="border border-slate-800 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-slate-800/30 transition">
                     <div>
                       <div className="flex items-center gap-2">
                         <span className={`text-xxxxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider ${
                           handoff.priority === "HIGH" || handoff.priority === "URGENT"
-                            ? "bg-rose-50 text-rose-700 dark:bg-rose-950/20 dark:text-rose-400"
-                            : "bg-amber-50 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
+                            ? "bg-rose-950/40 text-rose-400 border border-rose-500/20 dark:bg-rose-950/20 dark:text-rose-400"
+                            : "bg-amber-950/40 text-amber-400 border border-amber-500/20 dark:bg-amber-950/20 dark:text-amber-400"
                         }`}>
                           {handoff.priority} PRIORITY
                         </span>
@@ -236,7 +236,7 @@ export default function CounselorWorkspace() {
                           {handoff.status}
                         </span>
                       </div>
-                      <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200 mt-2">{handoff.reason}</h3>
+                      <h3 className="font-bold text-sm text-white mt-2">{handoff.reason}</h3>
                       <p className="text-xxs text-slate-500 mt-1">
                         Student: <strong>{handoff.student.name}</strong> • Info: {handoff.summary}
                       </p>
@@ -245,7 +245,7 @@ export default function CounselorWorkspace() {
                     <div>
                       <button
                         onClick={() => fetchAiSummary({ handoffId: handoff.id }, `Handoff Escalation: ${handoff.reason}`)}
-                        className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-xxs font-bold px-3 py-1.5 rounded-lg border border-indigo-200 transition whitespace-nowrap"
+                        className="bg-indigo-950/40 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-900/30 text-xxs font-bold px-3 py-1.5 rounded-lg border border-indigo-200 transition whitespace-nowrap"
                       >
                         Generate AI Summary
                       </button>
@@ -257,7 +257,7 @@ export default function CounselorWorkspace() {
           </div>
 
           {/* Document Verification Queue */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <FileText className="h-5 w-5 text-indigo-600" /> File Verification Queue
             </h2>
@@ -269,12 +269,12 @@ export default function CounselorWorkspace() {
             ) : (
               <div className="space-y-4">
                 {data?.pendingDocuments.map((doc: any) => (
-                  <div key={doc.id} className="border border-slate-100 dark:border-zinc-800 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-slate-50 dark:hover:bg-zinc-800/30 transition">
+                  <div key={doc.id} className="border border-slate-800 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-slate-800/30 transition">
                     <div>
-                      <span className="bg-amber-50 text-amber-700 text-xxxxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">
+                      <span className="bg-amber-950/40 text-amber-400 border border-amber-500/20 text-xxxxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">
                         Pending
                       </span>
-                      <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200 mt-1">{doc.fileType}</h3>
+                      <h3 className="font-bold text-sm text-white mt-1">{doc.fileType}</h3>
                       <p className="text-xxs text-slate-500">
                         Student: <strong>{doc.student.user.name}</strong> • File: <a href={doc.storageUrl} target="_blank" className="text-indigo-600 hover:underline">{doc.fileName}</a>
                       </p>
@@ -286,7 +286,7 @@ export default function CounselorWorkspace() {
                           setReviewDoc(doc);
                           setReviewStatus("APPROVED");
                         }}
-                        className="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xxs font-semibold px-3 py-1.5 rounded-lg border border-emerald-200 transition"
+                        className="bg-emerald-950/40 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-900/30 text-xxs font-semibold px-3 py-1.5 rounded-lg border border-emerald-200 transition"
                       >
                         Approve
                       </button>
@@ -295,7 +295,7 @@ export default function CounselorWorkspace() {
                           setReviewDoc(doc);
                           setReviewStatus("NEEDS_REVISION");
                         }}
-                        className="bg-amber-50 text-amber-700 hover:bg-amber-100 text-xxs font-semibold px-3 py-1.5 rounded-lg border border-amber-200 transition"
+                        className="bg-amber-950/40 text-amber-400 border border-amber-500/20 hover:bg-amber-900/30 text-xxs font-semibold px-3 py-1.5 rounded-lg border border-amber-200 transition"
                       >
                         Needs Revision
                       </button>
@@ -307,7 +307,7 @@ export default function CounselorWorkspace() {
           </div>
 
           {/* Student CRM applications list */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
               <Users className="h-5 w-5 text-indigo-600" /> Student CRM Pipeline
             </h2>
@@ -319,10 +319,10 @@ export default function CounselorWorkspace() {
             ) : (
               <div className="space-y-6">
                 {data?.applications.map((app: any) => (
-                  <div key={app.id} className="border border-slate-100 dark:border-zinc-800 p-4 rounded-xl space-y-4">
+                  <div key={app.id} className="border border-slate-800 p-4 rounded-xl space-y-4">
                     <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
                       <div>
-                        <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200">
+                        <h3 className="font-bold text-sm text-white">
                           {app.student.user.name}
                         </h3>
                         <p className="text-xxs text-slate-500">
@@ -333,7 +333,7 @@ export default function CounselorWorkspace() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => fetchAiSummary({ studentId: app.student.id }, `Student Profile AI Summary: ${app.student.user.name}`)}
-                          className="bg-slate-50 hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-slate-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-200 text-xxs font-semibold px-2.5 py-1.5 rounded-lg transition mr-2 flex items-center gap-1 cursor-pointer"
+                          className="bg-slate-50 hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-slate-800 text-slate-300 text-xxs font-semibold px-2.5 py-1.5 rounded-lg transition mr-2 flex items-center gap-1 cursor-pointer"
                         >
                           <Sparkles className="h-3.5 w-3.5 text-indigo-600" /> AI Summary
                         </button>
@@ -341,18 +341,18 @@ export default function CounselorWorkspace() {
                           value={app.status}
                           disabled={actionLoadingId === app.id}
                           onChange={(e) => handleStatusUpdate(app.id, e.target.value)}
-                          className="bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-900 dark:text-zinc-100 rounded-lg py-1 px-2.5 text-xxs focus:outline-none focus:border-indigo-600 font-bold cursor-pointer"
+                          className="bg-slate-950 border border-slate-800 text-white rounded-lg py-1 px-2.5 text-xxs focus:outline-none focus:border-indigo-600 font-bold cursor-pointer"
                         >
-                          <option value="DRAFTING" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Drafting</option>
-                          <option value="COUNSELOR_REVIEW" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Counselor Review</option>
-                          <option value="SUBMITTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Submitted</option>
-                          <option value="ACCEPTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Accepted</option>
-                          <option value="REJECTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Rejected</option>
-                          <option value="VISA_PREPARATION" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Visa Preparation</option>
-                          <option value="VISA_SUBMITTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Visa Submitted</option>
-                          <option value="VISA_APPROVED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Visa Approved</option>
-                          <option value="VISA_REJECTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Visa Rejected</option>
-                          <option value="ENROLLED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Enrolled</option>
+                          <option value="DRAFTING" className="bg-slate-950 text-white">Drafting</option>
+                          <option value="COUNSELOR_REVIEW" className="bg-slate-950 text-white">Counselor Review</option>
+                          <option value="SUBMITTED" className="bg-slate-950 text-white">Submitted</option>
+                          <option value="ACCEPTED" className="bg-slate-950 text-white">Accepted</option>
+                          <option value="REJECTED" className="bg-slate-950 text-white">Rejected</option>
+                          <option value="VISA_PREPARATION" className="bg-slate-950 text-white">Visa Preparation</option>
+                          <option value="VISA_SUBMITTED" className="bg-slate-950 text-white">Visa Submitted</option>
+                          <option value="VISA_APPROVED" className="bg-slate-950 text-white">Visa Approved</option>
+                          <option value="VISA_REJECTED" className="bg-slate-950 text-white">Visa Rejected</option>
+                          <option value="ENROLLED" className="bg-slate-950 text-white">Enrolled</option>
                         </select>
                         {actionLoadingId === app.id && <Loader2 className="h-4 w-4 animate-spin text-slate-400" />}
                       </div>
@@ -367,7 +367,7 @@ export default function CounselorWorkspace() {
         {/* Right Column: Task Creator + Task List */}
         <div className="space-y-8">
                {/* Create checklist task */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <Plus className="h-5 w-5 text-indigo-600" /> Assign Checklist Task
             </h2>
@@ -380,16 +380,16 @@ export default function CounselorWorkspace() {
 
             <form onSubmit={handleTaskSubmit} className="space-y-4">
               <div>
-                <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Assign To Student</label>
+                <label className="font-semibold text-xs text-slate-300 mb-1.5 block">Assign To Student</label>
                 <select
                   name="studentId"
                   value={taskForm.studentId}
                   onChange={(e) => setTaskForm({ ...taskForm, studentId: e.target.value })}
                   required
-                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2 px-3 text-xs focus:outline-none text-slate-900 dark:text-zinc-100 cursor-pointer"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2 px-3 text-xs focus:outline-none text-white cursor-pointer"
                 >
                   {data?.applications.map((app: any) => (
-                    <option key={app.id} value={app.studentId} className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">
+                    <option key={app.id} value={app.studentId} className="bg-slate-950 text-white">
                       {app.student.user.name}
                     </option>
                   ))}
@@ -397,35 +397,35 @@ export default function CounselorWorkspace() {
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Task Title</label>
+                <label className="font-semibold text-xs text-slate-300 mb-1.5 block">Task Title</label>
                 <input
                   type="text"
                   placeholder="e.g. Re-upload transcripts"
                   value={taskForm.title}
                   onChange={(e) => setTaskForm({ ...taskForm, title: e.target.value })}
                   required
-                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-xs focus:outline-none focus:border-indigo-600 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 px-3 text-xs focus:outline-none focus:border-indigo-500 text-white placeholder-slate-400 dark:placeholder-zinc-500"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Description</label>
+                <label className="font-semibold text-xs text-slate-300 mb-1.5 block">Description</label>
                 <textarea
                   placeholder="Details of what to submit..."
                   value={taskForm.description}
                   onChange={(e) => setTaskForm({ ...taskForm, description: e.target.value })}
                   rows={2}
-                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-indigo-600 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-indigo-500 text-white placeholder-slate-400 dark:placeholder-zinc-500"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Due Date</label>
+                <label className="font-semibold text-xs text-slate-300 mb-1.5 block">Due Date</label>
                 <input
                   type="date"
                   value={taskForm.dueDate}
                   onChange={(e) => setTaskForm({ ...taskForm, dueDate: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2 px-3 text-xs focus:outline-none text-slate-800 dark:text-zinc-200"
+                  className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-800 rounded-xl py-2 px-3 text-xs focus:outline-none text-white"
                 />
               </div>
 
@@ -439,7 +439,7 @@ export default function CounselorWorkspace() {
           </div>
 
           {/* Assigned checklist tasks list */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <Bookmark className="h-5 w-5 text-indigo-600" /> Assigned Checklist Items
             </h2>
@@ -452,7 +452,7 @@ export default function CounselorWorkspace() {
                   <div key={task.id} className="border border-slate-50 dark:border-zinc-800 pb-3 last:border-b-0 last:pb-0 flex items-start gap-2.5 text-xs">
                     <Clock className={`h-4 w-4 mt-0.5 flex-shrink-0 ${task.isCompleted ? "text-emerald-500" : "text-amber-500"}`} />
                     <div>
-                      <h4 className="font-bold text-slate-800 dark:text-zinc-200">{task.title}</h4>
+                      <h4 className="font-bold text-white">{task.title}</h4>
                       {task.description && <p className="text-xxs text-slate-400 mt-0.5">{task.description}</p>}
                       {task.dueDate && (
                         <span className="text-xxxxs text-slate-400 font-semibold flex items-center gap-0.5 mt-1">
@@ -472,44 +472,44 @@ export default function CounselorWorkspace() {
       {/* Review Dialog Popup */}
       {reviewDoc && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <form onSubmit={handleReviewSubmit} className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-4">
+          <form onSubmit={handleReviewSubmit} className="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full text-white p-6 sm:p-8 shadow-2xl space-y-4">
             <h2 className="text-lg font-bold flex items-center gap-2">
               <FileText className="h-5 w-5 text-indigo-600" /> File Review Verdict
             </h2>
-            <p className="text-xs text-slate-700 dark:text-zinc-300">
+            <p className="text-xs text-slate-300">
               Verifying document type <strong className="text-slate-900 dark:text-white">{reviewDoc.fileType}</strong> for student <strong className="text-slate-900 dark:text-white">{reviewDoc.student.user.name}</strong>.
             </p>
 
             <div>
-              <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Verdict Status</label>
+              <label className="font-semibold text-xs text-slate-300 mb-1.5 block">Verdict Status</label>
               <select
                 value={reviewStatus}
                 onChange={(e) => setReviewStatus(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-xs focus:outline-none text-slate-900 dark:text-zinc-100 cursor-pointer"
+                className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-800 rounded-xl py-2.5 px-3 text-xs focus:outline-none text-slate-900 dark:text-zinc-100 cursor-pointer"
               >
-                <option value="APPROVED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">APPROVED (Verified Good)</option>
-                <option value="REJECTED" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">REJECTED (Incorrect/Fraud)</option>
-                <option value="NEEDS_REVISION" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">NEEDS REVISION (Blurry/Expiry)</option>
+                <option value="APPROVED" className="bg-slate-950 text-white">APPROVED (Verified Good)</option>
+                <option value="REJECTED" className="bg-slate-950 text-white">REJECTED (Incorrect/Fraud)</option>
+                <option value="NEEDS_REVISION" className="bg-slate-950 text-white">NEEDS REVISION (Blurry/Expiry)</option>
               </select>
             </div>
 
             <div>
-              <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Review Comment / Instructions</label>
+              <label className="font-semibold text-xs text-slate-300 mb-1.5 block">Review Comment / Instructions</label>
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows={3}
                 placeholder="Specify instructions or reasons..."
                 required={reviewStatus !== "APPROVED"}
-                className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-indigo-500 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
+                className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-800 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-indigo-500 text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500"
               />
             </div>
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-zinc-800/80">
+            <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
               <button
                 type="button"
                 onClick={() => setReviewDoc(null)}
-                className="bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-200 font-semibold px-4 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-700 transition cursor-pointer"
+                className="bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-300 font-semibold px-4 py-2.5 rounded-xl text-xs border border-slate-800 transition cursor-pointer"
               >
                 Cancel
               </button>
@@ -527,8 +527,8 @@ export default function CounselorWorkspace() {
       {/* AI Summary Modal */}
       {summaryModal.isOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-4 flex flex-col max-h-[85vh]">
-            <div className="flex justify-between items-center border-b border-slate-100 dark:border-zinc-800 pb-3">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full text-white p-6 sm:p-8 shadow-2xl space-y-4 flex flex-col max-h-[85vh]">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-3">
               <h2 className="text-lg font-bold flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-indigo-600 animate-pulse" /> {summaryModal.title}
               </h2>
@@ -547,13 +547,13 @@ export default function CounselorWorkspace() {
                   <span className="text-xs text-slate-500 font-medium">Analyzing student records and drafting response...</span>
                 </div>
               ) : (
-                <div className="text-xs leading-relaxed text-slate-700 dark:text-zinc-300 whitespace-pre-wrap space-y-2 bg-slate-50 dark:bg-zinc-950 p-4 rounded-xl border border-slate-200 dark:border-zinc-800/80">
+                <div className="text-xs leading-relaxed text-slate-300 whitespace-pre-wrap space-y-2 bg-slate-950 p-4 rounded-xl border border-slate-800">
                   {summaryModal.content}
                 </div>
               )}
             </div>
 
-            <div className="flex justify-end pt-4 border-t border-slate-100 dark:border-zinc-800">
+            <div className="flex justify-end pt-4 border-t border-slate-800">
               <button
                 type="button"
                 onClick={() => setSummaryModal({ isOpen: false, title: "", content: "", loading: false })}

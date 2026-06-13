@@ -40,14 +40,14 @@ export default function ApplicationTracker() {
       case "VISA_APPROVED":
       case "ACCEPTED":
       case "ENROLLED":
-        return "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-450 border-emerald-100";
+        return "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-400 border-emerald-100";
       case "REJECTED":
       case "VISA_REJECTED":
-        return "bg-rose-50 text-rose-700 dark:bg-rose-950/20 dark:text-rose-450 border-rose-100";
+        return "bg-rose-50 text-rose-700 dark:bg-rose-950/20 dark:text-rose-400 border-rose-100";
       case "COUNSELOR_REVIEW":
-        return "bg-amber-50 text-amber-700 dark:bg-amber-950/20 dark:text-amber-450 border-amber-100";
+        return "bg-amber-50 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400 border-amber-100";
       default:
-        return "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/20 dark:text-indigo-450 border-indigo-100";
+        return "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/20 dark:text-indigo-400 border-indigo-100";
     }
   };
 
@@ -96,7 +96,7 @@ export default function ApplicationTracker() {
       </div>
 
       {applications.length === 0 ? (
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-12 text-center shadow-sm max-w-lg mx-auto">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl rounded-2xl p-12 text-center max-w-lg mx-auto">
           <Send className="h-12 w-12 text-slate-300 mx-auto mb-4" />
           <h2 className="text-lg font-bold mb-2">No Active Applications</h2>
           <p className="text-sm text-slate-500 mb-6">
@@ -109,12 +109,12 @@ export default function ApplicationTracker() {
       ) : (
         <div className="space-y-8">
           {applications.map((app) => (
-            <div key={app.id} className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm space-y-6">
+            <div key={app.id} className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl space-y-6">
               
               {/* Application Details */}
-              <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-slate-100 dark:border-zinc-800 pb-4">
+              <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-slate-800 pb-4">
                 <div>
-                  <h3 className="font-extrabold text-lg text-slate-800 dark:text-zinc-200">{app.course.title}</h3>
+                  <h3 className="font-extrabold text-lg text-slate-200">{app.course.title}</h3>
                   <p className="text-sm text-slate-500 font-medium">{app.university.name}</p>
                   
                   <div className="flex flex-wrap gap-4 text-xxs text-slate-400 mt-2">
@@ -150,12 +150,12 @@ export default function ApplicationTracker() {
                             ? "bg-emerald-500 border-emerald-600 text-white" 
                             : isFailed 
                             ? "bg-rose-500 border-rose-600 text-white" 
-                            : "bg-slate-50 border-slate-200 text-slate-450 dark:bg-zinc-800 dark:border-zinc-700"
+                            : "bg-slate-800 border border-slate-800 text-slate-400"
                         }`}>
                           {isCompleted ? "✓" : sIdx + 1}
                         </div>
                         <div>
-                          <div className={`text-xs font-bold ${isCompleted ? "text-slate-800 dark:text-zinc-200" : "text-slate-400"}`}>
+                          <div className={`text-xs font-bold ${isCompleted ? "text-slate-200" : "text-slate-400"}`}>
                             {stage.label}
                           </div>
                         </div>
@@ -166,13 +166,13 @@ export default function ApplicationTracker() {
               </div>
 
               {/* Required Documents / Visa Checklist placeholder */}
-              <div className="grid md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-zinc-800">
-                <div className="bg-slate-50 dark:bg-zinc-800/40 p-4 rounded-xl">
+              <div className="grid md:grid-cols-2 gap-6 pt-4 border-t border-slate-800">
+                <div className="bg-slate-950/40 border border-slate-800 p-4 rounded-xl">
                   <h4 className="text-xs font-extrabold uppercase text-slate-400 mb-3 flex items-center gap-1.5">
                     <ShieldCheck className="h-4 w-4 text-indigo-600" /> Visa Checklist Status
                   </h4>
                   {app.visaChecklist ? (
-                    <div className="grid grid-cols-2 gap-2 text-xxs text-slate-600 dark:text-zinc-400">
+                    <div className="grid grid-cols-2 gap-2 text-xxs text-slate-400">
                       <div className="flex items-center gap-1">
                         {app.visaChecklist.passport ? "✅" : "❌"} Passport copy
                       </div>
@@ -197,12 +197,12 @@ export default function ApplicationTracker() {
                   )}
                 </div>
 
-                <div className="bg-slate-50 dark:bg-zinc-800/40 p-4 rounded-xl">
+                <div className="bg-slate-950/40 border border-slate-800 p-4 rounded-xl">
                   <h4 className="text-xs font-extrabold uppercase text-slate-400 mb-3 flex items-center gap-1.5">
                     <BookOpen className="h-4 w-4 text-indigo-600" /> Nepal NOC checklist
                   </h4>
                   {app.nocChecklist ? (
-                    <div className="space-y-2 text-xxs text-slate-600 dark:text-zinc-400">
+                    <div className="space-y-2 text-xxs text-slate-400">
                       <div className="grid grid-cols-2 gap-2">
                         <div className="flex items-center gap-1">
                           {app.nocChecklist.citizenship ? "✅" : "❌"} citizenship Scan
@@ -235,3 +235,5 @@ export default function ApplicationTracker() {
     </div>
   );
 }
+
+

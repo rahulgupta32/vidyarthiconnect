@@ -144,7 +144,7 @@ export default function DocumentVault() {
         <div className="lg:col-span-2 space-y-8">
           
           {/* Upload Form */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <Upload className="h-5 w-5 text-indigo-600" /> Upload New Document
             </h2>
@@ -152,33 +152,33 @@ export default function DocumentVault() {
             <form onSubmit={handleUploadSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Document Type</label>
+                  <label className="font-semibold text-xs text-slate-300 mb-1.5 block">Document Type</label>
                   <select
                     value={fileType}
                     onChange={(e) => setFileType(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none text-slate-900 dark:text-zinc-100"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none text-white"
                   >
-                    <option value="Passport" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Passport Copy</option>
-                    <option value="Citizenship" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Citizenship Document</option>
-                    <option value="Academic transcripts" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Academic Transcripts</option>
-                    <option value="IELTS score card" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">IELTS / PTE / TOEFL Scores</option>
-                    <option value="CV / Resume" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">CV / Resume</option>
-                    <option value="Statement of Purpose" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Statement of Purpose (SOP)</option>
-                    <option value="Recommendation Letter" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Letter of Recommendation (LOR)</option>
-                    <option value="Bank statement" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Financial / Bank Documents</option>
-                    <option value="Nepal NOC" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">No Objection Certificate (NOC)</option>
+                    <option value="Passport" className="bg-slate-950 text-white">Passport Copy</option>
+                    <option value="Citizenship" className="bg-slate-950 text-white">Citizenship Document</option>
+                    <option value="Academic transcripts" className="bg-slate-950 text-white">Academic Transcripts</option>
+                    <option value="IELTS score card" className="bg-slate-950 text-white">IELTS / PTE / TOEFL Scores</option>
+                    <option value="CV / Resume" className="bg-slate-950 text-white">CV / Resume</option>
+                    <option value="Statement of Purpose" className="bg-slate-950 text-white">Statement of Purpose (SOP)</option>
+                    <option value="Recommendation Letter" className="bg-slate-950 text-white">Letter of Recommendation (LOR)</option>
+                    <option value="Bank statement" className="bg-slate-950 text-white">Financial / Bank Documents</option>
+                    <option value="Nepal NOC" className="bg-slate-950 text-white">No Objection Certificate (NOC)</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="font-semibold text-xs text-slate-700 dark:text-zinc-300 mb-1.5 block">Select File (PDF, JPG, PNG - Max 5MB)</label>
+                  <label className="font-semibold text-xs text-slate-300 mb-1.5 block">Select File (PDF, JPG, PNG - Max 5MB)</label>
                   <input
                     type="file"
                     id="file-input-element"
                     onChange={handleFileChange}
                     accept=".pdf,.jpg,.jpeg,.png"
                     required
-                    className="w-full bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl py-1.5 px-3 text-xs focus:outline-none text-slate-800 dark:text-zinc-200"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl py-1.5 px-3 text-xs focus:outline-none text-white"
                   />
                 </div>
               </div>
@@ -194,27 +194,27 @@ export default function DocumentVault() {
           </div>
 
           {/* Documents list */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl">
             <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
               <Lock className="h-5 w-5 text-indigo-600" /> Vault Inventory
             </h2>
 
             {documents.length === 0 ? (
-              <p className="text-sm text-slate-400 text-center py-10 border border-dashed border-slate-200 dark:border-zinc-800 rounded-xl">
+              <p className="text-sm text-slate-400 text-center py-10 border border-dashed border-slate-800 rounded-xl">
                 No documents found in vault. Upload passport or transcript copies above to get started.
               </p>
             ) : (
               <div className="space-y-6">
                 {documents.map((doc) => (
-                  <div key={doc.id} className="border border-slate-100 dark:border-zinc-800 p-4 rounded-xl space-y-4 hover:shadow-xs transition">
+                  <div key={doc.id} className="border border-slate-800 p-4 rounded-xl space-y-4 hover:shadow-xs transition">
                     <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
                       <div className="flex items-center gap-3">
                         <div className="bg-indigo-50 dark:bg-indigo-950 p-2.5 rounded-lg text-indigo-600 dark:text-indigo-400">
                           <FileText className="h-5 w-5" />
                         </div>
                         <div>
-                          <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200">{doc.fileType}</h3>
-                          <p className="text-xxs text-slate-450 leading-none">{doc.originalName} ({Math.round(doc.fileSize / 1024)} KB)</p>
+                          <h3 className="font-bold text-sm text-white">{doc.fileType}</h3>
+                          <p className="text-xxs text-slate-400 leading-none">{doc.originalName} ({Math.round(doc.fileSize / 1024)} KB)</p>
                         </div>
                       </div>
 
@@ -227,7 +227,7 @@ export default function DocumentVault() {
                           <a
                             href={doc.storageUrl}
                             target="_blank"
-                            className="bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100 p-1.5 rounded-lg transition"
+                            className="bg-slate-800 border border-slate-800 text-slate-300 hover:bg-slate-800 p-1.5 rounded-lg transition"
                             title="View Document"
                           >
                             <Eye className="h-3.5 w-3.5" />
@@ -238,7 +238,7 @@ export default function DocumentVault() {
 
                     {/* Counselor comments */}
                     {doc.comments && doc.comments.length > 0 && (
-                      <div className="bg-slate-50 dark:bg-zinc-800/40 p-3 rounded-lg border-l-2 border-indigo-500">
+                      <div className="bg-slate-950/40 border border-slate-800 p-3 rounded-lg border-l-2 border-indigo-500">
                         <div className="text-xxs font-bold text-slate-400 mb-1 flex items-center gap-1">
                           <MessageSquare className="h-3 w-3" /> Counselor Review Note:
                         </div>
@@ -258,7 +258,7 @@ export default function DocumentVault() {
         <div className="space-y-8">
           
           {/* Data privacy requests */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl">
             <h2 className="text-lg font-bold flex items-center gap-2 mb-4">
               <ShieldAlert className="h-5 w-5 text-indigo-600" /> Privacy & Consent Control
             </h2>
@@ -272,8 +272,8 @@ export default function DocumentVault() {
                   onChange={(e) => setConsents({ ...consents, dataSharing: e.target.checked })}
                   className="rounded accent-indigo-600 mt-1 h-4 w-4 flex-shrink-0 cursor-pointer"
                 />
-                <label htmlFor="data-share-check" className="text-xs text-slate-700 dark:text-zinc-300 leading-normal select-none cursor-pointer">
-                  <strong className="text-slate-900 dark:text-white">General Counselor Review:</strong> Allow assigned counselor to review files to verify GPA calculations.
+                <label htmlFor="data-share-check" className="text-xs text-slate-300 leading-normal select-none cursor-pointer">
+                  <strong className="text-white">General Counselor Review:</strong> Allow assigned counselor to review files to verify GPA calculations.
                 </label>
               </div>
 
@@ -285,14 +285,14 @@ export default function DocumentVault() {
                   onChange={(e) => setConsents({ ...consents, universitySharing: e.target.checked })}
                   className="rounded accent-indigo-600 mt-1 h-4 w-4 flex-shrink-0 cursor-pointer"
                 />
-                <label htmlFor="uni-share-check" className="text-xs text-slate-700 dark:text-zinc-300 leading-normal select-none cursor-pointer">
-                  <strong className="text-slate-900 dark:text-white">Partner University Sharing:</strong> Consent to share verified document metadata and files with admissions departments when submitting applications.
+                <label htmlFor="uni-share-check" className="text-xs text-slate-300 leading-normal select-none cursor-pointer">
+                  <strong className="text-white">Partner University Sharing:</strong> Consent to share verified document metadata and files with admissions departments when submitting applications.
                 </label>
               </div>
 
               <button
                 onClick={handleSaveConsent}
-                className="w-full bg-slate-50 hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-800 dark:text-zinc-200 font-bold py-2.5 rounded-xl border border-slate-200 dark:border-zinc-700 text-xs transition mt-2 cursor-pointer"
+                className="w-full bg-slate-50 hover:bg-slate-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-white font-bold py-2.5 rounded-xl border border-slate-200 dark:border-zinc-700 text-xs transition mt-2 cursor-pointer"
               >
                 Update Consent Permissions
               </button>
@@ -300,7 +300,7 @@ export default function DocumentVault() {
           </div>
 
           {/* Secure File upload guide */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl">
             <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
               <Lock className="h-5 w-5 text-indigo-600" /> Vault Security Details
             </h2>
@@ -320,3 +320,6 @@ export default function DocumentVault() {
     </div>
   );
 }
+
+
+

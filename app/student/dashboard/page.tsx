@@ -77,9 +77,9 @@ export default async function StudentDashboard() {
   });
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Welcome Banner */}
-      <div className="bg-gradient-to-r from-indigo-600 to-sky-500 text-white rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
+      <div className="bg-gradient-to-r from-indigo-600 to-sky-500 text-white rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
         <div className="relative z-10 max-w-xl">
           <h1 className="text-2xl sm:text-3xl font-extrabold mb-2">Welcome Back, {session.name}!</h1>
           <p className="text-indigo-200 text-sm">
@@ -93,46 +93,46 @@ export default async function StudentDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left 2 Columns */}
-        <div className="lg:col-span-2 space-y-8">
+        <div className="lg:col-span-2 space-y-6">
           
           {/* Active Applications */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-lg font-bold flex items-center gap-2">
-                <Send className="h-5 w-5 text-indigo-600" /> Active Applications
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <Send className="h-5 w-5 text-indigo-400" /> Active Applications
               </h2>
-              <Link href="/student/applications" className="text-xs text-indigo-600 hover:underline font-semibold">
+              <Link href="/student/applications" className="text-xs text-indigo-400 hover:underline font-semibold">
                 View All
               </Link>
             </div>
 
             {profile.applications.length === 0 ? (
-              <div className="text-center py-10 border border-dashed border-slate-200 dark:border-zinc-800 rounded-xl">
-                <Send className="h-10 w-10 text-slate-300 mx-auto mb-3" />
-                <p className="text-sm text-slate-500">You haven't submitted any applications yet.</p>
-                <Link href="/student/search" className="mt-4 inline-block bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-4 py-2 rounded-full">
+              <div className="text-center py-10 border border-dashed border-slate-800 rounded-xl">
+                <Send className="h-10 w-10 text-slate-600 mx-auto mb-3" />
+                <p className="text-sm text-slate-400">You haven't submitted any applications yet.</p>
+                <Link href="/student/search" className="mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-4 py-2 rounded-full">
                   Search Universities
                 </Link>
               </div>
             ) : (
               <div className="space-y-4">
                 {profile.applications.map((app) => (
-                  <div key={app.id} className="border border-slate-100 dark:border-zinc-800/80 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-slate-50 dark:hover:bg-zinc-800/30 transition">
+                  <div key={app.id} className="border border-slate-800 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-slate-800/30 transition-all duration-200">
                     <div>
-                      <h3 className="font-bold text-sm text-slate-900 dark:text-zinc-100">{app.course.title}</h3>
-                      <p className="text-xs text-slate-500">{app.university.name}</p>
-                      <div className="flex gap-4 text-xxs text-slate-400 mt-1">
+                      <h3 className="font-bold text-sm text-white">{app.course.title}</h3>
+                      <p className="text-xs text-slate-400">{app.university.name}</p>
+                      <div className="flex gap-4 text-xxs text-slate-500 mt-1">
                         <span>Intake: {app.intake}</span>
                         {app.counselor && <span>Counselor: {app.counselor.user.name}</span>}
                       </div>
                     </div>
                     <div>
-                      <span className={`text-xxs font-extrabold px-2.5 py-1 rounded-full uppercase ${
+                      <span className={`text-xxs font-extrabold px-2.5 py-1 rounded-full uppercase border ${
                         app.status === "VISA_APPROVED" || app.status === "ACCEPTED"
-                          ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-400"
+                          ? "bg-emerald-950/40 text-emerald-400 border-emerald-500/20"
                           : app.status === "REJECTED" || app.status === "VISA_REJECTED"
-                          ? "bg-rose-50 text-rose-700 dark:bg-rose-950/20 dark:text-rose-400"
-                          : "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/20 dark:text-indigo-400"
+                          ? "bg-rose-950/40 text-rose-400 border-rose-500/20"
+                          : "bg-indigo-950/40 text-indigo-400 border-indigo-500/20"
                       }`}>
                         {app.status.replace(/_/g, " ")}
                       </span>
@@ -144,12 +144,12 @@ export default async function StudentDashboard() {
           </div>
 
           {/* AI recommendations */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-lg font-bold flex items-center gap-2">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-amber-500" /> AI-Recommended Programs
               </h2>
-              <Link href="/student/search" className="text-xs text-indigo-600 hover:underline font-semibold">
+              <Link href="/student/search" className="text-xs text-indigo-400 hover:underline font-semibold">
                 Explore More
               </Link>
             </div>
@@ -161,22 +161,22 @@ export default async function StudentDashboard() {
             ) : (
               <div className="grid md:grid-cols-2 gap-4">
                 {profile.aiRecommendations.slice(0, 2).map((rec) => (
-                  <div key={rec.id} className="border border-slate-100 dark:border-zinc-800 p-4 rounded-xl hover:shadow-md transition">
+                  <div key={rec.id} className="border border-slate-800 p-4 rounded-xl hover:shadow-md transition">
                     <div className="flex justify-between items-start mb-2">
-                      <span className={`text-xxs font-bold px-2 py-0.5 rounded-full ${
+                      <span className={`text-xxs font-extrabold px-2 py-0.5 rounded-full border ${
                         rec.riskLevel === "SAFE"
-                          ? "bg-emerald-50 text-emerald-700"
+                          ? "bg-emerald-950/40 text-emerald-400 border-emerald-500/20"
                           : rec.riskLevel === "MODERATE"
-                          ? "bg-amber-50 text-amber-700"
-                          : "bg-rose-50 text-rose-700"
+                          ? "bg-amber-950/40 text-amber-400 border-amber-500/20"
+                          : "bg-rose-950/40 text-rose-400 border-rose-500/20"
                       }`}>
                         {rec.riskLevel} MATCH
                       </span>
-                      <span className="text-xs font-extrabold text-indigo-600">{rec.score}% match</span>
+                      <span className="text-xs font-bold text-indigo-400">{rec.score}% match</span>
                     </div>
-                    <h3 className="font-bold text-sm line-clamp-1">{rec.course.title}</h3>
-                    <p className="text-xxs text-slate-500 mb-2">{rec.course.university.name}</p>
-                    <p className="text-xxs text-slate-600 dark:text-zinc-400 line-clamp-2 leading-relaxed">{rec.reason}</p>
+                    <h3 className="font-bold text-sm text-white line-clamp-1">{rec.course.title}</h3>
+                    <p className="text-xxs text-slate-400 mb-2">{rec.course.university.name}</p>
+                    <p className="text-xxs text-slate-300 line-clamp-2 leading-relaxed">{rec.reason}</p>
                   </div>
                 ))}
               </div>
@@ -185,64 +185,64 @@ export default async function StudentDashboard() {
         </div>
 
         {/* Right 1 Column */}
-        <div className="space-y-8">
+        <div className="space-y-6">
           {/* Profile Completeness */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
-            <h2 className="text-lg font-bold flex items-center gap-2 mb-4">
-              <UserCheck className="h-5 w-5 text-indigo-600" /> Profile Completion
+          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <h2 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
+              <UserCheck className="h-5 w-5 text-indigo-400" /> Profile Completion
             </h2>
             <div className="flex items-center justify-between text-sm mb-2">
-              <span className="font-medium text-slate-500">Completed fields</span>
-              <span className="font-bold text-indigo-600">{completionPercentage}%</span>
+              <span className="font-medium text-slate-400">Completed fields</span>
+              <span className="font-bold text-indigo-400">{completionPercentage}%</span>
             </div>
-            <div className="w-full bg-slate-100 dark:bg-zinc-800 h-2.5 rounded-full overflow-hidden mb-4">
+            <div className="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden mb-4">
               <div className="bg-indigo-600 h-2.5 rounded-full" style={{ width: `${completionPercentage}%` }} />
             </div>
-            <Link href="/student/profile" className="w-full bg-slate-50 dark:bg-zinc-800 hover:bg-slate-100 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 text-xs font-semibold py-2 rounded-xl text-center block transition">
+            <Link href="/student/profile" className="w-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 text-xs font-semibold py-2 rounded-xl text-center block transition-colors duration-200">
               Build Profile Details
             </Link>
           </div>
 
           {/* Document Locker Summary */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
-            <h2 className="text-lg font-bold flex items-center gap-2 mb-4">
-              <FileText className="h-5 w-5 text-indigo-600" /> Document Locker
+          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <h2 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
+              <FileText className="h-5 w-5 text-indigo-400" /> Document Locker
             </h2>
             <div className="grid grid-cols-3 gap-2 text-center text-xs mb-4">
-              <div className="bg-slate-50 dark:bg-zinc-800/40 p-2 rounded-lg">
-                <div className="font-bold text-slate-800 dark:text-zinc-100">{profile.documents.length}</div>
+              <div className="bg-slate-800/40 p-2 rounded-lg border border-slate-800">
+                <div className="font-bold text-white">{profile.documents.length}</div>
                 <div className="text-slate-400 text-xxs">Uploaded</div>
               </div>
-              <div className="bg-emerald-50/50 dark:bg-emerald-950/10 p-2 rounded-lg">
-                <div className="font-bold text-emerald-600">{profile.documents.filter((d) => d.reviewStatus === "APPROVED").length}</div>
+              <div className="bg-emerald-950/10 p-2 rounded-lg border border-emerald-500/20">
+                <div className="font-bold text-emerald-400">{profile.documents.filter((d) => d.reviewStatus === "APPROVED").length}</div>
                 <div className="text-emerald-500 text-xxs">Approved</div>
               </div>
-              <div className="bg-amber-50/50 dark:bg-amber-950/10 p-2 rounded-lg">
-                <div className="font-bold text-amber-600">{profile.documents.filter((d) => d.reviewStatus === "PENDING").length}</div>
+              <div className="bg-amber-950/10 p-2 rounded-lg border border-amber-500/20">
+                <div className="font-bold text-amber-400">{profile.documents.filter((d) => d.reviewStatus === "PENDING").length}</div>
                 <div className="text-amber-500 text-xxs">Pending</div>
               </div>
             </div>
-            <Link href="/student/documents" className="w-full bg-slate-50 dark:bg-zinc-800 hover:bg-slate-100 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 text-xs font-semibold py-2 rounded-xl text-center block transition">
+            <Link href="/student/documents" className="w-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 text-xs font-semibold py-2 rounded-xl text-center block transition-colors duration-200">
               Open Document Vault
             </Link>
           </div>
 
           {/* Recent Notifications */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
-            <h2 className="text-lg font-bold flex items-center gap-2 mb-4">
-              <Clock className="h-5 w-5 text-indigo-600" /> Recent Activity
+          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <h2 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
+              <Clock className="h-5 w-5 text-indigo-400" /> Recent Activity
             </h2>
             {notifications.length === 0 ? (
-              <p className="text-xs text-slate-400 text-center py-4">No recent activity.</p>
+              <p className="text-xs text-slate-500 text-center py-4">No recent activity.</p>
             ) : (
               <div className="space-y-3.5">
                 {notifications.map((notif) => (
-                  <div key={notif.id} className="flex gap-2.5 items-start text-xs border-b border-slate-50 dark:border-zinc-800 pb-2.5 last:border-b-0 last:pb-0">
-                    {notif.type === "SUCCESS" && <CheckCircle className="h-4 w-4 text-emerald-500 flex-shrink-0" />}
-                    {notif.type === "WARNING" && <AlertCircle className="h-4 w-4 text-amber-500 flex-shrink-0" />}
-                    {notif.type === "ERROR" && <AlertCircle className="h-4 w-4 text-rose-500 flex-shrink-0" />}
-                    {notif.type === "INFO" && <Clock className="h-4 w-4 text-indigo-500 flex-shrink-0" />}
-                    <p className="text-slate-600 dark:text-zinc-300">{notif.content}</p>
+                  <div key={notif.id} className="flex gap-2.5 items-start text-xs border-b border-slate-800/50 pb-2.5 last:border-b-0 last:pb-0">
+                    {notif.type === "SUCCESS" && <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />}
+                    {notif.type === "WARNING" && <AlertCircle className="h-4 w-4 text-amber-400 flex-shrink-0" />}
+                    {notif.type === "ERROR" && <AlertCircle className="h-4 w-4 text-rose-400 flex-shrink-0" />}
+                    {notif.type === "INFO" && <Clock className="h-4 w-4 text-indigo-400 flex-shrink-0" />}
+                    <p className="text-slate-300">{notif.content}</p>
                   </div>
                 ))}
               </div>

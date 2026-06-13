@@ -160,22 +160,22 @@ export default function SuperAdminUsersPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-extrabold mb-2 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-          <Users className="h-6 w-6 text-indigo-600 dark:text-indigo-400" /> User Directory & Invitations
+    <div className="space-y-6">
+      <section className="mb-6">
+        <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <Users className="h-6 w-6 text-indigo-400" /> User Directory & Invitations
         </h1>
-        <p className="text-sm text-slate-500 dark:text-zinc-400">
+        <p className="mt-2 text-sm text-slate-400">
           Provision administrative accounts, copy secure signup links, and toggle active block bans across the platform.
         </p>
-      </div>
+      </section>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left column: Create Invitation */}
         <div className="space-y-6">
-          <Card className="border border-slate-200 dark:border-zinc-800">
-            <h2 className="text-base font-bold mb-4 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-              <UserPlus className="h-5 w-5 text-indigo-600" /> Send Staff Invitation
+          <Card className="border-slate-800 bg-slate-900/80 dark:bg-slate-900/80 dark:border-slate-800 shadow-xl">
+            <h2 className="text-base font-bold mb-4 text-white flex items-center gap-2">
+              <UserPlus className="h-5 w-5 text-indigo-400" /> Send Staff Invitation
             </h2>
 
             {formError && (
@@ -191,7 +191,7 @@ export default function SuperAdminUsersPage() {
             )}
 
             {generatedLink && (
-              <div className="bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900/50 p-4 rounded-xl mb-4 space-y-2">
+              <div className="bg-indigo-950/30 border border-indigo-900/50 dark:border-indigo-900/50 p-4 rounded-xl mb-4 space-y-2">
                 <p className="text-xs text-indigo-800 dark:text-indigo-300 font-bold leading-normal">
                   ⚠️ Copy this link and share it securely. It will be shown only once:
                 </p>
@@ -200,7 +200,7 @@ export default function SuperAdminUsersPage() {
                     type="text"
                     readOnly
                     value={generatedLink}
-                    className="w-full bg-white dark:bg-zinc-800 text-slate-900 dark:text-white border border-slate-300 dark:border-zinc-700 text-xxs px-2.5 py-1.5 rounded-lg focus:outline-none"
+                    className="w-full bg-slate-950 text-white border border-slate-800 text-xxs px-2.5 py-1.5 rounded-lg focus:outline-none"
                   />
                   <button
                     onClick={copyToClipboard}
@@ -279,15 +279,15 @@ export default function SuperAdminUsersPage() {
         <div className="lg:col-span-2 space-y-8">
           
           {/* Active Users directory */}
-          <Card className="border border-slate-200 dark:border-zinc-800">
-            <h2 className="text-base font-bold mb-4 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-              <UserCheck className="h-5 w-5 text-indigo-600" /> Active System Users
+          <Card className="border-slate-800 bg-slate-900/80 dark:bg-slate-900/80 dark:border-slate-800 shadow-xl">
+            <h2 className="text-base font-bold mb-4 text-white flex items-center gap-2">
+              <UserCheck className="h-5 w-5 text-indigo-400" /> Active System Users
             </h2>
 
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 dark:border-zinc-800 text-slate-400 uppercase font-extrabold tracking-wider">
+                  <tr className="border-b border-slate-800 text-slate-400 uppercase font-extrabold tracking-wider">
                     <th className="pb-3 pr-4">User</th>
                     <th className="pb-3 pr-4">Role</th>
                     <th className="pb-3 pr-4">Contact</th>
@@ -295,29 +295,29 @@ export default function SuperAdminUsersPage() {
                     <th className="pb-3 pr-4">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
+                <tbody className="divide-y divide-slate-800">
                   {users.map((u) => (
-                    <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/10">
-                      <td className="py-3 pr-4 font-semibold text-slate-800 dark:text-zinc-100">
+                    <tr key={u.id} className="hover:bg-slate-800/10">
+                      <td className="py-3 pr-4 font-semibold text-white">
                         {u.name}
                         <div className="text-[10px] text-slate-400 font-normal">{u.email}</div>
                       </td>
                       <td className="py-3 pr-4">
                         <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider ${
                           u.role === "SUPERADMIN"
-                            ? "bg-rose-50 text-rose-700 dark:bg-rose-950/20 border border-rose-200"
+                            ? "bg-rose-950/40 text-rose-400 border border-rose-500/20 dark:bg-rose-950/20 border border-rose-200"
                             : u.role === "ADMIN"
                             ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/20 border border-indigo-200"
                             : u.role === "COUNSELOR"
                             ? "bg-sky-50 text-sky-700 dark:bg-sky-950/20 border border-sky-200"
                             : u.role === "PARTNER"
-                            ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 border border-emerald-200"
+                            ? "bg-emerald-950/40 text-emerald-400 border border-emerald-500/20 dark:bg-emerald-950/20 border border-emerald-200"
                             : "bg-slate-50 text-slate-700"
                         }`}>
                           {u.role}
                         </span>
                       </td>
-                      <td className="py-3 pr-4 text-slate-500 dark:text-zinc-400 font-mono">{u.phone || "N/A"}</td>
+                      <td className="py-3 pr-4 text-slate-400 font-mono">{u.phone || "N/A"}</td>
                       <td className="py-3 pr-4">
                         <span className={`text-[10px] font-extrabold px-1.5 py-0.5 rounded ${
                           u.isBlocked 
@@ -334,7 +334,7 @@ export default function SuperAdminUsersPage() {
                             disabled={actionId === u.id}
                             className={`font-semibold p-1.5 rounded-lg border transition flex items-center gap-1 cursor-pointer ${
                               u.isBlocked 
-                                ? "bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100 dark:bg-rose-900/10" 
+                                ? "bg-rose-950/40 text-rose-400 border border-rose-500/20 border-rose-200 hover:bg-rose-100 dark:bg-rose-900/10" 
                                 : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 dark:bg-zinc-800 dark:border-zinc-700 dark:text-slate-200"
                             }`}
                           >
@@ -360,15 +360,15 @@ export default function SuperAdminUsersPage() {
           </Card>
 
           {/* Pending Invitations list */}
-          <Card className="border border-slate-200 dark:border-zinc-800">
-            <h2 className="text-base font-bold mb-4 text-slate-800 dark:text-zinc-100 flex items-center gap-2">
-              <Mail className="h-5 w-5 text-indigo-600" /> Staff Invitations Ledger
+          <Card className="border-slate-800 bg-slate-900/80 dark:bg-slate-900/80 dark:border-slate-800 shadow-xl">
+            <h2 className="text-base font-bold mb-4 text-white flex items-center gap-2">
+              <Mail className="h-5 w-5 text-indigo-400" /> Staff Invitations Ledger
             </h2>
 
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 dark:border-zinc-800 text-slate-400 uppercase font-extrabold tracking-wider">
+                  <tr className="border-b border-slate-800 text-slate-400 uppercase font-extrabold tracking-wider">
                     <th className="pb-3 pr-4">Invitee</th>
                     <th className="pb-3 pr-4">Target Role</th>
                     <th className="pb-3 pr-4">Expiry Date</th>
@@ -376,15 +376,15 @@ export default function SuperAdminUsersPage() {
                     <th className="pb-3 pr-4">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
+                <tbody className="divide-y divide-slate-800">
                   {invites.length === 0 ? (
                     <tr>
                       <td colSpan={5} className="py-4 text-center text-slate-400">No invitations issued yet.</td>
                     </tr>
                   ) : (
                     invites.map((inv) => (
-                      <tr key={inv.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/10">
-                        <td className="py-3 pr-4 font-semibold text-slate-800 dark:text-zinc-100">
+                      <tr key={inv.id} className="hover:bg-slate-800/10">
+                        <td className="py-3 pr-4 font-semibold text-white">
                           {inv.name}
                           <div className="text-[10px] text-slate-400 font-normal">{inv.email}</div>
                         </td>
@@ -397,10 +397,10 @@ export default function SuperAdminUsersPage() {
                         <td className="py-3 pr-4">
                           <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider ${
                             inv.status === "PENDING"
-                              ? "bg-amber-50 text-amber-700 dark:bg-amber-905/20 border border-amber-200"
+                              ? "bg-amber-950/40 text-amber-400 border border-amber-500/20 dark:bg-amber-950/20 border border-amber-200"
                               : inv.status === "ACCEPTED"
-                              ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 border border-emerald-200"
-                              : "bg-slate-50 text-slate-700 border border-slate-200"
+                              ? "bg-emerald-950/40 text-emerald-400 border border-emerald-500/20 dark:bg-emerald-950/20 border border-emerald-200"
+                              : "bg-slate-950 text-slate-300 border border-slate-800"
                           }`}>
                             {inv.status}
                           </span>
@@ -410,7 +410,7 @@ export default function SuperAdminUsersPage() {
                             <button
                               onClick={() => handleRevokeInvite(inv.id)}
                               disabled={actionId === inv.id}
-                              className="bg-rose-50 hover:bg-rose-100 text-rose-700 p-1.5 rounded-lg border border-rose-200 transition flex items-center gap-1 cursor-pointer"
+                              className="bg-rose-950/40 hover:bg-rose-900/30 text-rose-400 border border-rose-500/20 p-1.5 rounded-lg border border-rose-200 transition flex items-center gap-1 cursor-pointer"
                               title="Revoke invitation link"
                             >
                               {actionId === inv.id ? (

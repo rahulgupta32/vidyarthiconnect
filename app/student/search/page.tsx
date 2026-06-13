@@ -185,33 +185,33 @@ export default function UniversitySearch() {
         <div className="bg-gradient-to-r from-amber-500/10 via-indigo-500/5 to-transparent border border-amber-500/20 rounded-2xl p-6 shadow-xs relative">
           <div className="flex items-center gap-2 mb-4">
             <Sparkles className="h-5 w-5 text-amber-500" />
-            <h2 className="text-lg font-bold">Your AI Recommended Matches</h2>
+            <h2 className="text-lg font-bold text-white">Your AI Recommended Matches</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-6 mb-4">
             {recommendations.map((rec) => (
-              <div key={rec.id} className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-5 rounded-xl flex flex-col justify-between hover:shadow-md transition">
+              <div key={rec.id} className="bg-slate-900/60 border border-slate-800 p-5 rounded-xl flex flex-col justify-between hover:border-indigo-500/40 hover:shadow-md transition">
                 <div>
                   <div className="flex justify-between items-center mb-2">
                     <span className={`text-xxs font-extrabold px-2 py-0.5 rounded-full ${
                       rec.riskLevel === "SAFE" 
-                        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400" 
+                        ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" 
                         : rec.riskLevel === "MODERATE"
-                        ? "bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:text-amber-400"
-                        : "bg-rose-50 text-rose-700 dark:bg-rose-950/30 dark:text-rose-400"
+                        ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+                        : "bg-rose-500/10 text-rose-400 border border-rose-500/20"
                     }`}>
                       {rec.riskLevel} MATCH
                     </span>
-                    <span className="text-xs font-bold text-indigo-600">{rec.score}% Match</span>
+                    <span className="text-xs font-bold text-indigo-400">{rec.score}% Match</span>
                   </div>
-                  <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200 mb-1">{rec.course.title}</h3>
+                  <h3 className="font-bold text-sm text-white mb-1">{rec.course.title}</h3>
                   <p className="text-xxs text-slate-400 mb-3">{rec.course.university.name} ({rec.course.university.country.name})</p>
                   
-                  <div className="bg-slate-50 dark:bg-zinc-800/40 p-2.5 rounded-lg text-xxs leading-relaxed mb-4 text-slate-600 dark:text-zinc-300">
+                  <div className="bg-slate-950/40 border border-slate-800/60 p-2.5 rounded-lg text-xxs leading-relaxed mb-4 text-slate-300">
                     <strong>Why recommended:</strong> {rec.reason}
                   </div>
                   {rec.missingRequirements !== "None" && (
-                    <div className="text-xxs text-rose-600 mb-3">
+                    <div className="text-xxs text-rose-400 mb-3">
                       <strong>Missing:</strong> {rec.missingRequirements}
                     </div>
                   )}
@@ -220,7 +220,7 @@ export default function UniversitySearch() {
                 <button
                   onClick={() => handleApply(rec.course)}
                   disabled={applyingId === rec.course.id}
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-bold py-2 rounded-lg text-xxs transition"
+                  className="w-full bg-indigo-600 hover:bg-indigo-600 disabled:bg-indigo-400/50 text-white font-bold py-2 rounded-lg text-xxs transition-colors duration-200"
                 >
                   {applyingId === rec.course.id ? "Applying..." : "Apply Directly"}
                 </button>
@@ -238,7 +238,7 @@ export default function UniversitySearch() {
       )}
 
       {/* Main Search and Filters */}
-      <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm space-y-6">
+      <div className="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="relative w-full md:w-80">
             <Search className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
@@ -247,7 +247,7 @@ export default function UniversitySearch() {
               placeholder="Search course or university..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-9 text-sm focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40"
+              className="w-full bg-slate-950 text-white placeholder:text-slate-400 border border-slate-800 rounded-xl py-2.5 px-9 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
             />
           </div>
 
@@ -255,29 +255,29 @@ export default function UniversitySearch() {
             <select
               value={selectedCountry}
               onChange={(e) => setSelectedCountry(e.target.value)}
-              className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40"
+              className="bg-slate-950 text-white border border-slate-800 rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20 cursor-pointer"
             >
-              <option value="all">All Countries</option>
-              <option value="United States">United States</option>
-              <option value="Australia">Australia</option>
+              <option value="all" className="bg-slate-950 text-white">All Countries</option>
+              <option value="United States" className="bg-slate-950 text-white">United States</option>
+              <option value="Australia" className="bg-slate-950 text-white">Australia</option>
             </select>
 
             <select
               value={selectedFee}
               onChange={(e) => setSelectedFee(e.target.value)}
-              className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-500/40"
+              className="bg-slate-950 text-white border border-slate-800 rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20 cursor-pointer"
             >
-              <option value="all">Any Tuition Fee</option>
-              <option value="under-40k">Under $40,000/year</option>
-              <option value="above-40k">Above $40,000/year</option>
+              <option value="all" className="bg-slate-950 text-white">Any Tuition Fee</option>
+              <option value="under-40k" className="bg-slate-950 text-white">Under $40,000/year</option>
+              <option value="above-40k" className="bg-slate-950 text-white">Above $40,000/year</option>
             </select>
 
-            <label className="flex items-center gap-2 text-xs font-semibold select-none cursor-pointer text-slate-700 dark:text-slate-300">
+            <label className="flex items-center gap-2 text-xs font-semibold select-none cursor-pointer text-slate-300">
               <input
                 type="checkbox"
                 checked={onlyPartnered}
                 onChange={(e) => setOnlyPartnered(e.target.checked)}
-                className="h-4 w-4 rounded border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-950 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                className="h-4 w-4 rounded border-slate-700 bg-slate-950 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
               />
               Partnered Universities
             </label>
@@ -311,65 +311,65 @@ export default function UniversitySearch() {
                 } = getCourseCostDetails(course);
 
                 return (
-                  <div key={course.id} className="border border-slate-200 dark:border-zinc-800 p-5 rounded-2xl flex flex-col justify-between hover:shadow-md transition bg-white dark:bg-zinc-900/80 shadow-xs">
+                  <div key={course.id} className="border border-slate-800 p-5 rounded-2xl flex flex-col justify-between hover:border-indigo-500/40 transition bg-slate-900/80 shadow-xl">
                     <div>
                       <div className="flex justify-between items-start gap-2 mb-3">
                         <div>
-                          <h3 className="font-extrabold text-base text-slate-800 dark:text-zinc-200">{course.title}</h3>
-                          <p className="text-xs text-slate-500">{course.university.name}</p>
+                          <h3 className="font-extrabold text-base text-white">{course.title}</h3>
+                          <p className="text-xs text-slate-400">{course.university.name}</p>
                         </div>
                         <div className="flex gap-1.5 flex-wrap justify-end">
                           {course.university.partnerStatus === "PARTNERED" && (
-                            <span className="bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-400 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">
+                            <span className="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">
                               Partnered
                             </span>
                           )}
                           {course.dataStatus === "VERIFIED" ? (
-                            <span className="bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider flex items-center gap-1">
-                              <CheckCircle2 className="h-3 w-3" /> Verified Data
+                            <span className="bg-emerald-500/10 text-emerald-455 border border-emerald-500/20 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider flex items-center gap-1">
+                              <CheckCircle2 className="h-3 w-3 text-emerald-400" /> Verified Data
                             </span>
                           ) : course.dataStatus === "OUTDATED" ? (
-                            <span className="bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">
+                            <span className="bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">
                               ⚠️ Outdated Data
                             </span>
                           ) : (
-                            <span className="bg-slate-100 text-slate-500 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">
+                            <span className="bg-slate-800 text-slate-400 text-xxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider border border-slate-700">
                               Unverified Data
                             </span>
                           )}
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4 text-xxs text-slate-600 dark:text-zinc-300 bg-slate-50 dark:bg-zinc-800/40 p-3 rounded-xl mb-4">
-                        <div>📍 Country: <strong>{course.university.country.name}</strong></div>
-                        <div>⏱️ Duration: <strong>{course.duration}</strong></div>
-                        <div>💰 Tuition Fee: <strong>{currency} {tuition.toLocaleString()}/yr</strong></div>
-                        <div>📅 Intakes: <strong>{course.intakeDates}</strong></div>
-                        <div>🎓 World Ranking: <strong>#{course.university.rankingWorld || 'N/A'}</strong></div>
-                        <div>💵 Application Fee: <strong>{currency} {appFee}</strong></div>
-                        <div>🏦 Deposit Required: <strong>{currency} {deposit.toLocaleString()}</strong></div>
-                        <div>🛡️ Self-Finance Accepted: <strong>{course.selfFinanceAccepted ? "Yes" : "No"}</strong></div>
+                      <div className="grid grid-cols-2 gap-4 text-xxs text-slate-300 bg-slate-950/40 border border-slate-800/50 p-3 rounded-xl mb-4">
+                        <div>📍 Country: <strong className="text-white">{course.university.country.name}</strong></div>
+                        <div>⏱️ Duration: <strong className="text-white">{course.duration}</strong></div>
+                        <div>💰 Tuition Fee: <strong className="text-white">{currency} {tuition.toLocaleString()}/yr</strong></div>
+                        <div>📅 Intakes: <strong className="text-white">{course.intakeDates}</strong></div>
+                        <div>🎓 World Ranking: <strong className="text-white">#{course.university.rankingWorld || 'N/A'}</strong></div>
+                        <div>💵 Application Fee: <strong className="text-white">{currency} {appFee}</strong></div>
+                        <div>🏦 Deposit Required: <strong className="text-white">{currency} {deposit.toLocaleString()}</strong></div>
+                        <div>🛡️ Self-Finance Accepted: <strong className="text-white">{course.selfFinanceAccepted ? "Yes" : "No"}</strong></div>
                       </div>
 
-                      <div className="bg-slate-100/50 dark:bg-zinc-800/20 p-3 rounded-xl mb-4 space-y-1.5 text-xxs">
+                      <div className="bg-slate-950/40 border border-slate-800/50 p-3 rounded-xl mb-4 space-y-1.5 text-xxs">
                         <div className="flex justify-between">
-                          <span className="text-slate-500">Estimated Total Cost:</span>
-                          <span className="font-bold text-slate-800 dark:text-zinc-200">{currency} {totalEstimatedCost.toLocaleString()}</span>
+                          <span className="text-slate-405">Estimated Total Cost:</span>
+                          <span className="font-bold text-white">{currency} {totalEstimatedCost.toLocaleString()}</span>
                         </div>
                         {scholarshipAmount > 0 && (
-                          <div className="flex justify-between text-emerald-600 dark:text-emerald-400 font-semibold">
+                          <div className="flex justify-between text-emerald-400 font-semibold">
                             <span>Scholarship Applied:</span>
                             <span>- {currency} {scholarshipAmount.toLocaleString()}</span>
                           </div>
                         )}
-                        <div className="flex justify-between border-t border-slate-200 dark:border-zinc-800 pt-1.5 font-extrabold text-indigo-600 dark:text-indigo-400">
+                        <div className="flex justify-between border-t border-slate-800 pt-1.5 font-extrabold text-indigo-400">
                           <span>Final Self-Finance:</span>
                           <span>{currency} {finalSelfFinance.toLocaleString()}</span>
                         </div>
                       </div>
 
                       {course.scholarships && course.scholarships.length > 0 && (
-                        <div className="border border-emerald-100 dark:border-emerald-900/50 bg-emerald-50/20 p-2.5 rounded-lg mb-4 text-xxs text-emerald-700 dark:text-emerald-400 leading-relaxed">
+                        <div className="border border-emerald-500/20 bg-emerald-500/10 p-2.5 rounded-lg mb-4 text-xxs text-emerald-400 leading-relaxed">
                           <strong>Scholarship Available:</strong> {course.scholarships[0].name} (Value: {currency} {course.scholarships[0].amount.toLocaleString()})
                           {course.scholarships[0].deadline && (
                             <div className="text-slate-400 mt-0.5">Deadline: {new Date(course.scholarships[0].deadline).toLocaleDateString()}</div>
@@ -377,20 +377,20 @@ export default function UniversitySearch() {
                         </div>
                       )}
 
-                      <div className="text-xxs text-slate-400 space-y-1 border-t border-slate-100 dark:border-zinc-800 pt-2.5 mb-4">
+                      <div className="text-xxs text-slate-400 space-y-1 border-t border-slate-800 pt-2.5 mb-4">
                         <div>Last verified: {course.lastVerifiedAt ? new Date(course.lastVerifiedAt).toLocaleDateString() : "Pending"}</div>
                         {course.lastSyncedAt && <div>Last synced: {new Date(course.lastSyncedAt).toLocaleDateString()}</div>}
-                        <div>Source: {course.sourceUrl ? <a href={course.sourceUrl} target="_blank" className="underline text-indigo-500 hover:text-indigo-600">Public Link</a> : course.sourceNote || "Manual Entry"}</div>
+                        <div>Source: {course.sourceUrl ? <a href={course.sourceUrl} target="_blank" className="underline text-indigo-400 hover:text-indigo-300">Public Link</a> : course.sourceNote || "Manual Entry"}</div>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-3 pt-2">
                       <button
                         onClick={() => handleToggleCompare(course)}
-                        className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xxs font-semibold border transition ${
+                        className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xxs font-semibold border transition-colors duration-200 ${
                           isCompared 
-                            ? "bg-indigo-50 text-indigo-600 border-indigo-600 dark:bg-indigo-950/20" 
-                            : "bg-white border-slate-200 text-slate-600 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-200 hover:bg-slate-50"
+                            ? "bg-indigo-500/20 text-indigo-400 border-indigo-500/40" 
+                            : "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700"
                         }`}
                       >
                         <GitCompare className="h-3.5 w-3.5" />
@@ -400,7 +400,7 @@ export default function UniversitySearch() {
                       <button
                         onClick={() => handleApply(course)}
                         disabled={applyingId === course.id}
-                        className="flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-bold py-2 rounded-xl text-xxs transition flex items-center justify-center gap-1.5"
+                        className="flex-1 bg-indigo-600 hover:bg-indigo-600 disabled:bg-indigo-400/50 text-white font-bold py-2 rounded-xl text-xxs transition-colors duration-200 flex items-center justify-center gap-1.5"
                       >
                         {applyingId === course.id ? "Applying..." : "Apply Now"} <ArrowRight className="h-3.5 w-3.5" />
                       </button>
@@ -415,26 +415,26 @@ export default function UniversitySearch() {
 
       {/* Comparison Bottom Bar Drawer */}
       {compareList.length > 0 && (
-        <div className="sticky bottom-6 z-40 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-4 max-w-xl mx-auto shadow-2xl flex items-center justify-between gap-4">
+        <div className="sticky bottom-6 z-40 bg-slate-900 border border-slate-800 rounded-2xl p-4 max-w-xl mx-auto shadow-2xl flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 text-xxs font-extrabold px-2 py-1 rounded-md">
+            <span className="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xxs font-extrabold px-2 py-1 rounded-md">
               {compareList.length}/2 Selected
             </span>
-            <div className="text-xxs leading-none text-slate-500">
+            <div className="text-xxs leading-none text-slate-400">
               {compareList.map((c) => c.title.substring(0, 25) + "...").join(" vs ")}
             </div>
           </div>
           <div className="flex gap-2">
             <button
               onClick={() => setCompareList([])}
-              className="text-slate-400 hover:text-slate-600 text-xxs font-bold px-2.5 py-1.5"
+              className="text-slate-405 hover:text-slate-200 text-xxs font-bold px-2.5 py-1.5"
             >
               Clear
             </button>
             <button
               onClick={() => setShowComparison(true)}
               disabled={compareList.length < 2}
-              className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white text-xxs font-bold px-4 py-1.5 rounded-lg transition"
+              className="bg-indigo-600 hover:bg-indigo-600 disabled:bg-indigo-400/50 text-white text-xxs font-bold px-4 py-1.5 rounded-lg transition-colors duration-200"
             >
               Compare Side-by-Side
             </button>
@@ -444,92 +444,92 @@ export default function UniversitySearch() {
 
       {/* Comparison Modal Overlay */}
       {showComparison && compareList.length === 2 && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative">
-            <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
-              <GitCompare className="h-5 w-5 text-indigo-600" /> Side-by-Side Comparison
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative">
+            <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-white">
+              <GitCompare className="h-5 w-5 text-indigo-400" /> Side-by-Side Comparison
             </h2>
 
-            <div className="grid grid-cols-3 gap-4 border-b border-slate-100 pb-4 text-xs font-bold uppercase tracking-wider text-slate-400">
+            <div className="grid grid-cols-3 gap-4 border-b border-slate-800 pb-4 text-xs font-bold uppercase tracking-wider text-slate-400">
               <div>Metric</div>
               <div>{compareList[0].title}</div>
               <div>{compareList[1].title}</div>
             </div>
 
-            <div className="divide-y divide-slate-200 dark:divide-zinc-800 text-xs">
+            <div className="divide-y divide-slate-800 text-xs">
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">University</div>
-                <div className="font-bold text-slate-800 dark:text-zinc-200">{compareList[0].university.name}</div>
-                <div className="font-bold text-slate-800 dark:text-zinc-200">{compareList[1].university.name}</div>
+                <div className="font-bold text-white">{compareList[0].university.name}</div>
+                <div className="font-bold text-white">{compareList[1].university.name}</div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">World Ranking</div>
-                <div className="font-bold text-indigo-600">#{compareList[0].university.rankingWorld || "N/A"}</div>
-                <div className="font-bold text-indigo-600">#{compareList[1].university.rankingWorld || "N/A"}</div>
+                <div className="font-bold text-indigo-400">#{compareList[0].university.rankingWorld || "N/A"}</div>
+                <div className="font-bold text-indigo-400">#{compareList[1].university.rankingWorld || "N/A"}</div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Tuition Fee</div>
-                <div className="font-bold text-slate-700 dark:text-zinc-300">{details0?.currency} {details0?.tuition.toLocaleString()}/yr</div>
-                <div className="font-bold text-slate-700 dark:text-zinc-300">{details1?.currency} {details1?.tuition.toLocaleString()}/yr</div>
+                <div className="font-bold text-slate-300">{details0?.currency} {details0?.tuition.toLocaleString()}/yr</div>
+                <div className="font-bold text-slate-300">{details1?.currency} {details1?.tuition.toLocaleString()}/yr</div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Estimated Total Cost</div>
-                <div className="font-bold text-slate-800 dark:text-zinc-200">
+                <div className="font-bold text-white">
                   {details0?.currency} {details0?.total.toLocaleString()}/yr
                 </div>
-                <div className="font-bold text-slate-800 dark:text-zinc-200">
+                <div className="font-bold text-white">
                   {details1?.currency} {details1?.total.toLocaleString()}/yr
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Scholarship Value</div>
-                <div className="font-bold text-emerald-600">
+                <div className="font-bold text-emerald-400">
                   {details0?.currency} {details0?.scholarship.toLocaleString()}
                 </div>
-                <div className="font-bold text-emerald-600">
+                <div className="font-bold text-emerald-400">
                   {details1?.currency} {details1?.scholarship.toLocaleString()}
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Self-Finance Estimate</div>
-                <div className="font-extrabold text-indigo-600">
+                <div className="font-extrabold text-indigo-400">
                   {details0?.currency} {details0?.selfFinance.toLocaleString()}
                 </div>
-                <div className="font-extrabold text-indigo-600">
+                <div className="font-extrabold text-indigo-400">
                   {details1?.currency} {details1?.selfFinance.toLocaleString()}
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Requirements</div>
-                <div className="text-xxs">GPA: {compareList[0].minimumGpa || "N/A"}, English: {compareList[0].englishRequirement || "N/A"}</div>
-                <div className="text-xxs">GPA: {compareList[1].minimumGpa || "N/A"}, English: {compareList[1].englishRequirement || "N/A"}</div>
+                <div className="text-xxs text-slate-300">GPA: {compareList[0].minimumGpa || "N/A"}, English: {compareList[0].englishRequirement || "N/A"}</div>
+                <div className="text-xxs text-slate-300">GPA: {compareList[1].minimumGpa || "N/A"}, English: {compareList[1].englishRequirement || "N/A"}</div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Data Status</div>
-                <div className="uppercase font-semibold text-xxs">{compareList[0].dataStatus || "VERIFIED"}</div>
-                <div className="uppercase font-semibold text-xxs">{compareList[1].dataStatus || "VERIFIED"}</div>
+                <div className="uppercase font-semibold text-xxs text-slate-200">{compareList[0].dataStatus || "VERIFIED"}</div>
+                <div className="uppercase font-semibold text-xxs text-slate-200">{compareList[1].dataStatus || "VERIFIED"}</div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Duration</div>
-                <div>{compareList[0].duration}</div>
-                <div>{compareList[1].duration}</div>
+                <div className="text-slate-300">{compareList[0].duration}</div>
+                <div className="text-slate-300">{compareList[1].duration}</div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Intake Terms</div>
-                <div>{compareList[0].intakeDates}</div>
-                <div>{compareList[1].intakeDates}</div>
+                <div className="text-slate-300">{compareList[0].intakeDates}</div>
+                <div className="text-slate-300">{compareList[1].intakeDates}</div>
               </div>
               <div className="grid grid-cols-3 gap-4 py-3.5">
                 <div className="font-semibold text-slate-400">Partner Status</div>
-                <div className="uppercase font-semibold text-xxs">{compareList[0].university.partnerStatus}</div>
-                <div className="uppercase font-semibold text-xxs">{compareList[1].university.partnerStatus}</div>
+                <div className="uppercase font-semibold text-xxs text-slate-200">{compareList[0].university.partnerStatus}</div>
+                <div className="uppercase font-semibold text-xxs text-slate-200">{compareList[1].university.partnerStatus}</div>
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 mt-8 pt-4 border-t border-slate-100">
+            <div className="flex justify-end gap-3 mt-8 pt-4 border-t border-slate-800">
               <button
                 onClick={() => setShowComparison(false)}
-                className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2 rounded-xl text-xs border border-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-200 dark:border-zinc-700"
+                className="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-5 py-2 rounded-xl text-xs border border-slate-700 transition-colors duration-200"
               >
                 Close Comparison
               </button>

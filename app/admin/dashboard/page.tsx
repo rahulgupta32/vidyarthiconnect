@@ -96,14 +96,14 @@ export default function AdminDashboard() {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-bold mb-2">Admin CRM Panel</h1>
-        <p className="text-sm text-slate-500 dark:text-zinc-400">
+        <p className="text-sm text-slate-400">
           Assign counselors, monitor workloads, review student applications, manage accounts, and view service packages.
         </p>
       </div>
 
       {/* Metrics Widgets */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase font-bold">Students Registered</span>
             <Users className="h-5 w-5 text-indigo-600" />
@@ -112,7 +112,7 @@ export default function AdminDashboard() {
           <div className="text-xxs text-slate-400 mt-1">Total Nepali candidates</div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase font-bold">Counselor Staff</span>
             <UserPlus className="h-5 w-5 text-emerald-500" />
@@ -121,7 +121,7 @@ export default function AdminDashboard() {
           <div className="text-xxs text-slate-400 mt-1">Active advisory guides</div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase font-bold">Applications Submitted</span>
             <Send className="h-5 w-5 text-sky-500" />
@@ -130,7 +130,7 @@ export default function AdminDashboard() {
           <div className="text-xxs text-slate-400 mt-1">Pending & Decided packages</div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-xs">
+        <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-xs">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-slate-400 uppercase font-bold">Total Revenue</span>
             <DollarSign className="h-5 w-5 text-indigo-600" />
@@ -146,19 +146,19 @@ export default function AdminDashboard() {
         <div className="lg:col-span-2 space-y-8">
           
           {/* Student CRM Directory */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <Users className="h-5 w-5 text-indigo-600" /> Student CRM Directory
             </h2>
 
             <div className="space-y-4">
               {data?.students.map((student: any) => (
-                <div key={student.id} className="border border-slate-100 dark:border-zinc-800 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div key={student.id} className="border border-slate-800 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
-                    <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200">
+                    <h3 className="font-bold text-sm text-white">
                       {student.user.name}
                     </h3>
-                    <p className="text-xxs text-slate-600 dark:text-zinc-400">
+                    <p className="text-xxs text-slate-400">
                       Email: <strong className="text-slate-900 dark:text-white">{student.user.email}</strong> • GPA: <strong className="text-slate-900 dark:text-white">{student.gpa || "N/A"}</strong> • Preferred: <strong className="text-slate-900 dark:text-white">{student.preferredCountry || "N/A"}</strong>
                     </p>
                   </div>
@@ -168,8 +168,8 @@ export default function AdminDashboard() {
                     disabled={actionId === student.user.id}
                     className={`text-xxs font-bold px-3 py-1.5 rounded-lg border transition flex items-center gap-1 cursor-pointer ${
                       student.user.isBlocked 
-                        ? "bg-rose-50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-450 border-rose-200 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/40" 
-                        : "bg-slate-50 dark:bg-zinc-800 text-slate-700 dark:text-zinc-200 border-slate-200 dark:border-zinc-700 hover:bg-slate-100 dark:hover:bg-zinc-700"
+                        ? "bg-rose-950/20 text-rose-400 border border-rose-800/50 dark:text-rose-400 border-rose-200 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/40" 
+                        : "bg-slate-50 dark:bg-zinc-800 text-slate-300 border-slate-800 hover:bg-slate-100 dark:hover:bg-zinc-700"
                     }`}
                   >
                     {actionId === student.user.id ? (
@@ -190,22 +190,22 @@ export default function AdminDashboard() {
           </div>
 
           {/* Counselor Assignments Panel */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <UserPlus className="h-5 w-5 text-indigo-600" /> Counselor Assignments
             </h2>
 
             <div className="space-y-4">
               {data?.applications.map((app: any) => (
-                <div key={app.id} className="border border-slate-100 dark:border-zinc-800 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div key={app.id} className="border border-slate-800 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
-                    <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200">
+                    <h3 className="font-bold text-sm text-white">
                       {app.student.user.name}
                     </h3>
-                    <p className="text-xxs text-slate-605 dark:text-zinc-400 leading-normal">
+                    <p className="text-xxs text-slate-400 leading-normal">
                       University: <strong className="text-slate-900 dark:text-white">{app.university.name}</strong> • Course: <strong className="text-slate-900 dark:text-white">{app.course.title}</strong>
                     </p>
-                    <span className="text-xxxxs font-bold text-slate-500 dark:text-zinc-450 block mt-1 uppercase">
+                    <span className="text-xxxxs font-bold text-slate-400 block mt-1 uppercase">
                       Current Counselor: {app.counselor ? app.counselor.user.name : "None Assigned"}
                     </span>
                   </div>
@@ -215,16 +215,16 @@ export default function AdminDashboard() {
                       value={app.counselorId || ""}
                       disabled={actionId === app.id}
                       onChange={(e) => handleAssignCounselor(app.id, e.target.value)}
-                      className="bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-slate-900 dark:text-zinc-100 rounded-lg py-1 px-2.5 text-xxs focus:outline-none cursor-pointer"
+                      className="bg-slate-950 border border-slate-800 text-white rounded-lg py-1 px-2.5 text-xxs focus:outline-none cursor-pointer"
                     >
-                      <option value="" className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">Select Counselor</option>
+                      <option value="" className="bg-slate-950 text-white">Select Counselor</option>
                       {data?.counselors.map((c: any) => (
-                        <option key={c.id} value={c.id} className="bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100">
+                        <option key={c.id} value={c.id} className="bg-slate-950 text-white">
                           {c.user.name}
                         </option>
                       ))}
                     </select>
-                    {actionId === app.id && <Loader2 className="h-4 w-4 animate-spin text-slate-450" />}
+                    {actionId === app.id && <Loader2 className="h-4 w-4 animate-spin text-slate-400" />}
                   </div>
                 </div>
               ))}
@@ -236,7 +236,7 @@ export default function AdminDashboard() {
         <div className="space-y-8">
           
           {/* Counselors Workload Summary */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <Users className="h-5 w-5 text-indigo-600" /> Counselor Staff Workloads
             </h2>
@@ -252,7 +252,7 @@ export default function AdminDashboard() {
                         {c.activeStudentsCount} / {c.workloadLimit} Limit
                       </span>
                     </div>
-                    <div className="w-full bg-slate-100 dark:bg-zinc-800 h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-slate-950 border border-slate-800 h-2 rounded-full overflow-hidden">
                       <div 
                         className={`h-2 rounded-full ${ratio > 80 ? "bg-rose-500" : ratio > 50 ? "bg-amber-500" : "bg-emerald-500"}`}
                         style={{ width: `${ratio}%` }} 
@@ -265,7 +265,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Service Payments Log */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <DollarSign className="h-5 w-5 text-indigo-600" /> verified Payments
             </h2>
@@ -278,7 +278,7 @@ export default function AdminDashboard() {
                   <div key={p.id} className="border-b border-slate-50 dark:border-zinc-800 pb-3 last:border-b-0 last:pb-0 flex justify-between items-center text-xs">
                     <div>
                       <h4 className="font-bold">{p.student.user.name}</h4>
-                      <p className="text-xxxxs text-slate-450">{p.package.name} • via {p.method}</p>
+                      <p className="text-xxxxs text-slate-400">{p.package.name} • via {p.method}</p>
                     </div>
                     <span className="font-extrabold text-emerald-600">
                       NPR {p.amount.toLocaleString()}

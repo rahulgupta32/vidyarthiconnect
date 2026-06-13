@@ -223,7 +223,7 @@ export default function StudentAIAssistant() {
         <h1 className="text-2xl font-bold mb-2 flex items-center gap-2">
           <Sparkles className="h-6 w-6 text-indigo-600" /> AI Support Assistant
         </h1>
-        <p className="text-sm text-slate-500 dark:text-zinc-400">
+        <p className="text-sm text-slate-400">
           Personalized AI advisory for document checklists, SOP structure, visa filing, and scholarship matching.
         </p>
       </div>
@@ -245,8 +245,8 @@ export default function StudentAIAssistant() {
         
         {/* Sidebar Chat List */}
         <div className="space-y-4 lg:col-span-1">
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-4 rounded-2xl shadow-xs space-y-4">
-            <div className="flex justify-between items-center border-b border-slate-100 dark:border-zinc-800 pb-2">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-4 rounded-2xl shadow-xs space-y-4">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-2">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Chat Threads</span>
               <button 
                 onClick={() => handleNewConversation("New Support Chat", "GENERAL_SUPPORT")}
@@ -264,7 +264,7 @@ export default function StudentAIAssistant() {
                   className={`w-full text-left p-2.5 rounded-xl text-xxs font-semibold transition border ${
                     activeConvId === conv.id 
                       ? "bg-indigo-600 text-white border-indigo-600" 
-                      : "bg-slate-50 dark:bg-zinc-800 hover:bg-slate-100 border-transparent text-slate-700 dark:text-zinc-300"
+                      : "bg-slate-50 dark:bg-zinc-800 hover:bg-slate-100 border-transparent text-slate-300"
                   }`}
                 >
                   <div className="truncate font-bold">{conv.title}</div>
@@ -285,7 +285,7 @@ export default function StudentAIAssistant() {
         </div>
 
         {/* Chat Window */}
-        <div className="lg:col-span-2 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl shadow-xs flex flex-col justify-between h-[550px] relative overflow-hidden">
+        <div className="lg:col-span-2 bg-slate-900/80 border border-slate-800 shadow-xl rounded-2xl shadow-xs flex flex-col justify-between h-[550px] relative overflow-hidden">
           
           {/* Messages list */}
           <div className="flex-1 p-6 overflow-y-auto space-y-4">
@@ -306,7 +306,7 @@ export default function StudentAIAssistant() {
                   <div className={`max-w-[85%] rounded-2xl p-4 text-xs leading-relaxed whitespace-pre-wrap ${
                     m.role === "USER"
                       ? "bg-indigo-600 text-white rounded-br-none"
-                      : "bg-slate-100 dark:bg-zinc-800 text-slate-800 dark:text-zinc-200 rounded-bl-none border border-slate-200 dark:border-zinc-700/50"
+                      : "bg-slate-100 dark:bg-zinc-800 text-white rounded-bl-none border border-slate-800/50"
                   }`}>
                     {m.content}
                   </div>
@@ -332,7 +332,7 @@ export default function StudentAIAssistant() {
                   <button
                     key={i}
                     onClick={() => triggerQuickAction(act.prompt, act.context)}
-                    className="flex items-center gap-1 bg-white dark:bg-zinc-800 hover:bg-indigo-50/40 border border-slate-200 dark:border-zinc-700 px-2.5 py-1.5 rounded-lg text-xxxxs font-bold text-slate-600 dark:text-zinc-300 transition"
+                    className="flex items-center gap-1 bg-white dark:bg-zinc-800 hover:bg-indigo-50/40 border border-slate-800 px-2.5 py-1.5 rounded-lg text-xxxxs font-bold text-slate-600 dark:text-zinc-300 transition"
                   >
                     <act.icon className="h-3 w-3 text-indigo-600" /> {act.label}
                   </button>
@@ -342,7 +342,7 @@ export default function StudentAIAssistant() {
           )}
 
           {/* Input form */}
-          <div className="p-4 border-t border-slate-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex gap-2 items-center">
+          <div className="p-4 border-t border-slate-800 bg-slate-950 flex gap-2 items-center">
             <input
               type="text"
               placeholder="Ask about NOC, SOP review, financial balance proof, or visa checklists..."
@@ -375,7 +375,7 @@ export default function StudentAIAssistant() {
           </div>
 
           {/* Consent Configurations */}
-          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-5 rounded-2xl shadow-xs space-y-4">
+          <div className="bg-slate-900/80 border border-slate-800 shadow-xl p-5 rounded-2xl shadow-xs space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-50 pb-2">AI Privacy Consent</h3>
             
             <div className="space-y-4">

@@ -136,7 +136,7 @@ export default function ProfileBuilder() {
       )}
 
       {/* Stepper Progress Bar */}
-      <div className="flex justify-between items-center bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-4 rounded-xl shadow-xs">
+      <div className="flex justify-between items-center bg-slate-900/80 border border-slate-800 p-4 rounded-xl shadow-xl">
         {[
           { num: 1, label: "Academics", icon: GraduationCap },
           { num: 2, label: "Intentions", icon: MapPin },
@@ -150,29 +150,29 @@ export default function ProfileBuilder() {
                 isCompleted 
                   ? "bg-indigo-600 text-white" 
                   : isActive 
-                  ? "bg-indigo-50 border-2 border-indigo-600 text-indigo-600 dark:bg-indigo-950/30" 
-                  : "bg-slate-50 border border-slate-200 text-slate-400 dark:bg-zinc-800 dark:border-zinc-700"
+                  ? "bg-indigo-500/10 border-2 border-indigo-500 text-indigo-400" 
+                  : "bg-slate-800 border border-slate-800 text-slate-400"
               }`}>
                 {isCompleted ? <Check className="h-4 w-4" /> : s.num}
               </div>
               <span className={`text-xs font-semibold hidden sm:inline ${
-                isActive ? "text-indigo-600 font-bold" : "text-slate-400"
+                isActive ? "text-indigo-400 font-bold" : "text-slate-400"
               }`}>
                 {s.label}
               </span>
-              {s.num < 3 && <div className="w-8 sm:w-16 h-px bg-slate-200 dark:bg-zinc-800 mx-1" />}
+              {s.num < 3 && <div className="w-8 sm:w-16 h-px bg-slate-800 mx-1" />}
             </div>
           );
         })}
       </div>
 
       {/* Stepper Form */}
-      <form onSubmit={handleSubmit} className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 sm:p-8 rounded-2xl shadow-sm space-y-6">
+      <form onSubmit={handleSubmit} className="bg-slate-900/80 border border-slate-800 p-6 sm:p-8 rounded-2xl shadow-xl space-y-6">
         
         {/* STEP 1: ACADEMICS */}
         {step === 1 && (
           <div className="space-y-6">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-3">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-800 pb-3">
               <GraduationCap className="h-5 w-5 text-indigo-600" /> Academic & Test Scores
             </h2>
 
@@ -183,7 +183,7 @@ export default function ProfileBuilder() {
                   name="academicLevel"
                   value={formData.academicLevel}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-slate-950 text-white border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="">Select Level</option>
                   <option value="+2 High School">+2 High School / A-Levels</option>
@@ -202,7 +202,7 @@ export default function ProfileBuilder() {
                   onChange={handleChange}
                   max={4.0}
                   min={0.0}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-slate-950 text-white placeholder:text-slate-400 border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                   placeholder="e.g. 3.65 (GPA out of 4.0)"
                 />
               </div>
@@ -215,7 +215,7 @@ export default function ProfileBuilder() {
                   name="englishTestType"
                   value={formData.englishTestType}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-slate-950 text-white border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="IELTS">IELTS</option>
                   <option value="PTE">PTE Academic</option>
@@ -233,7 +233,7 @@ export default function ProfileBuilder() {
                   name="englishTestScore"
                   value={formData.englishTestScore}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-slate-950 text-white placeholder:text-slate-400 border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                   placeholder="e.g. 7.5 (for IELTS) or 68 (for PTE)"
                 />
               </div>
@@ -254,7 +254,7 @@ export default function ProfileBuilder() {
         {/* STEP 2: INTENTIONS */}
         {step === 2 && (
           <div className="space-y-6">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-3">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-800 pb-3">
               <MapPin className="h-5 w-5 text-indigo-600" /> Study Intentions & Budget
             </h2>
 
@@ -265,7 +265,7 @@ export default function ProfileBuilder() {
                   name="intendedDegree"
                   value={formData.intendedDegree}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-slate-950 text-white border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="">Select Intended Degree</option>
                   <option value="Bachelor">Bachelor Degree</option>
@@ -281,7 +281,7 @@ export default function ProfileBuilder() {
                   name="preferredCountry"
                   value={formData.preferredCountry}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-slate-950 text-white border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="">Select Country</option>
                   <option value="USA">United States (USA)</option>
@@ -299,7 +299,7 @@ export default function ProfileBuilder() {
                   name="budgetRange"
                   value={formData.budgetRange}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-slate-950 text-white border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="">Select Budget Range</option>
                   <option value="Below $15,000">Below $15,000</option>
@@ -316,7 +316,7 @@ export default function ProfileBuilder() {
                   name="fundingSource"
                   value={formData.fundingSource}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-slate-950 text-white placeholder:text-slate-400 border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                   placeholder="e.g. Bank Loan & Family Savings"
                 />
               </div>
@@ -329,7 +329,7 @@ export default function ProfileBuilder() {
                 name="preferredIntake"
                 value={formData.preferredIntake}
                 onChange={handleChange}
-                className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full bg-slate-950 text-white placeholder:text-slate-400 border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="e.g. Fall 2026 (Sept) or Semester 1 2027 (Feb)"
               />
             </div>
@@ -356,7 +356,7 @@ export default function ProfileBuilder() {
         {/* STEP 3: HISTORY & CONSENT */}
         {step === 3 && (
           <div className="space-y-6">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-100 dark:border-zinc-800 pb-3">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-zinc-100 flex items-center gap-2 border-b border-slate-800 pb-3">
               <FileCheck className="h-5 w-5 text-indigo-600 dark:text-indigo-400" /> Gap, Visa History & Consents
             </h2>
 
@@ -367,7 +367,7 @@ export default function ProfileBuilder() {
                   name="passportStatus"
                   value={formData.passportStatus}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-slate-950 text-white border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 >
                   <option value="Valid">Valid Passport</option>
                   <option value="Applied">Applied / Awaiting</option>
@@ -383,7 +383,7 @@ export default function ProfileBuilder() {
                   name="visaRefusalHistory"
                   value={formData.visaRefusalHistory}
                   onChange={handleChange}
-                  className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  className="w-full bg-slate-950 text-white placeholder:text-slate-400 border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                   placeholder="e.g. None or Refused once in USA (2024)"
                 />
               </div>
@@ -396,7 +396,7 @@ export default function ProfileBuilder() {
                 value={formData.workExperience}
                 onChange={handleChange}
                 rows={2}
-                className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full bg-slate-950 text-white placeholder:text-slate-400 border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="Brief description of your jobs or internships"
               />
             </div>
@@ -408,7 +408,7 @@ export default function ProfileBuilder() {
                 name="gapHistory"
                 value={formData.gapHistory}
                 onChange={handleChange}
-                className="w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-500 border border-slate-300 dark:border-slate-700 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full bg-slate-950 text-white placeholder:text-slate-400 border border-slate-800 rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
                 placeholder="Specify if there is any study gap and its reasons"
               />
             </div>
@@ -448,3 +448,4 @@ export default function ProfileBuilder() {
     </div>
   );
 }
+
