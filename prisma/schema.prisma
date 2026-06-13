@@ -237,6 +237,11 @@ enum AuditAction {
   PARTNER_UPDATE_REVIEW
   DATA_MARK_OUTDATED
   DATA_VERIFY
+  AI_CONSENT_UPDATE
+  AI_CHAT_CLEAR
+  AI_CHAT_RATE_LIMIT
+  AI_CHAT_LIMIT
+  COUNSELOR_HANDOFF_CREATE
 }
 
 // ==========================================
@@ -272,6 +277,11 @@ model User {
   auditLogs             AuditLog[]
   suspiciousActivities  SuspiciousActivityLog[]
   dataRequests          DataRequest[]
+  aiConversations       AIConversation[]
+  aiUsageLogs           AIUsageLog[]
+  aiConsentRecords      AIConsentRecord[]
+  studentHandoffs       CounselorHandoff[]       @relation("StudentHandoffs")
+  counselorHandoffs     CounselorHandoff[]       @relation("CounselorHandoffs")
 
   @@index([email])
   @@index([role])
@@ -970,4 +980,142 @@ model NOCChecklist {
   notes              String?
   updatedAt          DateTime    @updatedAt
   application        Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+// ==========================================
+// PHASE 3: AI ASSISTANT & CHATBOT ENUMS
+// ==========================================
+
+enum AIContextType {
+  GENERAL_SUPPORT
+  DOCUMENT_CHECKLIST
+  SOP_HELP
+  VISA_NOC
+  UNIVERSITY_RECOMMENDATION
+  SCHOLARSHIP_HELP
+  SELF_FINANCE_HELP
+  APPLICATION_STATUS
+  PLATFORM_HELP
+  COUNSELOR_ASSISTANT
+  ADMIN_DATA_REVIEW
+}
+
+enum AIMessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
+
+enum AIConsentType {
+  PROFILE_ANALYSIS
+  DOCUMENT_METADATA_ANALYSIS
+  SOP_TEXT_REVIEW
+  VISA_GUIDANCE
+  RECOMMENDATION_EXPLANATION
+  SCHOLARSHIP_ANALYSIS
+  SELF_FINANCE_ANALYSIS
+  CHAT_HISTORY
+}
+
+enum HandoffStatus {
+  OPEN
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum HandoffPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+// ==========================================
+// PHASE 3: AI ASSISTANT & CHATBOT MODELS
+// ==========================================
+
+model AIConversation {
+  id          String             @id @default(uuid())
+  userId      String
+  title       String
+  contextType AIContextType
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  // Relations
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages    AIMessage[]
+  handoffs    CounselorHandoff[]
+
+  @@index([userId])
+}
+
+model AIMessage {
+  id             String         @id @default(uuid())
+  conversationId String
+  role           AIMessageRole
+  content        String
+  createdAt      DateTime       @default(now())
+
+  // Relations
+  conversation   AIConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+}
+
+model AIUsageLog {
+  id               String   @id @default(uuid())
+  userId           String?
+  provider         String   @default("OPENAI")
+  model            String
+  feature          String
+  promptTokens     Int
+  completionTokens Int
+  totalTokens      Int
+  estimatedCost    Float
+  requestStatus    String   // "SUCCESS" or "FAILED"
+  errorMessage     String?
+  latencyMs        Int
+  createdAt        DateTime @default(now())
+
+  // Relations
+  user             User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+}
+
+model AIConsentRecord {
+  id          String        @id @default(uuid())
+  userId      String
+  consentType AIConsentType
+  granted     Boolean       @default(false)
+  grantedAt   DateTime      @default(now())
+  revokedAt   DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, consentType])
+}
+
+model CounselorHandoff {
+  id             String          @id @default(uuid())
+  studentId      String
+  counselorId    String?
+  conversationId String
+  reason         String
+  summary        String
+  priority       HandoffPriority
+  status         HandoffStatus
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  // Relations
+  student        User            @relation("StudentHandoffs", fields: [studentId], references: [id], onDelete: Cascade)
+  counselor      User?           @relation("CounselorHandoffs", fields: [counselorId], references: [id], onDelete: SetNull)
+  conversation   AIConversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 }

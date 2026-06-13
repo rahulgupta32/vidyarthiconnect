@@ -14,6 +14,7 @@ import {
   User
 } from "lucide-react";
 import { redirect } from "next/navigation";
+import FloatingChatWidget from "./FloatingChatWidget";
 
 export default async function StudentDashboard() {
   const session = await getSession();
@@ -249,6 +250,7 @@ export default async function StudentDashboard() {
           </div>
         </div>
       </div>
+      <FloatingChatWidget />
     </div>
   );
 }

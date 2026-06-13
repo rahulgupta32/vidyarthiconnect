@@ -57,11 +57,31 @@ export async function GET(req: NextRequest) {
       orderBy: { createdAt: "desc" },
     });
 
+    // Get counselor handoffs assigned to this counselor or unassigned
+    const handoffs = await db.counselorHandoff.findMany({
+      where: {
+        OR: [
+          { counselorId: counselor.userId },
+          { counselorId: null }
+        ]
+      },
+      include: {
+        student: {
+          select: { name: true, email: true }
+        },
+        conversation: {
+          select: { id: true, title: true }
+        }
+      },
+      orderBy: { createdAt: "desc" }
+    });
+
     return NextResponse.json({
       counselor,
       applications,
       pendingDocuments,
       tasks,
+      handoffs,
     });
   } catch (error: any) {
     console.error("GET counselor workspace error:", error);

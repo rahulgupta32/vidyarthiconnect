@@ -102,6 +102,7 @@ export default function SuperAdminDashboard() {
           { id: "audit", label: "Security Audit Logs", icon: Activity },
           { id: "suspicious", label: "Suspicious Activity Logs", icon: ShieldAlert },
           { id: "commissions", label: "Commissions Ledger", icon: DollarSign },
+          { id: "ai-monitor", label: "AI Monitoring & Audit", icon: Sparkles },
           { id: "settings", label: "System & AI Settings", icon: Settings },
         ].map((tab) => (
           <button
@@ -231,6 +232,176 @@ export default function SuperAdminDashboard() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </div>
+        )}
+
+        {/* TAB: AI MONITORING & AUDITING */}
+        {activeTab === "ai-monitor" && (
+          <div className="space-y-8">
+            <h2 className="text-lg font-bold flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-indigo-600 animate-pulse" /> AI Operations & Monitoring
+            </h2>
+
+            {/* AI Status Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="bg-slate-50 dark:bg-zinc-850 p-4 rounded-xl border border-slate-100 dark:border-zinc-800">
+                <span className="text-[10px] font-bold text-slate-400 block uppercase">OpenAI Key</span>
+                <span className={`inline-block mt-2 text-xxs font-extrabold px-2 py-0.5 rounded-full ${
+                  data?.aiStats?.aiConfigured 
+                    ? "bg-emerald-50 text-emerald-700" 
+                    : "bg-rose-50 text-rose-700"
+                }`}>
+                  {data?.aiStats?.aiConfigured ? "CONFIGURED" : "MISSING"}
+                </span>
+              </div>
+
+              <div className="bg-slate-50 dark:bg-zinc-850 p-4 rounded-xl border border-slate-100 dark:border-zinc-800">
+                <span className="text-[10px] font-bold text-slate-400 block uppercase">AI Engine Mode</span>
+                <span className={`inline-block mt-2 text-xxs font-extrabold px-2 py-0.5 rounded-full ${
+                  data?.aiStats?.aiEnabled 
+                    ? "bg-emerald-50 text-emerald-700" 
+                    : "bg-amber-50 text-amber-700"
+                }`}>
+                  {data?.aiStats?.aiEnabled ? "ACTIVE (OPENAI)" : "MOCK FALLBACK"}
+                </span>
+              </div>
+
+              <div className="bg-slate-50 dark:bg-zinc-850 p-4 rounded-xl border border-slate-100 dark:border-zinc-800">
+                <span className="text-[10px] font-bold text-slate-400 block uppercase">Today's Tokens</span>
+                <span className="text-sm font-black block mt-2 text-slate-800 dark:text-zinc-100">
+                  {data?.aiStats?.dailyTokenUsage?.toLocaleString() || 0}
+                </span>
+              </div>
+
+              <div className="bg-slate-50 dark:bg-zinc-850 p-4 rounded-xl border border-slate-100 dark:border-zinc-800">
+                <span className="text-[10px] font-bold text-slate-400 block uppercase">Monthly Tokens</span>
+                <span className="text-sm font-black block mt-2 text-slate-800 dark:text-zinc-100">
+                  {data?.aiStats?.monthlyTokenUsage?.toLocaleString() || 0}
+                </span>
+              </div>
+
+              <div className="bg-slate-50 dark:bg-zinc-850 p-4 rounded-xl border border-slate-100 dark:border-zinc-800">
+                <span className="text-[10px] font-bold text-slate-400 block uppercase font-bold">Handoff Alerts</span>
+                <span className="text-sm font-black block mt-2 text-rose-600">
+                  {data?.aiStats?.counselorHandoffCount || 0}
+                </span>
+              </div>
+            </div>
+
+            {/* Feature Usage Overview */}
+            <div className="bg-slate-50 dark:bg-zinc-850 p-5 rounded-2xl border border-slate-100 dark:border-zinc-800">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 font-bold">Top AI Features Used</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs text-left border-collapse">
+                  <thead>
+                    <tr className="border-b border-slate-200 dark:border-zinc-800 text-slate-400 uppercase font-extrabold tracking-wider">
+                      <th className="pb-2 pr-4">Feature Name</th>
+                      <th className="pb-2 pr-4">Request Calls</th>
+                      <th className="pb-2 pr-4">Total Tokens Consumed</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {!data?.aiStats?.topFeatures || data.aiStats.topFeatures.length === 0 ? (
+                      <tr>
+                        <td colSpan={3} className="py-4 text-center text-slate-400">No feature usage recorded.</td>
+                      </tr>
+                    ) : (
+                      data.aiStats.topFeatures.map((f: any, i: number) => (
+                        <tr key={i} className="border-b border-slate-100 dark:border-zinc-800/40">
+                          <td className="py-3 pr-4 font-bold text-slate-700 dark:text-zinc-200">{f.feature}</td>
+                          <td className="py-3 pr-4 font-semibold text-indigo-650">{f.count} calls</td>
+                          <td className="py-3 pr-4 text-slate-500">{f.tokens.toLocaleString()} tokens</td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* AI Usage Logs */}
+            <div className="space-y-4">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 font-bold">AI Usage & Cost Audits</h3>
+              <div className="overflow-x-auto max-h-96">
+                <table className="w-full text-[11px] text-left border-collapse">
+                  <thead className="sticky top-0 bg-white dark:bg-zinc-900 z-10">
+                    <tr className="border-b border-slate-200 dark:border-zinc-850 text-slate-400 uppercase font-extrabold tracking-wider">
+                      <th className="pb-2 pr-2">User</th>
+                      <th className="pb-2 pr-2">Feature</th>
+                      <th className="pb-2 pr-2">Model</th>
+                      <th className="pb-2 pr-2">Tokens (P+C)</th>
+                      <th className="pb-2 pr-2">Cost (Est)</th>
+                      <th className="pb-2 pr-2">Status</th>
+                      <th className="pb-2 pr-2">Latency</th>
+                      <th className="pb-2 pr-2">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 dark:divide-zinc-850">
+                    {!data?.aiUsageLogs || data.aiUsageLogs.length === 0 ? (
+                      <tr>
+                        <td colSpan={8} className="py-4 text-center text-slate-400">No logs found.</td>
+                      </tr>
+                    ) : (
+                      data.aiUsageLogs.map((log: any) => (
+                        <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/10">
+                          <td className="py-2.5 pr-2 font-semibold truncate max-w-[120px]">{log.user?.name || "System"}</td>
+                          <td className="py-2.5 pr-2 font-bold text-indigo-650">{log.feature}</td>
+                          <td className="py-2.5 pr-2 font-mono text-slate-500">{log.model}</td>
+                          <td className="py-2.5 pr-2">{log.promptTokens} + {log.completionTokens} ({log.totalTokens})</td>
+                          <td className="py-2.5 pr-2 font-mono font-semibold">${log.estimatedCost.toFixed(5)}</td>
+                          <td className="py-2.5 pr-2">
+                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                              log.requestStatus === "SUCCESS" 
+                                ? "bg-emerald-50 text-emerald-700" 
+                                : "bg-rose-50 text-rose-700"
+                            }`}>
+                              {log.requestStatus}
+                            </span>
+                          </td>
+                          <td className="py-2.5 pr-2 font-mono">{log.latencyMs}ms</td>
+                          <td className="py-2.5 pr-2 text-slate-400">{new Date(log.createdAt).toLocaleDateString()}</td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* AI Error Logs (Only Failures) */}
+            <div className="space-y-4">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-rose-500 font-bold">AI Failure & Error Logs</h3>
+              <div className="overflow-x-auto max-h-60">
+                <table className="w-full text-[11px] text-left border-collapse">
+                  <thead className="sticky top-0 bg-white dark:bg-zinc-900 z-10">
+                    <tr className="border-b border-slate-200 dark:border-zinc-850 text-rose-450 uppercase font-extrabold tracking-wider">
+                      <th className="pb-2 pr-2">User</th>
+                      <th className="pb-2 pr-2">Feature</th>
+                      <th className="pb-2 pr-2">Error Message</th>
+                      <th className="pb-2 pr-2">Latency</th>
+                      <th className="pb-2 pr-2">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 dark:divide-zinc-850">
+                    {!data?.aiErrorLogs || data.aiErrorLogs.length === 0 ? (
+                      <tr>
+                        <td colSpan={5} className="py-4 text-center text-slate-400">No failure logs. AI is operating smoothly!</td>
+                      </tr>
+                    ) : (
+                      data.aiErrorLogs.map((log: any) => (
+                        <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/10 text-rose-800 dark:text-rose-400">
+                          <td className="py-2.5 pr-2 font-semibold truncate max-w-[120px]">{log.user?.name || "System"}</td>
+                          <td className="py-2.5 pr-2 font-bold">{log.feature}</td>
+                          <td className="py-2.5 pr-2 truncate max-w-xs" title={log.errorMessage}>{log.errorMessage || "Unknown error"}</td>
+                          <td className="py-2.5 pr-2 font-mono">{log.latencyMs}ms</td>
+                          <td className="py-2.5 pr-2 text-slate-400">{new Date(log.createdAt).toLocaleString()}</td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}

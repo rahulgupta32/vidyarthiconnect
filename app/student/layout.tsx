@@ -10,7 +10,8 @@ import {
   CreditCard, 
   ShieldCheck, 
   Settings, 
-  LogOut 
+  LogOut,
+  Sparkles
 } from "lucide-react";
 
 export default async function StudentLayout({
@@ -27,6 +28,7 @@ export default async function StudentLayout({
   const navItems = [
     { name: "Overview Dashboard", path: "/student/dashboard", icon: LayoutDashboard },
     { name: "University Finder", path: "/student/search", icon: Search },
+    { name: "AI Assistant", path: "/student/ai-assistant", icon: Sparkles },
     { name: "Document Vault", path: "/student/documents", icon: FileText },
     { name: "Application Status", path: "/student/applications", icon: Send },
     { name: "Visa & NOC Check", path: "/student/visa", icon: ShieldCheck },

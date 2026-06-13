@@ -1,4 +1,4 @@
-import { PrismaClient, UserRole, ApplicationStatus, DocumentReviewStatus, PaymentStatus, CommissionStatus, NotificationType, RiskLevel, PartnerStatus, ConsentType, AuditAction, DataStatus, InstitutionType, DegreeLevel, ScholarshipType, CoverageType, ProviderType, AuthType, ConnectorStatus, SyncType, SyncStatus, ReviewStatus } from '@prisma/client';
+import { PrismaClient, UserRole, ApplicationStatus, DocumentReviewStatus, PaymentStatus, CommissionStatus, NotificationType, RiskLevel, PartnerStatus, ConsentType, AuditAction, DataStatus, InstitutionType, DegreeLevel, ScholarshipType, CoverageType, ProviderType, AuthType, ConnectorStatus, SyncType, SyncStatus, ReviewStatus, AIContextType, AIMessageRole, AIConsentType, HandoffStatus, HandoffPriority } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -863,6 +863,109 @@ async function main() {
       riskLevel: RiskLevel.SAFE,
       missingRequirements: 'None',
       suggestedNextSteps: 'Prepare SOP and English test scores.',
+    }
+  });
+
+  // Seed AI Privacy Consent Records for the student
+  console.log('Seeding AI Privacy Consents...');
+  await prisma.aIConsentRecord.createMany({
+    data: [
+      { userId: studentUser.id, consentType: AIConsentType.PROFILE_ANALYSIS, granted: true },
+      { userId: studentUser.id, consentType: AIConsentType.DOCUMENT_METADATA_ANALYSIS, granted: true },
+      { userId: studentUser.id, consentType: AIConsentType.SOP_TEXT_REVIEW, granted: false },
+      { userId: studentUser.id, consentType: AIConsentType.RECOMMENDATION_EXPLANATION, granted: true },
+      { userId: studentUser.id, consentType: AIConsentType.SCHOLARSHIP_ANALYSIS, granted: true },
+      { userId: studentUser.id, consentType: AIConsentType.SELF_FINANCE_ANALYSIS, granted: true },
+      { userId: studentUser.id, consentType: AIConsentType.CHAT_HISTORY, granted: true },
+    ]
+  });
+
+  // Seed AI Conversation & Messages
+  console.log('Seeding AI Conversations and Messages...');
+  const conv1 = await prisma.aIConversation.create({
+    data: {
+      userId: studentUser.id,
+      title: 'Visa & NOC Process Support',
+      contextType: AIContextType.VISA_NOC,
+    }
+  });
+
+  await prisma.aIMessage.createMany({
+    data: [
+      { conversationId: conv1.id, role: AIMessageRole.USER, content: 'What is a NOC?' },
+      { conversationId: conv1.id, role: AIMessageRole.ASSISTANT, content: 'NOC stands for No Objection Certificate. It is a mandatory document issued by the Ministry of Education, Science and Technology (MoEST) in Nepal, allowing students to study abroad and exchange currency for international tuition payments. You will need a verified university offer letter and payment receipts to apply for it.' },
+      { conversationId: conv1.id, role: AIMessageRole.USER, content: 'How do I apply for visa?' },
+      { conversationId: conv1.id, role: AIMessageRole.ASSISTANT, content: 'To apply for a student visa, you typically need to prepare your passport, academic documents, proof of financial capacity (like bank balance or loan details), and a No Objection Certificate (NOC) from MoEST. It is recommended to contact your counselor for personalized visa step guidance.' }
+    ]
+  });
+
+  // Seed AI Usage Logs
+  console.log('Seeding AI Usage Logs...');
+  await prisma.aIUsageLog.createMany({
+    data: [
+      {
+        userId: studentUser.id,
+        provider: 'OPENAI',
+        model: 'gpt-4.1-mini',
+        feature: 'STUDENT_CHAT',
+        promptTokens: 250,
+        completionTokens: 120,
+        totalTokens: 370,
+        estimatedCost: ((250 * 0.15) + (120 * 0.60)) / 1000000,
+        requestStatus: 'SUCCESS',
+        latencyMs: 450,
+      },
+      {
+        userId: studentUser.id,
+        provider: 'FAQ_RULE_ENGINE',
+        model: 'STATIC_RULES',
+        feature: 'STUDENT_CHAT',
+        promptTokens: 0,
+        completionTokens: 0,
+        totalTokens: 0,
+        estimatedCost: 0.0,
+        requestStatus: 'SUCCESS',
+        latencyMs: 12,
+      },
+      {
+        userId: studentUser.id,
+        provider: 'OPENAI',
+        model: 'gpt-4.1-mini',
+        feature: 'SOP_REVIEW',
+        promptTokens: 850,
+        completionTokens: 300,
+        totalTokens: 1150,
+        estimatedCost: ((850 * 0.15) + (300 * 0.60)) / 1000000,
+        requestStatus: 'SUCCESS',
+        latencyMs: 980,
+      },
+      {
+        userId: studentUser.id,
+        provider: 'OPENAI',
+        model: 'gpt-4.1-mini',
+        feature: 'STUDENT_CHAT',
+        promptTokens: 400,
+        completionTokens: 0,
+        totalTokens: 400,
+        estimatedCost: (400 * 0.15) / 1000000,
+        requestStatus: 'FAILED',
+        errorMessage: 'OpenAI API rate limit exceeded or key not configured.',
+        latencyMs: 110,
+      }
+    ]
+  });
+
+  // Seed Counselor Handoff Record
+  console.log('Seeding Counselor Handoffs...');
+  await prisma.counselorHandoff.create({
+    data: {
+      studentId: studentUser.id,
+      counselorId: counselorProfile.id,
+      conversationId: conv1.id,
+      reason: 'Visa refusal history',
+      summary: 'Student query: "What if my visa was refused last year for Australia? Can I apply to USA now?"',
+      priority: HandoffPriority.HIGH,
+      status: HandoffStatus.OPEN,
     }
   });
 

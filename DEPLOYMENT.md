@@ -98,5 +98,15 @@ When deploying to Vercel, navigate to **Project Settings > Environment Variables
 1. Log in as **SuperAdmin**.
 2. Navigate to the **External Sources** UI.
 3. Trigger a sync job for a specific connector. The service queues a background task, logs statuses to `DataSyncJob`, and writes records to `ImportedDataReview`.
-4. Go to the Admin Review Queue, select **Approve**, and verify the record is imported into the core `University`, `Course`, `CourseCost`, and `Scholarship` tables.
+4. Log in as **Admin** or **SuperAdmin** to review the approval queue and verify records.
+5. Student search UI refreshes with the verified listings automatically.
 
+### 7. Configuring Phase 3 OpenAI AI Assistant (Vercel)
+When deploying the AI Assistant capabilities, navigate to **Project Settings > Environment Variables** on Vercel and configure:
+- `OPENAI_API_KEY`: Your official OpenAI developer API key.
+- `OPENAI_MODEL`: Set to `"gpt-4.1-mini"` (default model for cost efficiency).
+- `OPENAI_ASSISTANT_ENABLED`: Set to `"true"` to connect to the live OpenAI API. Set to `"false"` (default) to bypass calls and use simulated offline fallback responses.
+- `OPENAI_DAILY_TOKEN_LIMIT_PER_USER`: Sets the daily token limit per user (e.g. `"50000"`). Leave empty (`""`) to skip the check.
+- `OPENAI_MONTHLY_TOKEN_LIMIT_GLOBAL`: Sets the system-wide global monthly token limit (e.g. `"1000000"`). Leave empty (`""`) to skip the check.
+
+*Note: All OpenAI calls are handled in server-side Next.js App Router API routes. None of these variables should be prefixed with `NEXT_PUBLIC_` to keep them secure and hidden from client-side bundle inspects.*

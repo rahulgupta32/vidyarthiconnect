@@ -12,7 +12,9 @@ import {
   Calendar,
   Send,
   Loader2,
-  Bookmark
+  Bookmark,
+  Sparkles,
+  X
 } from "lucide-react";
 
 export default function CounselorWorkspace() {
@@ -33,6 +35,28 @@ export default function CounselorWorkspace() {
     dueDate: "",
   });
   const [taskSuccess, setTaskSuccess] = useState(false);
+
+  // AI Summary States
+  const [summaryModal, setSummaryModal] = useState({ isOpen: false, title: "", content: "", loading: false });
+
+  const fetchAiSummary = async (params: { studentId?: string; handoffId?: string }, title: string) => {
+    setSummaryModal({ isOpen: true, title, content: "", loading: true });
+    try {
+      const res = await fetch("/api/ai/counselor-summary", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(params),
+      });
+      if (res.ok) {
+        const d = await res.json();
+        setSummaryModal(prev => ({ ...prev, content: d.summary, loading: false }));
+      } else {
+        setSummaryModal(prev => ({ ...prev, content: "Failed to generate AI summary.", loading: false }));
+      }
+    } catch (err) {
+      setSummaryModal(prev => ({ ...prev, content: "Error communicating with AI service.", loading: false }));
+    }
+  };
 
   const loadWorkspace = async () => {
     try {
@@ -185,6 +209,53 @@ export default function CounselorWorkspace() {
         {/* Left Column (Span 2): Document Reviews + Student CRM */}
         <div className="lg:col-span-2 space-y-8">
           
+          {/* AI Handoffs & Escalation Alerts */}
+          <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
+            <h2 className="text-lg font-bold mb-4 flex items-center gap-2 text-rose-600">
+              <AlertCircle className="h-5 w-5 text-rose-600 animate-pulse" /> AI Handoffs & Escalation Alerts
+            </h2>
+
+            {!data?.handoffs || data.handoffs.length === 0 ? (
+              <p className="text-sm text-slate-400 text-center py-8">
+                No active counselor handoffs or student escalations reported.
+              </p>
+            ) : (
+              <div className="space-y-4">
+                {data.handoffs.map((handoff: any) => (
+                  <div key={handoff.id} className="border border-slate-100 dark:border-zinc-800/80 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-slate-50 dark:hover:bg-zinc-800/30 transition">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className={`text-xxxxs font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider ${
+                          handoff.priority === "HIGH" || handoff.priority === "URGENT"
+                            ? "bg-rose-50 text-rose-700 dark:bg-rose-950/20 dark:text-rose-400"
+                            : "bg-amber-50 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
+                        }`}>
+                          {handoff.priority} PRIORITY
+                        </span>
+                        <span className="bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xxxxs font-bold px-2 py-0.5 rounded-md uppercase">
+                          {handoff.status}
+                        </span>
+                      </div>
+                      <h3 className="font-bold text-sm text-slate-800 dark:text-zinc-200 mt-2">{handoff.reason}</h3>
+                      <p className="text-xxs text-slate-500 mt-1">
+                        Student: <strong>{handoff.student.name}</strong> • Info: {handoff.summary}
+                      </p>
+                    </div>
+
+                    <div>
+                      <button
+                        onClick={() => fetchAiSummary({ handoffId: handoff.id }, `Handoff Escalation: ${handoff.reason}`)}
+                        className="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-xxs font-bold px-3 py-1.5 rounded-lg border border-indigo-250 transition whitespace-nowrap"
+                      >
+                        Generate AI Summary
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
           {/* Document Verification Queue */}
           <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-2xl shadow-sm">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
@@ -260,6 +331,12 @@ export default function CounselorWorkspace() {
                       </div>
 
                       <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => fetchAiSummary({ studentId: app.student.id }, `Student Profile AI Summary: ${app.student.user.name}`)}
+                          className="bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xxs font-semibold px-2.5 py-1 rounded-lg transition mr-2 flex items-center gap-1"
+                        >
+                          <Sparkles className="h-3.5 w-3.5 text-indigo-650" /> AI Summary
+                        </button>
                         <select
                           value={app.status}
                           disabled={actionLoadingId === app.id}
@@ -446,6 +523,47 @@ export default function CounselorWorkspace() {
               </button>
             </div>
           </form>
+        </div>
+      )}
+      {/* AI Summary Modal */}
+      {summaryModal.isOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-zinc-900 border border-slate-250 dark:border-zinc-850 rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-4 flex flex-col max-h-[85vh]">
+            <div className="flex justify-between items-center border-b border-slate-100 dark:border-zinc-850 pb-3">
+              <h2 className="text-lg font-bold flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-indigo-600 animate-pulse" /> {summaryModal.title}
+              </h2>
+              <button
+                onClick={() => setSummaryModal({ isOpen: false, title: "", content: "", loading: false })}
+                className="text-slate-400 hover:text-slate-600 transition"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto pr-2">
+              {summaryModal.loading ? (
+                <div className="flex flex-col items-center justify-center py-20 space-y-3">
+                  <Loader2 className="h-8 w-8 animate-spin text-indigo-650" />
+                  <span className="text-xs text-slate-500 font-medium">Analyzing student records and drafting response...</span>
+                </div>
+              ) : (
+                <div className="text-xs leading-relaxed text-slate-750 dark:text-zinc-300 whitespace-pre-wrap space-y-2 bg-slate-50 dark:bg-zinc-950 p-4 rounded-xl border border-slate-150 dark:border-zinc-800/80">
+                  {summaryModal.content}
+                </div>
+              )}
+            </div>
+
+            <div className="flex justify-end pt-4 border-t border-slate-100 dark:border-zinc-850">
+              <button
+                type="button"
+                onClick={() => setSummaryModal({ isOpen: false, title: "", content: "", loading: false })}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2 rounded-xl text-xs transition"
+              >
+                Close Summary
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
