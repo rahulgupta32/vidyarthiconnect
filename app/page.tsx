@@ -361,7 +361,7 @@ export default function Home() {
           <p className="text-indigo-100 mb-8 max-w-xl mx-auto">
             Create your secure student account and start receiving matches within minutes.
           </p>
-          <Link href="/signup" className="inline-block bg-white text-indigo-700 font-bold px-8 py-4 rounded-full shadow-lg hover:bg-slate-100 transition ring-2 ring-white/40 focus:outline-none focus:ring-4 focus:ring-white/50">
+          <Link href="/signup" className="inline-block bg-white !text-indigo-700 font-bold px-8 py-4 rounded-full shadow-lg hover:bg-slate-100 transition ring-2 ring-white/40 focus:outline-none focus:ring-4 focus:ring-white/50">
             Sign Up Now
           </Link>
         </div>
