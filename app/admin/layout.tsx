@@ -18,7 +18,7 @@ export default async function AdminLayout({
   return (
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen flex flex-col text-slate-900 dark:text-white">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 h-16 px-6 flex items-center justify-between shadow-sm">
+      <header className="sticky top-0 z-40 bg-white dark:bg-slate-900/95 border-b border-slate-200 dark:border-slate-800 h-16 px-6 flex items-center justify-between shadow-sm backdrop-blur">
         <div className="flex items-center gap-2">
           <Link href="/" className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-sky-500 bg-clip-text text-transparent">
             Vidyarthii<span className="text-sky-500 font-extrabold">Connect</span>
@@ -45,15 +45,17 @@ export default async function AdminLayout({
       </header>
 
       {/* Body wrapper */}
-      <div className="flex-1 flex flex-col md:flex-row">
+      <div className="flex flex-1 flex-col md:flex-row min-h-[calc(100vh-4rem)]">
         {/* Sidebar */}
-        <aside className="w-full md:w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 py-6 px-4 flex-shrink-0">
+        <aside className="w-full md:w-64 bg-white dark:bg-slate-900/80 border-r border-slate-200 dark:border-slate-800 py-6 px-4 flex-shrink-0">
           <SidebarNav role="admin" />
         </aside>
 
         {/* Content Area */}
-        <main className="flex-1 px-6 py-8 lg:px-10 overflow-y-auto max-w-7xl mx-auto w-full">
-          {children}
+        <main className="flex-1 px-6 py-8 lg:px-10 overflow-y-auto w-full">
+          <div className="mx-auto w-full max-w-7xl">
+            {children}
+          </div>
         </main>
       </div>
     </div>
